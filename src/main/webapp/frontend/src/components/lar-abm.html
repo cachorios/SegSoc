@@ -1,0 +1,60 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/vaadin-grid/src/vaadin-grid.html">
+<link rel="import" href="search-bar.html">
+<link rel="import" href="utils-mixin.html">
+<link rel="import" href="../../styles/shared-styles.html">
+
+
+<dom-module id="lar-abm">
+    <template>
+     <style include="shared-styles">
+        :host {
+            height: 100%;
+            width: calc(100% - 2 * 1rem);
+            --top-bar-height: 70px;
+            --titulo-height: 50px;
+            display: flex;
+            flex-direction: column;
+            /*margin: 1rem;*/
+
+            /*flex: 1 1 100%;*/
+            /*align-self: stretch;*/
+            padding: 0 1rem;
+        }
+
+        /*::slotted([slot=grid]) {*/
+             /*height: calc(99% - var(--top-bar-height));*/
+        /*}*/
+        vaadin-grid {
+            height: calc(100% - var(--top-bar-height));
+        }
+        [part="abm-content"]{
+            height: calc(100% - var(--titulo-height));
+        }
+
+
+
+    </style>
+
+        <h4 id="titulo" part="titulo" theme="abm">El Titulo</h4>
+        <div part="abm-content" theme="abm">
+            <search-bar id="searchbar" part="searchbar" theme="abm"></search-bar>
+            <vaadin-grid id="grid" theme="lar" slot="grid"></vaadin-grid>
+        </div>
+
+    </template>
+
+    <script>
+        class Abm extends Polymer.Element {
+            static get is() {
+                return 'lar-abm'
+            }
+            // ready() {
+            //     super.ready();
+            //     alert("llego!!!");
+            // }
+        }
+       window.customElements.define(Abm.is, Abm);
+    </script>
+
+</dom-module>

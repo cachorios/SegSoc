@@ -1,0 +1,2 @@
+<bean id="applicationContextProvider"-->
+                        <!--class="com.gmail.cachorios.app.ApplicationContextProvider"/>

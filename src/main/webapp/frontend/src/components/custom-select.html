@@ -1,0 +1,167 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<link rel="import" href="../../bower_components/vaadin-text-field/src/vaadin-text-field.html">
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../../bower_components/vaadin-icons/vaadin-icons.html">
+<link rel="import" href="../../bower_components/vaadin-button/src/vaadin-button.html">
+
+
+<link rel="import" href="../../styles/shared-styles.html">
+<dom-module id="custom-select">
+    <template>
+
+        <style include="shared-styles">
+                :host {
+                    display: flex;
+                    flex-direction: column;
+                    height: 100%;
+                    width: calc(100% - 2 * 1rem);
+                    --top-bar-height: 70px;
+                    --titulo-height: 50px;
+
+                    /*margin: 1rem;*/
+
+                    flex: 1 1 100%;
+                    /*align-self: stretch;*/
+                    padding: var(--lumo-space-xs) 0;
+
+                }
+                [part="contenido"]
+                {
+                    background-color: aqua;
+                    font-size: 5rem;
+                }
+
+                /*::slotted([slot=grid]) {*/
+                     /*height: calc(99% - var(--top-bar-height));*/
+                /*}*/
+
+
+
+            /*.custom_select{*/
+            /*    display: flex;*/
+            /*    flex-direction: column;*/
+
+            /*    --lumo-text-field-size: var(--lumo-size-m);*/
+            /*    color: var(--lumo-body-text-color);*/
+            /*    font-size: var(--lumo-font-size-m);*/
+            /*    font-family: var(--lumo-font-family);*/
+            /*    -webkit-font-smoothing: antialiased;*/
+            /*    -moz-osx-font-smoothing: grayscale;*/
+            /*    -webkit-tap-highlight-color: transparent;*/
+            /*    padding: var(--lumo-space-xs) 0;*/
+
+            /*    background-color: #2d9f19;*/
+            /*}*/
+
+            .custom-select-label{
+                align-self: flex-start;
+                color: var(--lumo-secondary-text-color);
+                font-weight: 500;
+                font-size: var(--lumo-font-size-s);
+                margin-left: calc(var(--lumo-border-radius-m) / 4);
+                transition: color 0.2s;
+                line-height: 1;
+                padding-bottom: 0.5em;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                position: relative;
+                max-width: 100%;
+                box-sizing: border-box;
+                width: 99%;
+            }
+
+            .small{
+                background-color: #ef6c00 !important;
+            }
+            .custom_select_width{
+
+            }
+            .codigo{
+                padding-top: 0.5rem;
+                height: 1.8rem;
+                width: 6rem;
+            }
+        </style>
+        <label id="label" class="custom-select-label">the label</label>
+        <div class="contenido">
+            <vaadin-text-field id="field" class="field" placeholder="[[codigoPlaceHolder]]" value="{{codigoValue}}"
+                     on-focus="_onFieldFocus" on-blur="_onFieldBlur"
+                     theme="white">
+                    <iron-icon icon$="[[searchIcon]]" slot="prefix"></iron-icon>
+            </vaadin-text-field>
+        </div>
+
+
+        </template>
+
+
+    <script>
+        class CustomSelect extends Polymer.Element {
+            static get is() { return 'custom-select'; }
+
+            static get properties() {
+                return {
+                    codigoPlaceHolder: {
+                        type: String
+                    },
+                    codigoValue: {
+                      type: String,
+                      notify: true
+                    },
+                     searchIcon: {
+                        type: String,
+                        value: 'vaadin:search'
+                      },
+                };
+            }
+
+            ready() {
+                 alert("llego")
+                this.addEventListener('touchmove', e => e.preventDefault());
+            }
+        }
+
+        window.customElements.define(CustomSelect.is, CustomSelect);
+    </script>
+</dom-module>
+
+<custom-style>
+    <style include="custom-select">
+        .custom_select{
+            display: flex;
+            flex-direction: column;
+
+            --lumo-text-field-size: var(--lumo-size-m);
+            color: var(--lumo-body-text-color);
+            font-size: var(--lumo-font-size-m);
+            font-family: var(--lumo-font-family);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            -webkit-tap-highlight-color: transparent;
+            padding: var(--lumo-space-xs) 0;
+
+            background-color: #2d9f19;
+
+        }
+
+        .custom-select-label{
+              align-self: flex-start;
+              color: var(--lumo-secondary-text-color);
+              font-weight: 500;
+              font-size: var(--lumo-font-size-s);
+              margin-left: calc(var(--lumo-border-radius-m) / 4);
+              transition: color 0.2s;
+              line-height: 1;
+              padding-bottom: 0.5em;
+              overflow: hidden;
+              white-space: nowrap;
+              text-overflow: ellipsis;
+              position: relative;
+              max-width: 100%;
+              box-sizing: border-box;
+          }
+
+    </style>
+</custom-style>

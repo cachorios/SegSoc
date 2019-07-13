@@ -1,0 +1,11 @@
+package com.gmail.cachorios.core.ui.data;
+
+
+public final class EntityUtil {
+
+	public static final String getName(Class<? extends EntidadInterface> type) {
+		// All main entities have simple one word names, so this is sufficient. Metadata
+		// could be added to the class if necessary.
+		return type.getSimpleName();
+	}
+}

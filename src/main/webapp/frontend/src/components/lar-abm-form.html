@@ -1,0 +1,49 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/vaadin-form-layout/src/vaadin-form-layout.html">
+
+<link rel="import" href="form-buttons-bar.html">
+
+<dom-module id="lar-abm-form">
+    <template>
+        <style>
+              :host {
+                    display: flex;
+                   flex-direction: column;
+                   flex: auto;
+                   height: 100%;
+                   /*width: 400px;*/
+
+              }
+
+              vaadin-form-layout {
+                overflow: auto;
+                flex: auto;
+
+
+              }
+        </style>
+            <h3 id="titulo">Titulo</h3>
+            <vaadin-form-layout id="form">
+
+            </vaadin-form-layout>
+
+            <form-buttons-bar id="botonera"></form-buttons-bar>
+
+</template>
+ <script>
+    class AbmForm extends Polymer.Element {
+      static get is() {
+        return 'lar-abm-form';
+      }
+
+      ready() {
+        super.ready();
+        this.$.form.addEventListener('change', e => {
+          this.$.botonera.$.save.disabled = false;
+        });
+      }
+    }
+
+    window.customElements.define(AbmForm.is, AbmForm);
+  </script>
+</dom-module>

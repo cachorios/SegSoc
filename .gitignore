@@ -1,0 +1,10 @@
+/.idea
+/target
+*.iml
+dejos-ips.iml
+src/main/webapp/WEB-INF/resources.xml
+/src/main/webapp/VAADIN/addons/
+/.designer/
+
+src/main/resources/application.properties
+create.sql
