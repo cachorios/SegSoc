@@ -1,6 +1,5 @@
 package com.gmail.cachorios.backend.data.entity;
 
-import com.gmail.cachorios.core.ui.data.AbstractEntity;
 import com.gmail.cachorios.core.ui.data.AbstractEntityId;
 
 import javax.persistence.*;
