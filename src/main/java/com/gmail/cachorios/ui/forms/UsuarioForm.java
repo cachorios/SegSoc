@@ -1,4 +1,4 @@
-package com.gmail.cachorios.ui;
+package com.gmail.cachorios.ui.forms;
 
 import com.github.appreciated.app.layout.annotations.Caption;
 import com.github.appreciated.app.layout.annotations.Icon;
@@ -12,6 +12,7 @@ import com.gmail.cachorios.core.ui.view.abm.*;
 
 import com.gmail.cachorios.core.ui.view.component.CustomSelect;
 import com.gmail.cachorios.core.ui.view.component.selectCompuesto.SelectCompuesto;
+import com.gmail.cachorios.ui.MainAppLayout;
 import com.gmail.cachorios.ui.utils.LarConst;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.formlayout.FormLayout;
@@ -33,17 +34,17 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 
 @Route(value = LarConst.PAGE_USERS, layout = MainAppLayout.class)
-@Caption("Usuarios")
+@Caption("UsuarioForm")
 @Icon(VaadinIcon.HOME)
 
 @Secured(Role.ADMIN)
-public class Usuarios extends Abm<User, TemplateModel> {
+public class UsuarioForm extends Abm<User, TemplateModel> {
 
     private UserService userService;
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public Usuarios(FilterableAbmService<User> service, PasswordEncoder passwordEncoder  ) {
+    public UsuarioForm(FilterableAbmService<User> service, PasswordEncoder passwordEncoder  ) {
 
         super("Usuario", service);
         this.passwordEncoder = passwordEncoder;

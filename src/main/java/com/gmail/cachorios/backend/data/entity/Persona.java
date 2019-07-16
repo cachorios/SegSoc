@@ -17,10 +17,6 @@ public class Persona extends AbstractEntity {
 
     private Parametro parentesco;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "persona", fetch = FetchType.LAZY)
-    @NotNull
-    private List<Documento> fotosDocumento;
-
     @NotNull
     private String nombre;
 
@@ -45,6 +41,14 @@ public class Persona extends AbstractEntity {
 
     @NotNull
     private Integer numeroPartida;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "persona", fetch = FetchType.LAZY)
+    @NotNull
+    private List<Documento> fotosDocumento;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "persona", fetch = FetchType.LAZY)
+    @NotNull
+    private List<Plan> planes;
 
     @Override
     public Long getId() {

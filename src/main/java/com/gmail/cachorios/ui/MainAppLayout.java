@@ -17,6 +17,7 @@ import com.gmail.cachorios.app.ApplicationContextProvider;
 import com.gmail.cachorios.app.seguridad.SecurityUtils;
 import com.gmail.cachorios.backend.data.entity.User;
 import com.gmail.cachorios.backend.servicios.UserService;
+import com.gmail.cachorios.ui.forms.UsuarioForm;
 import com.vaadin.flow.component.dependency.HtmlImport;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.notification.Notification;
@@ -71,7 +72,7 @@ public class MainAppLayout extends AppLayoutRouterLayout {
                                 VaadinIcon.COG.create(),
                                 clickEvent -> Notification.show("onClick ...")
                         ), HEADER)
-                        .add(new LeftNavigationComponent(Usuarios.class))
+                        .add(new LeftNavigationComponent(UsuarioForm.class))
 
                         .add(LeftSubMenuBuilder
                                 .get("Liquidación", VaadinIcon.PLUS.create())

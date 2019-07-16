@@ -19,6 +19,9 @@ public class Movimiento extends AbstractEntity {
     private Date fecha;
 
     @NotNull
+    private User usuario;
+
+    @NotNull
     private Persona persona;
 
     @OneToMany(mappedBy = "movimiento")
@@ -47,6 +50,14 @@ public class Movimiento extends AbstractEntity {
 
     public void setPersona(Persona persona) {
         this.persona = persona;
+    }
+
+    public User getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(User usuario) {
+        this.usuario = usuario;
     }
 
     public List<MovimientoDetalle> getDetalles() {

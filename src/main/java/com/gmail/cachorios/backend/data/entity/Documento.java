@@ -1,6 +1,7 @@
 package com.gmail.cachorios.backend.data.entity;
 
 import com.gmail.cachorios.core.ui.data.AbstractEntity;
+import com.gmail.cachorios.core.ui.data.enums.ETipoDocumento;
 
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -13,6 +14,9 @@ public class Documento extends AbstractEntity {
 
     @NotNull
     private String descripcion;
+
+    @NotNull
+    private ETipoDocumento tipo;
 
     @ManyToOne
     private Persona persona;
@@ -47,6 +51,14 @@ public class Documento extends AbstractEntity {
 
     public MovimientoDetalle getMovimientoDetalle() {
         return movimientoDetalle;
+    }
+
+    public ETipoDocumento getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(ETipoDocumento tipo) {
+        this.tipo = tipo;
     }
 
     public void setMovimientoDetalle(MovimientoDetalle movimientoDetalle) {
