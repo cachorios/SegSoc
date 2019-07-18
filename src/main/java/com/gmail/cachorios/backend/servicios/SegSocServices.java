@@ -3,24 +3,24 @@ package com.gmail.cachorios.backend.servicios;
 
 import com.gmail.cachorios.app.ApplicationContextProvider;
 import com.gmail.cachorios.app.seguridad.SecurityUtils;
-import com.gmail.cachorios.backend.data.entity.User;
+import com.gmail.cachorios.backend.data.entity.Usuario;
 import com.vaadin.flow.component.UI;
 
 public  class SegSocServices {
-    private static User user;
-    public static User getUsuarioActivo() {
+    private static Usuario usuario;
+    public static Usuario getUsuarioActivo() {
         if(SecurityUtils.isUserLoggedIn()) {
-            if (user == null) {
-                UserService userService = ApplicationContextProvider.getApplicationContext().getBean(UserService.class);
-                user = userService.getRepository().findByEmailIgnoreCase(SecurityUtils.getUsername());
+            if (usuario == null) {
+                UsuarioService usuarioService = ApplicationContextProvider.getApplicationContext().getBean(UsuarioService.class);
+                usuario = usuarioService.getRepository().findByEmailIgnoreCase(SecurityUtils.getUsername());
             }
-            return user;
+            return usuario;
         }
         return null;
     }
 
     public static void refreshUsuarioActivo() {
-        user = null;
+        usuario = null;
         getUsuarioActivo();
     }
 

@@ -7,12 +7,16 @@ import com.gmail.cachorios.backend.data.entity.Persona;
 import com.gmail.cachorios.backend.servicios.ParametroService;
 import com.gmail.cachorios.backend.servicios.PersonaService;
 import com.gmail.cachorios.core.ui.data.FilterableAbmService;
+import com.gmail.cachorios.core.ui.data.enums.EFactorRH;
+import com.gmail.cachorios.core.ui.data.enums.EGrupoSanguineo;
+import com.gmail.cachorios.core.ui.data.enums.EParentesco;
 import com.gmail.cachorios.core.ui.data.util.converter.ImporteConverter;
 import com.gmail.cachorios.core.ui.data.util.converter.IntegerConverter;
 import com.gmail.cachorios.core.ui.view.abm.Abm;
 import com.gmail.cachorios.core.ui.view.component.selectCompuesto.SelectCompuesto;
 import com.gmail.cachorios.ui.MainAppLayout;
 import com.gmail.cachorios.ui.utils.LarConst;
+import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Label;
@@ -24,7 +28,7 @@ import com.vaadin.flow.templatemodel.TemplateModel;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
-@Route(value = LarConst.PAGE_USERS, layout = MainAppLayout.class)
+@Route(value = LarConst.PAGE_PERSONA, layout = MainAppLayout.class)
 @Caption("PersonaForm")
 @Icon(VaadinIcon.USER)
 public class PersonaForm extends Abm<Persona, TemplateModel> {
@@ -33,7 +37,7 @@ public class PersonaForm extends Abm<Persona, TemplateModel> {
     public PersonaForm(FilterableAbmService<Persona> service) {
         super("Persona", service);
 
-        setWith("1600px");
+        setWith("1000px");
 
         configureGrid(this.getGrid());
 
@@ -54,6 +58,9 @@ public class PersonaForm extends Abm<Persona, TemplateModel> {
     @Override
     protected void crearForm(FormLayout form, BeanValidationBinder<Persona> binder) {
         TextField nombre, documento, sexo, direccion, descripcionDireccion, numeroPartida;
+        ComboBox<EParentesco> cbParentesco;
+        ComboBox<EGrupoSanguineo> cbGrupoSanguineo;
+        ComboBox<EFactorRH> cbFactor;
 
         SelectCompuesto<Persona> csPersona = new SelectCompuesto<>("Cabeza", PersonaService.class );
         csPersona.setColSpan(3L)
@@ -67,41 +74,17 @@ public class PersonaForm extends Abm<Persona, TemplateModel> {
         csPersona.getElement().setAttribute("colspan", "3");
         binder.bind(csPersona, "cabeza");
 
-        SelectCompuesto<Parametro> csParentesco = new SelectCompuesto<>("Parentesco", ParametroService.class );
-        csParentesco.setColSpan(2L)
-                .setWidthInput("150px")
-                .withFind("Lista de Parentescos")
-                .addColumn(Parametro::getId,"Codigo")
-                .addColumn(Parametro::getNombre,"Nombre")
-                //     .withVer()
-                //.withAdd()
-                .withClear();
-        csParentesco.getElement().setAttribute("colspan", "2");
-        binder.bind(csParentesco, "parentesco");
+        cbParentesco = new ComboBox<>("Parentesco");
+        cbParentesco.getElement().setAttribute("colspan", "2");
+        cbParentesco.setItems(EParentesco.values());
 
-        SelectCompuesto<Parametro> csGrupoSanguineo = new SelectCompuesto<>("Grupo sanguineo", ParametroService.class );
-        csGrupoSanguineo.setColSpan(3L)
-                .setWidthInput("150px")
-                .withFind("Lista de grupo sanguineo")
-                .addColumn(Parametro::getId,"Codigo")
-                .addColumn(Parametro::getNombre,"Nombre")
-                //     .withVer()
-                //.withAdd()
-                .withClear();
-        csGrupoSanguineo.getElement().setAttribute("colspan", "3");
-        binder.bind(csGrupoSanguineo, "grupoSanguineo");
+        cbGrupoSanguineo = new ComboBox<>("Grupo sanguineo");
+        cbGrupoSanguineo.getElement().setAttribute("colspan", "2");
+        cbGrupoSanguineo.setItems(EGrupoSanguineo.values());
 
-        SelectCompuesto<Parametro> csFactorRH = new SelectCompuesto<>("Factor RH", ParametroService.class );
-        csFactorRH.setColSpan(2L)
-                .setWidthInput("150px")
-                .withFind("Lista de factores RH")
-                .addColumn(Parametro::getId,"Codigo")
-                .addColumn(Parametro::getNombre,"Nombre")
-                //     .withVer()
-                //.withAdd()
-                .withClear();
-        csFactorRH.getElement().setAttribute("colspan", "2");
-        binder.bind(csFactorRH, "factor");
+        cbFactor = new ComboBox<>("Factor RH");
+        cbFactor.getElement().setAttribute("colspan", "2");
+        cbFactor.setItems(EFactorRH.values());
 
         nombre = new TextField("Nombre");
         nombre.getElement().setAttribute("colspan", "2");
@@ -125,9 +108,9 @@ public class PersonaForm extends Abm<Persona, TemplateModel> {
 
         numeroPartida = new TextField("Numero de partida");
         numeroPartida.getElement().setAttribute("colspan", "2");
-        binder.bind(numeroPartida, "numeroPartida");
+        binder.forField(numeroPartida).withConverter(new IntegerConverter()).bind("numeroPartida");
 
-        form.add(nombre, documento, sexo, csPersona, csParentesco, csGrupoSanguineo, csFactorRH, direccion, descripcionDireccion, numeroPartida);
+        form.add(nombre, documento, sexo, csPersona, cbParentesco, cbGrupoSanguineo, cbFactor, direccion, descripcionDireccion, numeroPartida);
         form.setResponsiveSteps(
                 new FormLayout.ResponsiveStep("0",1),
                 new FormLayout.ResponsiveStep("21em",2),

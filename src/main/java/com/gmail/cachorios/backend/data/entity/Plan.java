@@ -1,12 +1,14 @@
 package com.gmail.cachorios.backend.data.entity;
 
-import com.gmail.cachorios.core.ui.data.AbstractEntity;
+import com.gmail.cachorios.core.ui.data.AbstractEntityId;
 
+import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
-public class Plan extends AbstractEntity {
+@Entity
+public class Plan extends AbstractEntityId {
 
     @Id
     private Long id;

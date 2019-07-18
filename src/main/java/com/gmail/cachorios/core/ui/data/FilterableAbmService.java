@@ -3,7 +3,7 @@ package com.gmail.cachorios.core.ui.data;
 import java.util.Optional;
 
 
-import com.gmail.cachorios.backend.data.entity.User;
+import com.gmail.cachorios.backend.data.entity.Usuario;
 import com.gmail.cachorios.backend.servicios.SegSocServices;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -25,7 +25,7 @@ public interface FilterableAbmService<T extends EntidadInterface> extends AbmSer
 		return getRepository().findById(id);
 	}
 
-	default public  User getUsuario(){
+	default public Usuario getUsuario(){
 		return SegSocServices.getUsuarioActivo();
 	}
 }

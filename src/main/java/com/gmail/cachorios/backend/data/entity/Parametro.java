@@ -1,6 +1,6 @@
 package com.gmail.cachorios.backend.data.entity;
 
-import com.gmail.cachorios.core.ui.data.AbstractEntity;
+import com.gmail.cachorios.core.ui.data.AbstractEntityId;
 import com.gmail.cachorios.core.ui.data.enums.ETipoParametro;
 
 import javax.persistence.*;
@@ -9,7 +9,7 @@ import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Entity
-public class Parametro extends AbstractEntity {
+public class Parametro extends AbstractEntityId {
 
     @Id
     private Long id;

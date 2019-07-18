@@ -1,7 +1,7 @@
 package com.gmail.cachorios.backend.servicios;
 
 import com.gmail.cachorios.backend.data.entity.Parametro;
-import com.gmail.cachorios.backend.data.entity.User;
+import com.gmail.cachorios.backend.data.entity.Usuario;
 import com.gmail.cachorios.backend.repositorios.ParametroRepositorio;
 import com.gmail.cachorios.core.ui.data.FilterableAbmService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,7 +53,7 @@ public class ParametroService implements FilterableAbmService<Parametro> {
     }
 
     @Override
-    public Parametro createNew(User currentUser) {
+    public Parametro createNew(Usuario currentUsuario) {
         return new Parametro();
     }
 }

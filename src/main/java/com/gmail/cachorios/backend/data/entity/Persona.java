@@ -1,6 +1,6 @@
 package com.gmail.cachorios.backend.data.entity;
 
-import com.gmail.cachorios.core.ui.data.AbstractEntity;
+import com.gmail.cachorios.core.ui.data.AbstractEntityId;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -8,11 +8,12 @@ import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
-public class Persona extends AbstractEntity {
+public class Persona extends AbstractEntityId {
 
     @Id
     private Long id;
 
+    @ManyToOne
     private Persona cabeza;
 
     private Parametro parentesco;

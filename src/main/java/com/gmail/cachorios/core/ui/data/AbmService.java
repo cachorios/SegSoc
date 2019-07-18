@@ -2,7 +2,7 @@ package com.gmail.cachorios.core.ui.data;
 
 import javax.persistence.EntityNotFoundException;
 
-import com.gmail.cachorios.backend.data.entity.User;
+import com.gmail.cachorios.backend.data.entity.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 
@@ -12,19 +12,19 @@ public interface AbmService<T extends EntidadInterface> {
 	JpaRepository<T, Long> getRepository();
 
 
-	default T save(User currentUser, T entity) {
+	default T save(Usuario currentUsuario, T entity) {
 		return getRepository().saveAndFlush(entity);
 	}
 
-	default void delete(User currentUser, T entity) {
+	default void delete(Usuario currentUsuario, T entity) {
 		if (entity == null) {
 			throw new EntityNotFoundException();
 		}
 		getRepository().delete(entity);
 	}
 
-	default void delete(User currentUser, long id) {
-		delete(currentUser, load(id));
+	default void delete(Usuario currentUsuario, long id) {
+		delete(currentUsuario, load(id));
 	}
 
 	default long count() {
@@ -39,5 +39,5 @@ public interface AbmService<T extends EntidadInterface> {
 		return entity;
 	}
 
-	T createNew(User currentUser);
+	T createNew(Usuario currentUsuario);
 }

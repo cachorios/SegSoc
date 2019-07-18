@@ -3,15 +3,13 @@ package com.gmail.cachorios.ui.forms;
 import com.github.appreciated.app.layout.annotations.Caption;
 import com.github.appreciated.app.layout.annotations.Icon;
 import com.gmail.cachorios.backend.data.Role;
-import com.gmail.cachorios.backend.data.entity.User;
+import com.gmail.cachorios.backend.data.entity.Usuario;
 
 import com.gmail.cachorios.core.ui.data.FilterableAbmService;
-import com.gmail.cachorios.backend.servicios.UserService;
+import com.gmail.cachorios.backend.servicios.UsuarioService;
 import com.gmail.cachorios.core.ui.view.abm.*;
 
 
-import com.gmail.cachorios.core.ui.view.component.CustomSelect;
-import com.gmail.cachorios.core.ui.view.component.selectCompuesto.SelectCompuesto;
 import com.gmail.cachorios.ui.MainAppLayout;
 import com.gmail.cachorios.ui.utils.LarConst;
 import com.vaadin.flow.component.combobox.ComboBox;
@@ -38,19 +36,18 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Icon(VaadinIcon.HOME)
 
 @Secured(Role.ADMIN)
-public class UsuarioForm extends Abm<User, TemplateModel> {
+public class UsuarioForm extends Abm<Usuario, TemplateModel> {
 
-    private UserService userService;
+    private UsuarioService usuarioService;
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UsuarioForm(FilterableAbmService<User> service, PasswordEncoder passwordEncoder  ) {
+    public UsuarioForm(FilterableAbmService<Usuario> service, PasswordEncoder passwordEncoder  ) {
 
         super("Usuario", service);
         this.passwordEncoder = passwordEncoder;
-        //this.userService = service;
-        //ancho del formulario
-        setWith("1600px");
+
+        setWith("1000px");
 
         configureGrid();
 
@@ -63,25 +60,21 @@ public class UsuarioForm extends Abm<User, TemplateModel> {
     }
 
     private void configureGrid() {
-        this.getGrid().addColumn(TemplateRenderer.<User> of("<img src='[[item.foto]]' alt='foto'  height=\"30\" style='border-radius: 100%;' >").withProperty("foto", User::getPhotoUrl))
+        this.getGrid().addColumn(TemplateRenderer.<Usuario> of("<img src='[[item.foto]]' alt='foto'  height=\"30\" style='border-radius: 100%;' >").withProperty("foto", Usuario::getFotoUrl))
                 .setHeader("Foto")
                 .setFlexGrow(0).setSortable(false);
-        Grid.Column col1 = this.getGrid().addColumn(User::getLastName).setHeader("Apellido").setFlexGrow(1).setSortable(true).setKey("lastName");
-        Grid.Column col2 = this.getGrid().addColumn(User::getFirstName).setHeader("Nombre").setFlexGrow(1).setSortable(true).setKey("firstName");
+        Grid.Column col1 = this.getGrid().addColumn(Usuario::getApellido).setHeader("Apellido").setFlexGrow(1).setSortable(true).setKey("apellido");
+        Grid.Column col2 = this.getGrid().addColumn(Usuario::getNombre).setHeader("Nombre").setFlexGrow(1).setSortable(true).setKey("nombre");
 
-//        HeaderRow topRow = this.getGrid().prependHeaderRow();
-//        topRow.join(col1, col2).setComponent(new Label("Apellido y Nombre"));
+        this.getGrid().addColumn(Usuario::getEmail).setHeader("Correo").setFlexGrow(1).setSortable(true).setKey("email");
 
-        this.getGrid().addColumn(User::getEmail).setHeader("Correo").setFlexGrow(1).setSortable(true).setKey("email");
-
-        this.getGrid().addColumn(User::getRole).setHeader("Role").setFlexGrow(0).setSortable(true).setWidth("125px").setResizable(false).setKey("role");
-//        this.getGrid().addColumn(User::isLocked).setHeader("Bloqueado").setFlexGrow(0).setSortable(true).setWidth("110px").setResizable(false).setKey("locked");
+        this.getGrid().addColumn(Usuario::getRole).setHeader("Role").setFlexGrow(0).setSortable(true).setWidth("125px").setResizable(false).setKey("role");
     }
 
 
 
     @Override
-    protected void crearForm(FormLayout form, BeanValidationBinder<User> binder) {
+    protected void crearForm(FormLayout form, BeanValidationBinder<Usuario> binder) {
         TextField email, first, last;
         PasswordField password;
         ComboBox<String> role;
@@ -100,28 +93,11 @@ public class UsuarioForm extends Abm<User, TemplateModel> {
 
         first = new TextField("Nombre");
         first.getElement().setAttribute("colspan", "2");
-        binder.bind(first, "firstName");
+        binder.bind(first, "nombre");
         last = new TextField("Apellido");
-        binder.bind(last, "lastName");
+        binder.bind(last, "apellido");
         password = new PasswordField("Clave de  acceso");
         password.getElement().setAttribute("colspan", "3");
-
-
-//        empresa = new CustomSelect<>("Empleador", EmpleadorService.class);
-//        empresa.getElement().setAttribute("colspan", "3");
-
-//        empresa
-//                .withSetConsultarCodigo((service, string) -> service.findById(Long.valueOf(string)))
-//                .withSetObtenerVarlor(empleador -> empleador.getId().toString())
-//                .withSetObtenerLeyenda(empleador -> empleador.getNombre())
-//
-//        ;
-//        empresa.withFind()
-//                .init();
-
-        //binder.bind(empresa, "empleador");
-
-
 
         binder.forField(password).withValidator(pass -> {
             return pass.matches("^(|(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,})$");
@@ -140,11 +116,4 @@ public class UsuarioForm extends Abm<User, TemplateModel> {
         );
     }
 }
-/*
-<vaadin-text-field id="email" label="Email (login)" colspan="2"></vaadin-text-field>
-<vaadin-text-field id="first" label="First Name"></vaadin-text-field>
-<vaadin-text-field id="last" label="Last Name"></vaadin-text-field>
-<vaadin-password-field id="password" label="Password" colspan="2"></vaadin-password-field>
-<vaadin-combo-box id="role" label="Role" colspan="3"></vaadin-combo-box>
-*/
 

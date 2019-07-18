@@ -2,7 +2,7 @@ package com.gmail.cachorios.backend.servicios;
 
 import com.gmail.cachorios.backend.data.entity.Movimiento;
 import com.gmail.cachorios.backend.data.entity.MovimientoDetalle;
-import com.gmail.cachorios.backend.data.entity.User;
+import com.gmail.cachorios.backend.data.entity.Usuario;
 import com.gmail.cachorios.backend.repositorios.MovimientoDetalleRepositorio;
 import com.gmail.cachorios.core.ui.data.FilterableAbmService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,7 +53,7 @@ public class MovimientoDetalleService implements FilterableAbmService<Movimiento
     }
 
     @Override
-    public MovimientoDetalle createNew(User currentUser) {
+    public MovimientoDetalle createNew(Usuario currentUsuario) {
         return new MovimientoDetalle();
     }
 

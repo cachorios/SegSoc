@@ -7,7 +7,8 @@ public class LarConst {
 
     public static final String PAGE_ROOT = "";
     public static final String PAGE_PERSONA = "Persona";
-    public static final String PAGE_PORCENTAJE = "porcentaje";
+    public static final String PAGE_PARAMETRO = "Parametro";
+    public static final String PAGE_MOVIMIENTO = "Movimiento";
     public static final String PAGE_USERS = "usuarios";
 
     public static final String TITLE_ACCESS_DENIED = "Acceso denegado";
@@ -15,6 +16,7 @@ public class LarConst {
 
     public static final String TITULO_USUARIOS = "Administració de Usuarios";
     public static final String TITULO_PERSONA = "Administración de Personas";
+    public static final String TITULO_MOVIMIENTO = "Movimientos";
 
 
     public static final String VIEWPORT = "width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes";

@@ -294,7 +294,7 @@
                                       <files>
                                         <file>src/main-view.html</file>
                                         <file>src/views/admin/users/users-view.html</file>
-                                        <file>src/views/admin/users/user-form.html</file>
+                                        <file>src/views/admin/users/usuario-form.html</file>
                                         <file>src/views/admin/products/products-view.html</file>
                                         <file>src/views/admin/products/product-form.html</file>
                                         <file>src/views/storefront/storefront-view.html</file>
@@ -511,7 +511,7 @@
                         <configuration>
                             <trimStackTrace>false</trimStackTrace>
                             <systemPropertyVariables>
-                                <sauce.user>${sauce.user}</sauce.user>
+                                <sauce.usuario>${sauce.usuario}</sauce.usuario>
                                 <sauce.sauceAccessKey>${sauce.sauceAccessKey}</sauce.sauceAccessKey>
                                 <sauce.options>${sauce.options}</sauce.options>
                                 <com.vaadin.testbench.Parameters.gridBrowsers>${com.vaadin.testbench.Parameters.gridBrowsers}</com.vaadin.testbench.Parameters.gridBrowsers>

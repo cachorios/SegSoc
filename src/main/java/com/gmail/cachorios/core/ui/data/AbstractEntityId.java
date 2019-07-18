@@ -26,6 +26,10 @@ import javax.persistence.Version;
 			return version;
 		}
 
+		public boolean isNew() {
+		return (getId() == null);
+	}
+
 		@Override
 		public int hashCode() {
 			if (id == null) {

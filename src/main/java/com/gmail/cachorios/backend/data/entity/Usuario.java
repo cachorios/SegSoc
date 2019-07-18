@@ -9,9 +9,8 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-@Entity(name="UserInfo")
-public class User extends AbstractEntityId {
-
+@Entity
+public class Usuario extends AbstractEntityId {
 
 	@NotEmpty
 	@Email
@@ -25,18 +24,18 @@ public class User extends AbstractEntityId {
 
 	@NotBlank
 	@Size(max = 255)
-	private String firstName;
+	private String nombre;
 
 	@NotBlank
 	@Size(max = 255)
-	private String lastName;
+	private String apellido;
 
 	@NotBlank
 	@Size(max = 255)
 	private String role;
 
 	@Size(max = 2083)
-	private String photoUrl;
+	private String fotoUrl;
 
 	private boolean locked = false;
 
@@ -46,7 +45,7 @@ public class User extends AbstractEntityId {
 		this.email = email == null ? null : email.toLowerCase();
 	}
 
-	public User() {
+	public Usuario() {
 		// An empty constructor is needed for all beans
 	}
 
@@ -58,20 +57,20 @@ public class User extends AbstractEntityId {
 		this.passwordHash = passwordHash;
 	}
 
-	public String getFirstName() {
-		return firstName;
+	public String getNombre() {
+		return nombre;
 	}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 
-	public String getLastName() {
-		return lastName;
+	public String getApellido() {
+		return apellido;
 	}
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
 	}
 
 	public String getRole() {
@@ -90,12 +89,12 @@ public class User extends AbstractEntityId {
 		this.email = email;
 	}
 
-	public String getPhotoUrl() {
-		return photoUrl;
+	public String getFotoUrl() {
+		return fotoUrl;
 	}
 
-	public void setPhotoUrl(String photoUrl) {
-		this.photoUrl = photoUrl;
+	public void setFotoUrl(String fotoUrl) {
+		this.fotoUrl = fotoUrl;
 	}
 
 	public boolean isLocked() {
@@ -107,7 +106,7 @@ public class User extends AbstractEntityId {
 	}
 
     public String getFullName(){
-		return getFirstName() + " " + getLastName();
+		return getNombre() + " " + getApellido();
 	}
 
 }

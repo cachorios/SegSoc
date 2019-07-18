@@ -8,15 +8,17 @@ import com.github.appreciated.app.layout.component.appmenu.MenuHeaderComponent;
 import com.github.appreciated.app.layout.component.appmenu.left.LeftClickableComponent;
 import com.github.appreciated.app.layout.component.appmenu.left.LeftNavigationComponent;
 import com.github.appreciated.app.layout.component.appmenu.left.builder.LeftAppMenuBuilder;
-import com.github.appreciated.app.layout.component.appmenu.left.builder.LeftSubMenuBuilder;
 import com.github.appreciated.app.layout.notification.DefaultNotificationHolder;
 import com.github.appreciated.app.layout.notification.component.AppBarNotificationButton;
 import com.github.appreciated.app.layout.router.AppLayoutRouterLayout;
 
 import com.gmail.cachorios.app.ApplicationContextProvider;
 import com.gmail.cachorios.app.seguridad.SecurityUtils;
-import com.gmail.cachorios.backend.data.entity.User;
-import com.gmail.cachorios.backend.servicios.UserService;
+import com.gmail.cachorios.backend.data.entity.Usuario;
+import com.gmail.cachorios.backend.servicios.UsuarioService;
+import com.gmail.cachorios.ui.forms.MovimientoForm;
+import com.gmail.cachorios.ui.forms.ParametroForm;
+import com.gmail.cachorios.ui.forms.PersonaForm;
 import com.gmail.cachorios.ui.forms.UsuarioForm;
 import com.vaadin.flow.component.dependency.HtmlImport;
 import com.vaadin.flow.component.icon.VaadinIcon;
@@ -46,13 +48,13 @@ public class MainAppLayout extends AppLayoutRouterLayout {
 
         notifications = new DefaultNotificationHolder(newStatus -> { });
 
-        UserService userService = ApplicationContextProvider.getApplicationContext().getBean(UserService.class);
-        User user = userService.getRepository().findByEmailIgnoreCase(SecurityUtils.getUsername());
+        UsuarioService usuarioService = ApplicationContextProvider.getApplicationContext().getBean(UsuarioService.class);
+        Usuario usuario = usuarioService.getRepository().findByEmailIgnoreCase(SecurityUtils.getUsername());
 
 
 //        String diricono = "/frontend/images/" + "cacho"+ ".png";
 
-        MenuHeaderComponent header = new MenuHeaderComponent(user.getFullName(), null, user.getPhotoUrl());
+        MenuHeaderComponent header = new MenuHeaderComponent(usuario.getFullName(), null, usuario.getFotoUrl());
         header.getContent().setAlignItems(FlexComponent.Alignment.CENTER);
 
         AppLayout appLayout = AppLayoutBuilder
@@ -73,15 +75,18 @@ public class MainAppLayout extends AppLayoutRouterLayout {
                                 clickEvent -> Notification.show("onClick ...")
                         ), HEADER)
                         .add(new LeftNavigationComponent(UsuarioForm.class))
+                        .add(new LeftNavigationComponent(PersonaForm.class))
+                        .add(new LeftNavigationComponent(ParametroForm.class))
+                        .add(new LeftNavigationComponent(MovimientoForm.class))
 
-                        .add(LeftSubMenuBuilder
+                        /*.add(LeftSubMenuBuilder
                                 .get("Liquidación", VaadinIcon.PLUS.create())
-                                /*.add(new LeftNavigationComponent(Liquidaciones.class))
+                                .add(new LeftNavigationComponent(Liquidaciones.class))
                                 .add(new LeftNavigationComponent(LiquidacionDetalles.class))
                                 .add(new LeftNavigationComponent(Conceptos.class))
                                 .add(new LeftNavigationComponent(LugaresPagos.class))
-                                .add(new LeftNavigationComponent(Porcentajes.class))*/
-                                .build())
+                                .add(new LeftNavigationComponent(Porcentajes.class))
+                                .build())*/
                         //.add(new LeftNavigationComponent(Regimenes.class))
                         .addToSection(new LeftClickableComponent("Clickable Entry",
                                 VaadinIcon.COG.create(),

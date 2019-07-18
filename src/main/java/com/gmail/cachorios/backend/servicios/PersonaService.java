@@ -1,7 +1,7 @@
 package com.gmail.cachorios.backend.servicios;
 
 import com.gmail.cachorios.backend.data.entity.Persona;
-import com.gmail.cachorios.backend.data.entity.User;
+import com.gmail.cachorios.backend.data.entity.Usuario;
 import com.gmail.cachorios.backend.repositorios.PersonaRepositorio;
 import com.gmail.cachorios.core.ui.data.FilterableAbmService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,7 +53,7 @@ public class PersonaService implements FilterableAbmService<Persona> {
     }
 
     @Override
-    public Persona createNew(User currentUser) {
+    public Persona createNew(Usuario currentUsuario) {
         return new Persona();
     }
 }

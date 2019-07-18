@@ -1,13 +1,13 @@
 package com.gmail.cachorios.backend.data.entity;
 
-import com.gmail.cachorios.core.ui.data.AbstractEntity;
+import com.gmail.cachorios.core.ui.data.AbstractEntityId;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
-public class MovimientoDetalle extends AbstractEntity {
+public class MovimientoDetalle extends AbstractEntityId {
 
     @Id
     private Long id;

@@ -2,8 +2,8 @@ package com.gmail.cachorios.app.seguridad;
 
 
 import com.gmail.cachorios.backend.data.Role;
-import com.gmail.cachorios.backend.data.entity.User;
-import com.gmail.cachorios.backend.repositorios.UserRepositorio;
+import com.gmail.cachorios.backend.data.entity.Usuario;
+import com.gmail.cachorios.backend.repositorios.UsuarioRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Bean;
@@ -55,7 +55,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Bean
 	@Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-	public User currentUser(UserRepositorio userRepository) {
+	public Usuario currentUser(UsuarioRepositorio userRepository) {
 		return userRepository.findByEmailIgnoreCase(SecurityUtils.getUsername());
 	}
 

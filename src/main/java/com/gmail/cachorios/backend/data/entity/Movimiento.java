@@ -1,6 +1,6 @@
 package com.gmail.cachorios.backend.data.entity;
 
-import com.gmail.cachorios.core.ui.data.AbstractEntity;
+import com.gmail.cachorios.core.ui.data.AbstractEntityId;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -10,7 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-public class Movimiento extends AbstractEntity {
+public class Movimiento extends AbstractEntityId {
 
     @Id
     private Long id;
@@ -19,7 +19,7 @@ public class Movimiento extends AbstractEntity {
     private Date fecha;
 
     @NotNull
-    private User usuario;
+    private Usuario usuario;
 
     @NotNull
     private Persona persona;
@@ -52,11 +52,11 @@ public class Movimiento extends AbstractEntity {
         this.persona = persona;
     }
 
-    public User getUsuario() {
+    public Usuario getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(User usuario) {
+    public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
 

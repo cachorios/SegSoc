@@ -1,7 +1,7 @@
 package com.gmail.cachorios.core.ui.view.abm;
 
 import com.gmail.cachorios.app.HasLogger;
-import com.gmail.cachorios.backend.data.entity.User;
+import com.gmail.cachorios.backend.data.entity.Usuario;
 import com.gmail.cachorios.core.ui.data.EntidadInterface;
 import com.gmail.cachorios.core.ui.data.EntityUtil;
 import com.gmail.cachorios.core.ui.data.AbmService;
@@ -21,14 +21,14 @@ import java.util.function.UnaryOperator;
 public class EntityPresenter<T extends EntidadInterface, V extends EntityView<T>> implements HasLogger {
 
     private AbmService<T> abmService;
-    private User currentUser;
+    private Usuario currentUsuario;
     private V view;
 
     EntityPresenterEstado<T> estado = new EntityPresenterEstado<T>();
 
-    public EntityPresenter(AbmService<T> abmService, User currentUser) {
+    public EntityPresenter(AbmService<T> abmService, Usuario currentUsuario) {
         this.abmService = abmService;
-        this.currentUser = currentUser;
+        this.currentUsuario = currentUsuario;
     }
 
     public void setView(V view){
@@ -42,7 +42,7 @@ public class EntityPresenter<T extends EntidadInterface, V extends EntityView<T>
     public void delete(AbmOperacionListener<T> onSuccess) {
         Message CONFIRM_DELETE = Message.CONFIRM_DELETE.createMessage();
         confirmIfNecessaryAndExecute(true, CONFIRM_DELETE, () -> {
-            if (executeOperation(() -> abmService.delete(currentUser, estado.getEntidad()))) {
+            if (executeOperation(() -> abmService.delete(currentUsuario, estado.getEntidad()))) {
                 onSuccess.execute(estado.getEntidad());
             }
         }, () -> {
@@ -88,7 +88,7 @@ public class EntityPresenter<T extends EntidadInterface, V extends EntityView<T>
     }
 
     private void guardarEntidad() {
-        estado.actualizarEntidad( abmService.save(currentUser, estado.getEntidad()), esNuevo());
+        estado.actualizarEntidad( abmService.save(currentUsuario, estado.getEntidad()), esNuevo());
     }
 
     //??? donde se usa
@@ -147,7 +147,7 @@ public class EntityPresenter<T extends EntidadInterface, V extends EntityView<T>
     }
 
     public T crearNuevo() {
-        estado.actualizarEntidad(abmService.createNew(currentUser), true);
+        estado.actualizarEntidad(abmService.createNew(currentUsuario), true);
         return estado.getEntidad();
     }
 

@@ -1,7 +1,7 @@
 package com.gmail.cachorios.core.ui.view.abm;
 
 import com.gmail.cachorios.app.HasLogger;
-import com.gmail.cachorios.backend.data.entity.User;
+import com.gmail.cachorios.backend.data.entity.Usuario;
 import com.gmail.cachorios.core.ui.data.EntidadInterface;
 import com.gmail.cachorios.core.ui.data.FilterableAbmService;
 import com.gmail.cachorios.core.ui.util.TemplateUtil;
@@ -56,7 +56,7 @@ public abstract class Abm<T extends EntidadInterface, D extends TemplateModel> e
 
     private FilterableAbmService service;
 
-    private User currentUser;
+    private Usuario currentUsuario;
 
     public Abm(String nombreEntidad, FilterableAbmService<T> service) {
         this.nombreEntidad = nombreEntidad;
@@ -181,13 +181,13 @@ public abstract class Abm<T extends EntidadInterface, D extends TemplateModel> e
         return binder;
     }
 
-    public void setCurrentUser(User currentUser){
-        this.currentUser = currentUser;
+    public void setCurrentUsuario(Usuario currentUsuario){
+        this.currentUsuario = currentUsuario;
     }
 
     public AbmEntityPresenter<T>    getPresenter(){
         if(presenter == null){
-            presenter = new AbmEntityPresenter<>(service, currentUser);
+            presenter = new AbmEntityPresenter<>(service, currentUsuario);
             presenter.setView(this);
         }
 

@@ -8,7 +8,8 @@ package com.gmail.cachorios.core.ui.data.enums;
  * @author jmfragueiro
  * @version 20161011
  */
-public enum ETipoParametro {
-    NINGUNO,            //0
-    PLAN                //1
+public enum EFactorRH {
+    NINGUNO,          //0
+    POSITIVO,         //1
+    NEGATIVO          //2
 }

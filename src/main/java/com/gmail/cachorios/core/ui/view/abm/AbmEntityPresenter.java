@@ -1,7 +1,7 @@
 package com.gmail.cachorios.core.ui.view.abm;
 
 
-import com.gmail.cachorios.backend.data.entity.User;
+import com.gmail.cachorios.backend.data.entity.Usuario;
 import com.gmail.cachorios.core.ui.data.EntidadInterface;
 import com.gmail.cachorios.core.ui.data.FilterableAbmService;
 import org.vaadin.artur.spring.dataprovider.FilterablePageableDataProvider;
@@ -11,8 +11,8 @@ public class AbmEntityPresenter<T extends EntidadInterface>  extends EntityPrese
     private FilterablePageableDataProvider<T, String> filteredDataProvider;
 
 
-    public AbmEntityPresenter(FilterableAbmService<T> crudService, User currentUser) {
-        super(crudService, currentUser);
+    public AbmEntityPresenter(FilterableAbmService<T> crudService, Usuario currentUsuario) {
+        super(crudService, currentUsuario);
         this.filteredDataProvider = new AbmDataProvider<>(crudService);
     }
 

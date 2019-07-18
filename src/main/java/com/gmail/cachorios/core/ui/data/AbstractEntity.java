@@ -16,10 +16,6 @@ public abstract class AbstractEntity implements EntidadInterface {
 		return version;
 	}
 
-	public boolean isNew() {
-		return (getId() == null);
-	}
-
 
 	@Override
 	public int hashCode() {
