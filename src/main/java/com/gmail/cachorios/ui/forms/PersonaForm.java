@@ -2,24 +2,22 @@ package com.gmail.cachorios.ui.forms;
 
 import com.github.appreciated.app.layout.annotations.Caption;
 import com.github.appreciated.app.layout.annotations.Icon;
-import com.gmail.cachorios.backend.data.entity.Parametro;
 import com.gmail.cachorios.backend.data.entity.Persona;
-import com.gmail.cachorios.backend.servicios.ParametroService;
+import com.gmail.cachorios.backend.data.entity.Plan;
 import com.gmail.cachorios.backend.servicios.PersonaService;
 import com.gmail.cachorios.core.ui.data.FilterableAbmService;
 import com.gmail.cachorios.core.ui.data.enums.EFactorRH;
 import com.gmail.cachorios.core.ui.data.enums.EGrupoSanguineo;
 import com.gmail.cachorios.core.ui.data.enums.EParentesco;
-import com.gmail.cachorios.core.ui.data.util.converter.ImporteConverter;
 import com.gmail.cachorios.core.ui.data.util.converter.IntegerConverter;
 import com.gmail.cachorios.core.ui.view.abm.Abm;
+import com.gmail.cachorios.core.ui.view.component.UnoaMuchoComponent;
 import com.gmail.cachorios.core.ui.view.component.selectCompuesto.SelectCompuesto;
 import com.gmail.cachorios.ui.MainAppLayout;
 import com.gmail.cachorios.ui.utils.LarConst;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.grid.Grid;
-import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.BeanValidationBinder;
@@ -61,6 +59,19 @@ public class PersonaForm extends Abm<Persona, TemplateModel> {
         ComboBox<EParentesco> cbParentesco;
         ComboBox<EGrupoSanguineo> cbGrupoSanguineo;
         ComboBox<EFactorRH> cbFactor;
+
+        UnoaMuchoComponent<Plan, Persona> planes = new UnoaMuchoComponent("Planes", this);
+
+        planes.setHeight("300px");
+
+        planes.getGrid().addColumn(Plan::getNombre).setHeader("Nombre").setFlexGrow(0);
+        planes.getGrid().addColumn(Plan::getMonto).setHeader("Monto").setFlexGrow(1);
+
+        planes.withForm(PlanForm.class)
+                .withVer()
+                .withNuevo(Plan.class);
+
+        planes.iniciar();
 
         SelectCompuesto<Persona> csPersona = new SelectCompuesto<>("Cabeza", PersonaService.class );
         csPersona.setColSpan(3L)
@@ -110,7 +121,7 @@ public class PersonaForm extends Abm<Persona, TemplateModel> {
         numeroPartida.getElement().setAttribute("colspan", "2");
         binder.forField(numeroPartida).withConverter(new IntegerConverter()).bind("numeroPartida");
 
-        form.add(nombre, documento, sexo, csPersona, cbParentesco, cbGrupoSanguineo, cbFactor, direccion, descripcionDireccion, numeroPartida);
+        form.add(nombre, documento, sexo/*, csPersona*/, cbParentesco, cbGrupoSanguineo, cbFactor, direccion, descripcionDireccion, numeroPartida, planes);
         form.setResponsiveSteps(
                 new FormLayout.ResponsiveStep("0",1),
                 new FormLayout.ResponsiveStep("21em",2),

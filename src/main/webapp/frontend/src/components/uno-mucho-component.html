@@ -1,0 +1,30 @@
+
+
+<dom-module id="uno-mucho-component">
+<template>
+    <style include="shared-styles">
+        :host{
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            flex-wrap: nowrap;
+            /*background-color: #eef0e2;*/
+            padding: 0.5rem;
+        }
+
+
+
+    </style>
+
+    <slot></slot>
+</template>
+<script>
+    class UnoaMuchoComponent extends Polymer.Element {
+         static get is() {
+           return 'uno-mucho-component';
+         }
+     }
+     window.customElements.define(UnoaMuchoComponent.is, UnoaMuchoComponent);
+</script>
+</dom-module>

@@ -5,8 +5,10 @@ import com.github.appreciated.app.layout.annotations.Icon;
 import com.gmail.cachorios.backend.data.entity.Parametro;
 import com.gmail.cachorios.core.ui.data.FilterableAbmService;
 import com.gmail.cachorios.core.ui.data.enums.ETipoParametro;
+import com.gmail.cachorios.core.ui.data.util.converter.BooleanConverter;
 import com.gmail.cachorios.core.ui.data.util.converter.ImporteConverter;
 import com.gmail.cachorios.core.ui.data.util.converter.IntegerConverter;
+import com.gmail.cachorios.core.ui.data.util.converter.LongConverter;
 import com.gmail.cachorios.core.ui.view.abm.Abm;
 import com.gmail.cachorios.ui.MainAppLayout;
 import com.gmail.cachorios.ui.utils.LarConst;
@@ -18,7 +20,6 @@ import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.BeanValidationBinder;
 import com.vaadin.flow.data.converter.LocalDateToDateConverter;
-import com.vaadin.flow.data.converter.StringToBooleanConverter;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.templatemodel.TemplateModel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +42,7 @@ public class ParametroForm extends Abm<Parametro, TemplateModel> {
 
     @Override
     protected String getBasePage() {
-        return LarConst.PAGE_PERSONA;
+        return LarConst.PAGE_PARAMETRO;
     }
 
     private void configureGrid(Grid<Parametro> grid) {
@@ -74,11 +75,11 @@ public class ParametroForm extends Abm<Parametro, TemplateModel> {
 
         valorint = new TextField("Valor entero");
         valorint.getElement().setAttribute("colspan", "2");
-        binder.forField(valorint).withConverter(new IntegerConverter()).bind("valorint");
+        binder.forField(valorint).withConverter(new LongConverter()).bind("valorint");
 
         valorbol = new TextField("Valor boleano");
         valorbol.getElement().setAttribute("colspan", "1");
-        binder.forField(valorbol).withConverter(new StringToBooleanConverter(valorbol.getValue())).bind("valorbol");
+        binder.forField(valorbol).withConverter(new BooleanConverter()).bind("valorbol");
 
         valordob = new TextField("Valor decimal");
         valordob.getElement().setAttribute("colspan", "2");

@@ -15,6 +15,7 @@ import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.grid.Grid;
 
 
+import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H4;
 
 import com.vaadin.flow.component.polymertemplate.Id;
@@ -53,6 +54,7 @@ public abstract class Abm<T extends EntidadInterface, D extends TemplateModel> e
     private AbmEntityPresenter<T> presenter;
     protected abstract String getBasePage();
     private final BeanValidationBinder<T> binder;
+    private Div padre;
 
     private FilterableAbmService service;
 
@@ -223,11 +225,7 @@ public abstract class Abm<T extends EntidadInterface, D extends TemplateModel> e
         return grid;
     }
 
-
-
-
-
-
-
-
+    public void setPadre(Div div) {
+        this.padre = div;
+    }
 }

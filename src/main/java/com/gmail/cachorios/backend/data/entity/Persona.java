@@ -13,7 +13,7 @@ public class Persona extends AbstractEntityId {
     @Id
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Persona cabeza;
 
     private Parametro parentesco;
@@ -44,11 +44,9 @@ public class Persona extends AbstractEntityId {
     private Integer numeroPartida;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "persona", fetch = FetchType.LAZY)
-    @NotNull
     private List<Documento> fotosDocumento;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "persona", fetch = FetchType.LAZY)
-    @NotNull
     private List<Plan> planes;
 
     @Override
@@ -146,6 +144,14 @@ public class Persona extends AbstractEntityId {
 
     public void setFotosDocumento(List<Documento> fotosDocumento) {
         this.fotosDocumento = fotosDocumento;
+    }
+
+    public List<Plan> getPlanes() {
+        return planes;
+    }
+
+    public void setPlanes(List<Plan> planes) {
+        this.planes = planes;
     }
 
     @Override
