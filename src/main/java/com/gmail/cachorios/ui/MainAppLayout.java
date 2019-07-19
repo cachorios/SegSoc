@@ -16,10 +16,7 @@ import com.gmail.cachorios.app.ApplicationContextProvider;
 import com.gmail.cachorios.app.seguridad.SecurityUtils;
 import com.gmail.cachorios.backend.data.entity.Usuario;
 import com.gmail.cachorios.backend.servicios.UsuarioService;
-import com.gmail.cachorios.ui.forms.MovimientoForm;
-import com.gmail.cachorios.ui.forms.ParametroForm;
-import com.gmail.cachorios.ui.forms.PersonaForm;
-import com.gmail.cachorios.ui.forms.UsuarioForm;
+import com.gmail.cachorios.ui.forms.*;
 import com.vaadin.flow.component.dependency.HtmlImport;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.notification.Notification;
@@ -76,8 +73,10 @@ public class MainAppLayout extends AppLayoutRouterLayout {
                         ), HEADER)
                         .add(new LeftNavigationComponent(UsuarioForm.class))
                         .add(new LeftNavigationComponent(PersonaForm.class))
-                        .add(new LeftNavigationComponent(ParametroForm.class))
                         .add(new LeftNavigationComponent(MovimientoForm.class))
+                        .add(new LeftNavigationComponent(ProductoForm.class))
+                        .add(new LeftNavigationComponent(PlanForm.class))
+                        .add(new LeftNavigationComponent(ParametroForm.class))
 
                         /*.add(LeftSubMenuBuilder
                                 .get("Liquidación", VaadinIcon.PLUS.create())
@@ -86,12 +85,12 @@ public class MainAppLayout extends AppLayoutRouterLayout {
                                 .add(new LeftNavigationComponent(Conceptos.class))
                                 .add(new LeftNavigationComponent(LugaresPagos.class))
                                 .add(new LeftNavigationComponent(Porcentajes.class))
-                                .build())*/
-                        //.add(new LeftNavigationComponent(Regimenes.class))
+                                .build())
+
                         .addToSection(new LeftClickableComponent("Clickable Entry",
                                 VaadinIcon.COG.create(),
                                 clickEvent -> Notification.show("onClick ...")
-                        ), FOOTER)
+                        ), FOOTER)*/
                         .build())
                 .build();
 

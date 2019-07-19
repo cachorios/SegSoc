@@ -134,7 +134,7 @@ public class UnoaMuchoComponent<T extends AbstractEntityId, P extends AbstractEn
 
     private Abm getForm(){
         if(form  == null){
-            form = (Abm) ApplicationContextProvider.getApplicationContext().getBean(formClass);;
+            form = (Abm) ApplicationContextProvider.getApplicationContext().getBean(formClass);
         }
         return form;
     }

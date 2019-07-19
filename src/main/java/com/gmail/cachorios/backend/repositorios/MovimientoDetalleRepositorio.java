@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface MovimientoDetalleRepositorio extends JpaRepository<MovimientoDetalle, Long> {
     Page<MovimientoDetalle> findBy(Pageable pageable);
 
-    Page<MovimientoDetalle> findByMovimiento(Movimiento persona, Pageable pageable);
+    Page<MovimientoDetalle> findByMovimiento(Movimiento movimiento, Pageable pageable);
 
     long countByMovimiento(Movimiento movimiento);
 }

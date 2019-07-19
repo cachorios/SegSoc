@@ -7,9 +7,12 @@ public class LarConst {
 
     public static final String PAGE_ROOT = "";
     public static final String PAGE_PERSONA = "Persona";
+    public static final String PAGE_PRODUCTO = "Producto";
     public static final String PAGE_PARAMETRO = "Parametro";
     public static final String PAGE_PLAN = "Plan";
     public static final String PAGE_MOVIMIENTO = "Movimiento";
+    public static final String PAGE_MOVIMIENTODET = "Detalles movimiento";
+    public static final String PAGE_DOCUMENTOS = "Documentos";
     public static final String PAGE_USERS = "usuarios";
 
     public static final String TITLE_ACCESS_DENIED = "Acceso denegado";
@@ -20,10 +23,12 @@ public class LarConst {
     public static final String TITULO_PARAMETRO = "Administración de Parametro";
     public static final String TITULO_PLAN = "Administración de Planes";
     public static final String TITULO_MOVIMIENTO = "Movimientos";
+    public static final String TITULO_MOVIMIENTODET = "Detalles de movimientos";
+    public static final String TITULO_DOCUMENTO = "Administración de Documentos";
 
 
     public static final String VIEWPORT = "width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes";
-    public static final String APP_TITLE = "ContaLarWeb";
+    public static final String APP_TITLE = "SegSocWeb";
     public static final int NOTIFICATION_DURATION = 4000;
     public static final String TITULO_REGIMEN = "Regimenes";
     public static final String TITULO_PORCENTAJE = "Porcentajes";
