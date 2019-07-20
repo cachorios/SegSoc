@@ -5,6 +5,7 @@ import com.gmail.cachorios.core.ui.data.enums.ETipoParametro;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 public interface ParametroRepositorio extends JpaRepository<Parametro, Long> {
     Page<Parametro> findBy(Pageable pageable);
@@ -20,4 +21,7 @@ public interface ParametroRepositorio extends JpaRepository<Parametro, Long> {
 
     long countByTipo(
             ETipoParametro tipo);
+
+    @Query(value = "SELECT MAX(e.orden) FROM parametro e WHERE e.tipo = ?1", nativeQuery = true)
+    int getMaxOrdenByTipo(ETipoParametro tipo);
 }

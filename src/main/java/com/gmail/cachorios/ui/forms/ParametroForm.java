@@ -2,7 +2,9 @@ package com.gmail.cachorios.ui.forms;
 
 import com.github.appreciated.app.layout.annotations.Caption;
 import com.github.appreciated.app.layout.annotations.Icon;
+import com.gmail.cachorios.app.ApplicationContextProvider;
 import com.gmail.cachorios.backend.data.entity.Parametro;
+import com.gmail.cachorios.backend.repositorios.ParametroRepositorio;
 import com.gmail.cachorios.backend.servicios.ParametroService;
 import com.gmail.cachorios.core.ui.data.enums.ETipoParametro;
 import com.gmail.cachorios.core.ui.data.util.converter.BooleanConverter;
@@ -51,6 +53,12 @@ public class ParametroForm extends Abm<Parametro, TemplateModel> {
         grid.addColumn(Parametro::getOrden).setHeader("Orden").setKey("orden").setWidth("40%");
     }
 
+    private void setOrden(ETipoParametro eTipoParametro, TextField campo) {
+        ParametroRepositorio parametroRepositorio = ApplicationContextProvider.getApplicationContext().getBean(ParametroRepositorio.class);
+        int maxOrden = parametroRepositorio.getMaxOrdenByTipo(eTipoParametro);
+        campo.setValue(String.valueOf(maxOrden));
+    }
+
     @Override
     protected void crearForm(FormLayout form, BeanValidationBinder<Parametro> binder) {
         TextField clase, orden, nombre, valorint, valordob, valorstr, valorbol, valorchr;
@@ -61,14 +69,15 @@ public class ParametroForm extends Abm<Parametro, TemplateModel> {
         nombre.getElement().setAttribute("colspan", "2");
         binder.bind(nombre,"nombre");
 
-        tipoComboBox = new ComboBox<>("Tipo");
-        tipoComboBox.getElement().setAttribute("colspan", "2");
-        tipoComboBox.setItems(ETipoParametro.values());
-        binder.bind(tipoComboBox, "tipo");
-
         orden = new TextField("Orden");
         orden.getElement().setAttribute("colspan", "1");
         binder.forField(orden).withConverter(new IntegerConverter()).bind("orden");
+
+        tipoComboBox = new ComboBox<>("Tipo");
+        tipoComboBox.getElement().setAttribute("colspan", "2");
+        tipoComboBox.setItems(ETipoParametro.values());
+        tipoComboBox.addValueChangeListener(e -> setOrden(e.getSource().getValue(), orden));
+        binder.bind(tipoComboBox, "tipo");
 
         clase = new TextField("Clase");
         clase.getElement().setAttribute("colspan", "2");

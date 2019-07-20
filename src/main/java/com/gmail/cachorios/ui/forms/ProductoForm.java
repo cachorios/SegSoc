@@ -17,7 +17,7 @@ import com.vaadin.flow.templatemodel.TemplateModel;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Route(value = LarConst.PAGE_PRODUCTO, layout = MainAppLayout.class)
-@Caption("ProductoForm")
+@Caption("Productos")
 @Icon(VaadinIcon.BARCODE)
 public class ProductoForm extends Abm<Producto, TemplateModel> {
 
@@ -25,16 +25,16 @@ public class ProductoForm extends Abm<Producto, TemplateModel> {
     public ProductoForm(FilterableAbmService<Producto> service) {
         super("Producto", service);
 
-        setWith("1000px");
+        setWith("500px");
 
         configureGrid(this.getGrid());
 
-        this.iniciar(LarConst.TITULO_PERSONA);
+        this.iniciar(LarConst.TITULO_PRODUCTO);
     }
 
     @Override
     protected String getBasePage() {
-        return LarConst.PAGE_PERSONA;
+        return LarConst.PAGE_PRODUCTO;
     }
 
     private void configureGrid(Grid<Producto> grid) {
@@ -46,16 +46,16 @@ public class ProductoForm extends Abm<Producto, TemplateModel> {
         TextField descripcion;
 
         descripcion = new TextField("Descripcion");
-        descripcion.getElement().setAttribute("colspan", "3");
+        descripcion.getElement().setAttribute("colspan", "1");
         binder.bind(descripcion, "descripcion");
 
         form.add(descripcion);
         form.setResponsiveSteps(
-                new FormLayout.ResponsiveStep("0",1),
+                new FormLayout.ResponsiveStep("0",1)/*,
                 new FormLayout.ResponsiveStep("18em",2),
                 new FormLayout.ResponsiveStep("19em",3),
                 new FormLayout.ResponsiveStep("20em",4),
-                new FormLayout.ResponsiveStep("21em",5)
+                new FormLayout.ResponsiveStep("21em",5)*/
         );
     }
 }

@@ -20,6 +20,7 @@ public class LarConst {
 
     public static final String TITULO_USUARIOS = "Administració de Usuarios";
     public static final String TITULO_PERSONA = "Administración de Personas";
+    public static final String TITULO_PRODUCTO = "Administración de Productos";
     public static final String TITULO_PARAMETRO = "Administración de Parametro";
     public static final String TITULO_PLAN = "Administración de Planes";
     public static final String TITULO_MOVIMIENTO = "Movimientos";
