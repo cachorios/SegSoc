@@ -14,6 +14,7 @@ import com.gmail.cachorios.core.ui.data.enums.EParentesco;
 import com.gmail.cachorios.core.ui.data.util.converter.IntegerConverter;
 import com.gmail.cachorios.core.ui.view.abm.Abm;
 import com.gmail.cachorios.core.ui.view.component.MuchoaMuchoGrid;
+import com.gmail.cachorios.core.ui.view.component.UnoaMuchoComponent;
 import com.gmail.cachorios.core.ui.view.component.selectCompuesto.SelectCompuesto;
 import com.gmail.cachorios.ui.MainAppLayout;
 import com.gmail.cachorios.ui.utils.LarConst;
@@ -62,7 +63,7 @@ public class PersonaForm extends Abm<Persona, TemplateModel> {
         ComboBox<EGrupoSanguineo> cbGrupoSanguineo;
         ComboBox<EFactorRH> cbFactor;
 
-        MuchoaMuchoGrid<Plan> planes;
+        // MuchoaMuchoGrid<Plan> planes;
 
         /*PlanService planService = ApplicationContextProvider.getApplicationContext().getBean(PlanService.class);
         planes = new MuchoaMuchoGrid<Plan>(planService.getAll());
@@ -71,7 +72,7 @@ public class PersonaForm extends Abm<Persona, TemplateModel> {
                 .altoFila("12rem")
                 .leyendaIzquierdo("Disponible").leyendaDerecha("Seleccionado");*/
 
-        /*UnoaMuchoComponent<Plan, Persona> planes = new UnoaMuchoComponent("Planes", this);
+        UnoaMuchoComponent<Plan, Persona> planes = new UnoaMuchoComponent("Planes", this);
 
         planes.setHeight("300px");
         planes.getElement().setAttribute("colspan", "5");
@@ -83,7 +84,7 @@ public class PersonaForm extends Abm<Persona, TemplateModel> {
                 .withVer()
                 .withNuevo(Plan.class);
 
-        planes.iniciar();*/
+        planes.iniciar();
 
         SelectCompuesto<Persona> csPersona = new SelectCompuesto<>("Cabeza", PersonaService.class );
         csPersona.setColSpan(3L)
@@ -133,7 +134,7 @@ public class PersonaForm extends Abm<Persona, TemplateModel> {
         numeroPartida.getElement().setAttribute("colspan", "2");
         binder.forField(numeroPartida).withConverter(new IntegerConverter()).bind("numeroPartida");
 
-        form.add(nombre, documento, sexo, csPersona, cbParentesco, cbGrupoSanguineo, cbFactor, direccion, descripcionDireccion, numeroPartida/*, planes*/);
+        form.add(nombre, documento, sexo, csPersona, cbParentesco, cbGrupoSanguineo, cbFactor, direccion, descripcionDireccion, numeroPartida, planes);
         form.setResponsiveSteps(
                 new FormLayout.ResponsiveStep("0",1),
                 new FormLayout.ResponsiveStep("18em",2),

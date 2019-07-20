@@ -4,6 +4,7 @@ import com.gmail.cachorios.backend.data.entity.Parametro;
 import com.gmail.cachorios.backend.data.entity.Usuario;
 import com.gmail.cachorios.backend.repositorios.ParametroRepositorio;
 import com.gmail.cachorios.core.ui.data.FilterableAbmService;
+import com.gmail.cachorios.core.ui.data.enums.ETipoParametro;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -12,19 +13,19 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class ParametroService implements FilterableAbmService<Parametro> {
+public class ParametroTipoService implements FilterableAbmService<Parametro> {
     private final ParametroRepositorio parametroRepositorio;
+    private ETipoParametro tipo;
 
     @Autowired
-    public ParametroService(ParametroRepositorio parametroRepositorio) {
+    public ParametroTipoService(ParametroRepositorio parametroRepositorio) {
         this.parametroRepositorio = parametroRepositorio;
     }
 
     @Override
     public Page<Parametro> findAnyMatching(Optional<String> filter, Pageable pageable) {
-        if(filter.isPresent()){
-            String filtro = makeForLike(filter.get());
-            return getRepository().findByNombreLikeIgnoreCase(filtro, pageable);
+        if(tipo != null){
+            return getRepository().findByTipo(tipo, pageable);
         }
 
         return find(pageable);
@@ -36,9 +37,8 @@ public class ParametroService implements FilterableAbmService<Parametro> {
 
     @Override
     public long countAnyMatching(Optional<String> filter) {
-        if(filter.isPresent()){
-            String filtro = makeForLike(filter.get());
-            return getRepository().countByNombreLikeIgnoreCase(filtro);
+        if(tipo != null){
+            return getRepository().countByTipo(tipo);
         }
         return count();
     }
@@ -56,5 +56,9 @@ public class ParametroService implements FilterableAbmService<Parametro> {
     @Override
     public Parametro createNew(Usuario currentUsuario) {
         return new Parametro();
+    }
+
+    public void setTipo(ETipoParametro tipo) {
+        this.tipo = tipo;
     }
 }

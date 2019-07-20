@@ -6,13 +6,13 @@ public class LarConst {
     public static final Locale APP_LOCALE = Locale.US;
 
     public static final String PAGE_ROOT = "";
-    public static final String PAGE_PERSONA = "Persona";
-    public static final String PAGE_PRODUCTO = "Producto";
-    public static final String PAGE_PARAMETRO = "Parametro";
-    public static final String PAGE_PLAN = "Plan";
-    public static final String PAGE_MOVIMIENTO = "Movimiento";
-    public static final String PAGE_MOVIMIENTODET = "Detalles movimiento";
-    public static final String PAGE_DOCUMENTOS = "Documentos";
+    public static final String PAGE_PERSONA = "persona";
+    public static final String PAGE_PRODUCTO = "producto";
+    public static final String PAGE_PARAMETRO = "parametro";
+    public static final String PAGE_PLAN = "plan";
+    public static final String PAGE_MOVIMIENTO = "movimiento";
+    public static final String PAGE_MOVIMIENTODET = "detmovimiento";
+    public static final String PAGE_DOCUMENTOS = "documentos";
     public static final String PAGE_USERS = "usuarios";
 
     public static final String TITLE_ACCESS_DENIED = "Acceso denegado";

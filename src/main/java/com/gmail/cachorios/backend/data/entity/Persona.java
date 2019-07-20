@@ -6,7 +6,6 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 public class Persona extends AbstractEntityId {
@@ -47,14 +46,8 @@ public class Persona extends AbstractEntityId {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "persona", fetch = FetchType.LAZY)
     private List<Documento> fotosDocumento;
 
-    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    @JoinTable(name = "persona_plan"
-            ,joinColumns        = @JoinColumn(name = "persona",   referencedColumnName = "id")
-            ,inverseJoinColumns = @JoinColumn(name = "plan",      referencedColumnName = "id"))
-    private Set<Plan> planes;
-
-//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "persona", fetch = FetchType.LAZY)
-//    private List<Plan> planes;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "persona", fetch = FetchType.LAZY)
+    private List<Plan> planes;
 
     @Override
     public Long getId() {
@@ -153,11 +146,11 @@ public class Persona extends AbstractEntityId {
         this.fotosDocumento = fotosDocumento;
     }
 
-    public Set<Plan> getPlanes() {
+    public List<Plan> getPlanes() {
         return planes;
     }
 
-    public void setPlanes(Set<Plan> planes) {
+    public void setPlanes(List<Plan> planes) {
         this.planes = planes;
     }
 

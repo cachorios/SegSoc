@@ -118,6 +118,10 @@ public class SelectCompuesto<T extends EntidadInterface> extends PolymerTemplate
         return fieldSupport.getValue();
     }
 
+    public FilterableAbmService<T> getService() {
+        return service;
+    }
+
     @Override
     public Registration addValueChangeListener(ValueChangeListener<? super AbstractField.ComponentValueChangeEvent<SelectCompuesto<T>, T>> valueChangeListener) {
         return fieldSupport.addValueChangeListener(valueChangeListener);

@@ -2,10 +2,15 @@ package com.gmail.cachorios.ui.forms;
 
 import com.github.appreciated.app.layout.annotations.Caption;
 import com.github.appreciated.app.layout.annotations.Icon;
+import com.gmail.cachorios.backend.data.entity.Parametro;
 import com.gmail.cachorios.backend.data.entity.Plan;
+import com.gmail.cachorios.backend.servicios.ParametroService;
+import com.gmail.cachorios.backend.servicios.ParametroTipoService;
 import com.gmail.cachorios.core.ui.data.FilterableAbmService;
+import com.gmail.cachorios.core.ui.data.enums.ETipoParametro;
 import com.gmail.cachorios.core.ui.data.util.converter.ImporteConverter;
 import com.gmail.cachorios.core.ui.view.abm.Abm;
+import com.gmail.cachorios.core.ui.view.component.selectCompuesto.SelectCompuesto;
 import com.gmail.cachorios.ui.MainAppLayout;
 import com.gmail.cachorios.ui.utils.LarConst;
 import com.vaadin.flow.component.formlayout.FormLayout;
@@ -45,17 +50,26 @@ public class PlanForm extends Abm<Plan, TemplateModel> {
 
     @Override
     protected void crearForm(FormLayout form, BeanValidationBinder<Plan> binder) {
-        TextField nombre, monto;
+        TextField monto;
 
-        nombre = new TextField("Nombre");
-        nombre.getElement().setAttribute("colspan", "2");
-        binder.bind(nombre,"nombre");
+        SelectCompuesto<Parametro> csNombre = new SelectCompuesto<>("Nombre", ParametroTipoService.class );
+        ((ParametroTipoService) csNombre.getService()).setTipo(ETipoParametro.PLAN);
+        csNombre.setColSpan(3L)
+                .setWidthInput("150px")
+                .withFind("Lista de Planes")
+                .addColumn(Parametro::getId,"Codigo")
+                .addColumn(Parametro::getNombre,"Nombre")
+                //     .withVer()
+                //.withAdd()
+                .withClear();
+        csNombre.getElement().setAttribute("colspan", "3");
+        binder.bind(csNombre, "nombre");
 
         monto = new TextField("Monto");
         monto.getElement().setAttribute("colspan", "2");
         binder.forField(monto).withConverter(new ImporteConverter()).bind("monto");
 
-        form.add(nombre, monto);
+        form.add(csNombre, monto);
         form.setResponsiveSteps(
                 new FormLayout.ResponsiveStep("0",1),
                 new FormLayout.ResponsiveStep("21em",2),

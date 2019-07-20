@@ -3,7 +3,7 @@ package com.gmail.cachorios.ui.forms;
 import com.github.appreciated.app.layout.annotations.Caption;
 import com.github.appreciated.app.layout.annotations.Icon;
 import com.gmail.cachorios.backend.data.entity.Parametro;
-import com.gmail.cachorios.core.ui.data.FilterableAbmService;
+import com.gmail.cachorios.backend.servicios.ParametroService;
 import com.gmail.cachorios.core.ui.data.enums.ETipoParametro;
 import com.gmail.cachorios.core.ui.data.util.converter.BooleanConverter;
 import com.gmail.cachorios.core.ui.data.util.converter.ImporteConverter;
@@ -30,14 +30,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class ParametroForm extends Abm<Parametro, TemplateModel> {
 
     @Autowired
-    public ParametroForm(FilterableAbmService<Parametro> service) {
+    public ParametroForm(ParametroService service) {
         super("Parametro", service);
 
         setWith("1000px");
 
         configureGrid(this.getGrid());
 
-        this.iniciar(LarConst.TITULO_PERSONA);
+        this.iniciar(LarConst.TITULO_PARAMETRO);
     }
 
     @Override
@@ -64,6 +64,7 @@ public class ParametroForm extends Abm<Parametro, TemplateModel> {
         tipoComboBox = new ComboBox<>("Tipo");
         tipoComboBox.getElement().setAttribute("colspan", "2");
         tipoComboBox.setItems(ETipoParametro.values());
+        binder.bind(tipoComboBox, "tipo");
 
         orden = new TextField("Orden");
         orden.getElement().setAttribute("colspan", "1");

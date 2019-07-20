@@ -13,7 +13,7 @@ public class Plan extends AbstractEntityId {
     @Id
     private Long id;
 
-    @NotNull
+    @ManyToOne
     private Parametro nombre;
 
     @NotNull
