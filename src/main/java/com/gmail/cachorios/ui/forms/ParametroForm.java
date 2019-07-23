@@ -14,6 +14,7 @@ import com.gmail.cachorios.core.ui.data.util.converter.LongConverter;
 import com.gmail.cachorios.core.ui.view.abm.Abm;
 import com.gmail.cachorios.ui.MainAppLayout;
 import com.gmail.cachorios.ui.utils.LarConst;
+import com.vaadin.flow.component.AbstractField;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.formlayout.FormLayout;
@@ -53,10 +54,13 @@ public class ParametroForm extends Abm<Parametro, TemplateModel> {
         grid.addColumn(Parametro::getOrden).setHeader("Orden").setKey("orden").setWidth("40%");
     }
 
-    private void setOrden(ETipoParametro eTipoParametro, TextField campo) {
-        ParametroRepositorio parametroRepositorio = ApplicationContextProvider.getApplicationContext().getBean(ParametroRepositorio.class);
-        int maxOrden = parametroRepositorio.getMaxOrdenByTipo(eTipoParametro);
-        campo.setValue(String.valueOf(maxOrden));
+    private void setOrden(AbstractField.ComponentValueChangeEvent e, ETipoParametro eTipoParametro, TextField campo) {
+        if(e.isFromClient()) {
+            ParametroRepositorio parametroRepositorio = ApplicationContextProvider.getApplicationContext().getBean(ParametroRepositorio.class);
+            int maxOrden = parametroRepositorio.getMaxOrdenByTipo(eTipoParametro);
+            // todo: Ver por que el ENUM envia tipo dato 'bytea' a la BD
+            campo.setValue(String.valueOf(++maxOrden));
+        }
     }
 
     @Override
@@ -76,7 +80,7 @@ public class ParametroForm extends Abm<Parametro, TemplateModel> {
         tipoComboBox = new ComboBox<>("Tipo");
         tipoComboBox.getElement().setAttribute("colspan", "2");
         tipoComboBox.setItems(ETipoParametro.values());
-        tipoComboBox.addValueChangeListener(e -> setOrden(e.getSource().getValue(), orden));
+        tipoComboBox.addValueChangeListener(e -> setOrden(e, e.getSource().getValue(), orden));
         binder.bind(tipoComboBox, "tipo");
 
         clase = new TextField("Clase");

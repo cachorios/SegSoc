@@ -3,6 +3,7 @@ package com.gmail.cachorios.core.ui.view.component;
 import com.gmail.cachorios.app.ApplicationContextProvider;
 import com.gmail.cachorios.core.ui.data.AbstractEntityId;
 import com.gmail.cachorios.core.ui.view.abm.Abm;
+import com.gmail.cachorios.core.ui.view.abm.AbmForm;
 import com.vaadin.flow.component.AbstractField.ComponentValueChangeEvent;
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.Component;
@@ -18,6 +19,7 @@ import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.shared.Registration;
+import com.vaadin.flow.templatemodel.TemplateModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -134,6 +136,7 @@ public class UnoaMuchoComponent<T extends AbstractEntityId, P extends AbstractEn
 
     private Abm getForm(){
         if(form  == null){
+            // todo: Crear dinamicamente un formulario
             form = (Abm) ApplicationContextProvider.getApplicationContext().getBean(formClass);
         }
         return form;
