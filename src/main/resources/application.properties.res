@@ -24,6 +24,6 @@ spring.jpa.properties.javax.persistence.schema-generation.scripts.create-target=
 
 # Uncomment if using PostgreSQL
 spring.jpa.properties.hibernate.temp.use_jdbc_metadata_defaults=false
-spring.datasource.url=jdbc:postgresql://localhost:5432/dejos
+spring.datasource.url=jdbc:postgresql://localhost:5432/SeguimientoSocial
 spring.datasource.username=postgres
 spring.datasource.password=postgres

@@ -1,4 +1,4 @@
-package com.gmail.cachorios.ui.forms;
+package com.gmail.cachorios.ui.views.admin;
 
 import com.github.appreciated.app.layout.annotations.Caption;
 import com.github.appreciated.app.layout.annotations.Icon;
@@ -23,12 +23,12 @@ import com.vaadin.flow.templatemodel.TemplateModel;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Route(value = LarConst.PAGE_MOVIMIENTO, layout = MainAppLayout.class)
-@Caption("MovimientoForm")
+@Caption("Movimientos")
 @Icon(VaadinIcon.ARROW_RIGHT)
-public class MovimientoForm extends Abm<Movimiento, TemplateModel> {
+public class Movimientos extends Abm<Movimiento, TemplateModel> {
 
     @Autowired
-    public MovimientoForm(FilterableAbmService<Movimiento> service) {
+    public Movimientos(FilterableAbmService<Movimiento> service) {
         super("Movimiento", service);
 
         setWith("1000px");
@@ -76,7 +76,7 @@ public class MovimientoForm extends Abm<Movimiento, TemplateModel> {
         detalles.getGrid().addColumn(MovimientoDetalle::getProductoDescripcion).setHeader("Productos descriptos").setFlexGrow(2);
         detalles.getGrid().addColumn(MovimientoDetalle::getProducto).setHeader("Productos").setFlexGrow(2);
 
-        detalles.withForm(MovimientoDetalleForm.class)
+        detalles.withForm(MovimientoDetalles.class)
                 .withVer()
                 .withNuevo(MovimientoDetalle.class);
 

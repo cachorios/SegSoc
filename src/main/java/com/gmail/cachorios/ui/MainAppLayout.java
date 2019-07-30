@@ -16,7 +16,7 @@ import com.gmail.cachorios.app.ApplicationContextProvider;
 import com.gmail.cachorios.app.seguridad.SecurityUtils;
 import com.gmail.cachorios.backend.data.entity.Usuario;
 import com.gmail.cachorios.backend.servicios.UsuarioService;
-import com.gmail.cachorios.ui.forms.*;
+import com.gmail.cachorios.ui.views.admin.*;
 import com.vaadin.flow.component.dependency.HtmlImport;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.notification.Notification;
@@ -24,7 +24,6 @@ import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.page.Push;
 import com.vaadin.flow.component.page.Viewport;
 
-import static com.github.appreciated.app.layout.entity.Section.FOOTER;
 import static com.github.appreciated.app.layout.entity.Section.HEADER;
 
 
@@ -71,12 +70,12 @@ public class MainAppLayout extends AppLayoutRouterLayout {
                                 VaadinIcon.COG.create(),
                                 clickEvent -> Notification.show("onClick ...")
                         ), HEADER)
-                        .add(new LeftNavigationComponent(UsuarioForm.class))
-                        .add(new LeftNavigationComponent(PersonaForm.class))
-                        .add(new LeftNavigationComponent(MovimientoForm.class))
-                        .add(new LeftNavigationComponent(ProductoForm.class))
-                        .add(new LeftNavigationComponent(PlanForm.class))
-                        .add(new LeftNavigationComponent(ParametroForm.class))
+                        .add(new LeftNavigationComponent(Usuarios.class))
+                        .add(new LeftNavigationComponent(Personas.class))
+                        .add(new LeftNavigationComponent(Movimientos.class))
+                        .add(new LeftNavigationComponent(Productos.class))
+                        .add(new LeftNavigationComponent(Planes.class))
+                        .add(new LeftNavigationComponent(Parametros.class))
 
                         /*.add(LeftSubMenuBuilder
                                 .get("Liquidación", VaadinIcon.PLUS.create())

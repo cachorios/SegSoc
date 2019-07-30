@@ -4,6 +4,10 @@ package com.gmail.cachorios.core.ui.view.abm;
 import com.gmail.cachorios.backend.data.entity.Usuario;
 import com.gmail.cachorios.core.ui.data.EntidadInterface;
 import com.gmail.cachorios.core.ui.data.FilterableAbmService;
+import com.gmail.cachorios.core.ui.view.abm.eventos.LoadFormEvent;
+import com.gmail.cachorios.core.ui.view.abm.eventos.PostUpdateEvent;
+import com.gmail.cachorios.core.ui.view.abm.eventos.PreUpdateEvent;
+import com.gmail.cachorios.core.ui.view.abm.eventos.SaveEvent;
 import org.vaadin.artur.spring.dataprovider.FilterablePageableDataProvider;
 
 
@@ -46,6 +50,7 @@ public class AbmEntityPresenter<T extends EntidadInterface>  extends EntityPrese
     }
 
     private T open(T entidad){
+        getView().fireEvent(new LoadFormEvent(getView(),false, entidad));
         getView().getBinder().readBean(entidad);
         getView().getForm().getButtons().setSaveDisabled(true);
         getView().getForm().getButtons().setDeleteDisabled(esNuevo());
@@ -57,16 +62,26 @@ public class AbmEntityPresenter<T extends EntidadInterface>  extends EntityPrese
 
     public void save() {
         if (writeEntity()) {
-            super.save(e -> {
-                if (esNuevo()) {
-                    getView().showCreatedNotification();
-                    filteredDataProvider.refreshAll();
-                } else {
-                    getView().showUpdatedNotification();
-                    filteredDataProvider.refreshItem(e);
-                }
+            getView().fireEvent(new PreUpdateEvent(getView(), false, getEntidad()));
+    
+            if (getView().getPadre() == null) {
+                super.save(e -> {
+                    if (esNuevo()) {
+                        getView().showCreatedNotification();
+                        filteredDataProvider.refreshAll();
+                    } else {
+                        getView().showUpdatedNotification();
+                        filteredDataProvider.refreshItem(e);
+                    }
+                    closeSilently();
+                });
+    
+                getView().fireEvent(new PostUpdateEvent(getView(), false, getEntidad()));
+            }else{
+                getView().fireEvent(new SaveEvent(getView(), false, getEntidad()));
                 closeSilently();
-            });
+            }
+            
         }
     }
 

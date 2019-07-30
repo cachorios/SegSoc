@@ -75,5 +75,7 @@ public class GeneradorDatos implements HasLogger {
         usuario.setLocked(locked);
         return usuario;
     }
-
+    
+    
+    
 }

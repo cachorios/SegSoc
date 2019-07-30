@@ -1,10 +1,14 @@
 package com.gmail.cachorios.backend.data.entity;
 
 import com.gmail.cachorios.core.ui.data.AbstractEntityId;
+import com.gmail.cachorios.core.ui.data.enums.EFactorRH;
+import com.gmail.cachorios.core.ui.data.enums.EGrupoSanguineo;
+import com.gmail.cachorios.core.ui.data.enums.EParentesco;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -16,37 +20,37 @@ public class Persona extends AbstractEntityId {
     @ManyToOne(cascade = CascadeType.ALL)
     private Persona cabeza;
 
-    private Parametro parentesco;
+    private EParentesco parentesco;
 
-    @NotNull
+//    @NotNull
     private String nombre;
 
-    @NotNull
+//    @NotNull
     private String documento;
 
-    @NotNull
+//    @NotNull
     @Size(max = 1)
     private String sexo;
 
-    @NotNull
-    private Parametro grupoSanguineo;
+//    @NotNull
+    private EGrupoSanguineo grupoSanguineo;
 
-    @NotNull
-    private Parametro factor;
+//    @NotNull
+    private EFactorRH factor;
 
-    @NotNull
+//    @NotNull
     private String direccion;
 
-    @NotNull
+//    @NotNull
     private String descripcionDireccion;
 
-    @NotNull
+//    @NotNull
     private Integer numeroPartida;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "persona", fetch = FetchType.LAZY)
     private List<Documento> fotosDocumento;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "persona", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "persona",fetch = FetchType.EAGER)
     private List<Plan> planes;
 
     @Override
@@ -66,13 +70,7 @@ public class Persona extends AbstractEntityId {
         this.cabeza = cabeza;
     }
 
-    public Parametro getParentesco() {
-        return parentesco;
-    }
-
-    public void setParentesco(Parametro parentesco) {
-        this.parentesco = parentesco;
-    }
+    
 
     public String getNombre() {
         return nombre;
@@ -98,22 +96,7 @@ public class Persona extends AbstractEntityId {
         this.sexo = sexo;
     }
 
-    public Parametro getGrupoSanguineo() {
-        return grupoSanguineo;
-    }
-
-    public void setGrupoSanguineo(Parametro grupoSanguineo) {
-        this.grupoSanguineo = grupoSanguineo;
-    }
-
-    public Parametro getFactor() {
-        return factor;
-    }
-
-    public void setFactor(Parametro factor) {
-        this.factor = factor;
-    }
-
+    
     public String getDireccion() {
         return direccion;
     }
@@ -153,7 +136,41 @@ public class Persona extends AbstractEntityId {
     public void setPlanes(List<Plan> planes) {
         this.planes = planes;
     }
-
+    
+    public void addPlan(Plan plan){
+        if(planes == null){
+            planes = new ArrayList<>();
+        }
+        planes.add(plan);
+        
+    }
+    
+    public EParentesco getParentesco() {
+        return parentesco;
+    }
+    
+    public void setParentesco(EParentesco parentesco) {
+        this.parentesco = parentesco;
+    }
+    
+    public EGrupoSanguineo getGrupoSanguineo() {
+        return grupoSanguineo;
+    }
+    
+    public void setGrupoSanguineo(EGrupoSanguineo grupoSanguineo) {
+        this.grupoSanguineo = grupoSanguineo;
+    }
+    
+    public EFactorRH getFactor() {
+        return factor;
+    }
+    
+    public void setFactor(EFactorRH factor) {
+        this.factor = factor;
+    }
+    
+    
+    
     @Override
     public String toString() {
         return (isNew() ? "Nueva persona" : nombre);

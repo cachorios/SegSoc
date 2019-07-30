@@ -134,11 +134,16 @@
 
       [part~="row"]:last-child [part~="header-cell"],
       [part~="header-cell"]:not(:empty):not([details-cell]) {
-        padding-top: var(--lumo-space-l);
-        padding-bottom: var(--lumo-space-m);
+        padding-top: var(--lumo-space-s);
+        padding-bottom: var(--lumo-space-s);
 
-        font-size: var(--lumo-font-size-s);
+
+        font-size: var(--lumo-font-size-m);
+        font-weight: bold;
         border-bottom: 1px solid var(--lumo-shade-5pct);
+      }
+      [part="row"]:only-child [part~="header-cell"] {
+          min-height: var(--lumo-size-m);
       }
 
       :host(:not([theme~="no-row-borders"])) [part~="cell"]:not([part~="details-cell"]) {

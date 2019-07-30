@@ -1,4 +1,4 @@
-package com.gmail.cachorios.ui.forms;
+package com.gmail.cachorios.ui.views.admin;
 
 import com.github.appreciated.app.layout.annotations.Caption;
 import com.github.appreciated.app.layout.annotations.Icon;
@@ -19,10 +19,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 @Route(value = LarConst.PAGE_PRODUCTO, layout = MainAppLayout.class)
 @Caption("Productos")
 @Icon(VaadinIcon.BARCODE)
-public class ProductoForm extends Abm<Producto, TemplateModel> {
+public class Productos extends Abm<Producto, TemplateModel> {
 
     @Autowired
-    public ProductoForm(FilterableAbmService<Producto> service) {
+    public Productos(FilterableAbmService<Producto> service) {
         super("Producto", service);
 
         setWith("500px");

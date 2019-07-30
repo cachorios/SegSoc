@@ -1,4 +1,4 @@
-package com.gmail.cachorios.ui.forms;
+package com.gmail.cachorios.ui.views.admin;
 
 import com.github.appreciated.app.layout.annotations.Caption;
 import com.github.appreciated.app.layout.annotations.Icon;
@@ -32,17 +32,17 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 
 @Route(value = LarConst.PAGE_USERS, layout = MainAppLayout.class)
-@Caption("UsuarioForm")
+@Caption("Usuarios")
 @Icon(VaadinIcon.HOME)
 
 @Secured(Role.ADMIN)
-public class UsuarioForm extends Abm<Usuario, TemplateModel> {
+public class Usuarios extends Abm<Usuario, TemplateModel> {
 
     private UsuarioService usuarioService;
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UsuarioForm(FilterableAbmService<Usuario> service, PasswordEncoder passwordEncoder  ) {
+    public Usuarios(FilterableAbmService<Usuario> service, PasswordEncoder passwordEncoder  ) {
 
         super("Usuario", service);
         this.passwordEncoder = passwordEncoder;

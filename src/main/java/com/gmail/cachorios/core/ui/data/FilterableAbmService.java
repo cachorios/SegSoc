@@ -28,4 +28,12 @@ public interface FilterableAbmService<T extends EntidadInterface> extends AbmSer
 	default public Usuario getUsuario(){
 		return SegSocServices.getUsuarioActivo();
 	}
+	
+	default void setPadre(EntidadInterface padre){}
+	
+	default EntidadInterface getPadre(){
+		return null;
+		
+	}
+	
 }

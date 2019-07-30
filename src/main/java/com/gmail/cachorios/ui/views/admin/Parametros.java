@@ -1,4 +1,4 @@
-package com.gmail.cachorios.ui.forms;
+package com.gmail.cachorios.ui.views.admin;
 
 import com.github.appreciated.app.layout.annotations.Caption;
 import com.github.appreciated.app.layout.annotations.Icon;
@@ -28,12 +28,12 @@ import com.vaadin.flow.templatemodel.TemplateModel;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Route(value = LarConst.PAGE_PARAMETRO, layout = MainAppLayout.class)
-@Caption("ParametroForm")
+@Caption("Parametros")
 @Icon(VaadinIcon.OPTIONS)
-public class ParametroForm extends Abm<Parametro, TemplateModel> {
+public class Parametros extends Abm<Parametro, TemplateModel> {
 
     @Autowired
-    public ParametroForm(ParametroService service) {
+    public Parametros(ParametroService service) {
         super("Parametro", service);
 
         setWith("1000px");

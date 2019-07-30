@@ -1,6 +1,7 @@
 package com.gmail.cachorios.core.ui.view.component;
 
 import com.gmail.cachorios.app.ApplicationContextProvider;
+import com.gmail.cachorios.app.Context;
 import com.gmail.cachorios.core.ui.data.AbstractEntityId;
 import com.gmail.cachorios.core.ui.view.abm.Abm;
 import com.gmail.cachorios.core.ui.view.abm.AbmForm;
@@ -19,6 +20,7 @@ import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.shared.Registration;
+import com.vaadin.flow.spring.annotation.SpringComponent;
 import com.vaadin.flow.templatemodel.TemplateModel;
 
 import java.util.ArrayList;
@@ -27,6 +29,7 @@ import java.util.Objects;
 
 @Tag("uno-mucho-component")
 @HtmlImport("frontend://src/components/uno-mucho-component.html")
+
 public class UnoaMuchoComponent<T extends AbstractEntityId, P extends AbstractEntityId> extends Div
         implements HasValueAndElement<ComponentValueChangeEvent<UnoaMuchoComponent<T,P>, List<T>>, List<T>> {
     private Abm padre;
@@ -136,8 +139,7 @@ public class UnoaMuchoComponent<T extends AbstractEntityId, P extends AbstractEn
 
     private Abm getForm(){
         if(form  == null){
-            // todo: Crear dinamicamente un formulario
-            form = (Abm) ApplicationContextProvider.getApplicationContext().getBean(formClass);
+            form = (Abm)Context.getBean(formClass);
         }
         return form;
     }
@@ -208,17 +210,24 @@ public class UnoaMuchoComponent<T extends AbstractEntityId, P extends AbstractEn
     }
 
     private void verAcction(ClickEvent<Button> e) {
-        Abm frm = getForm();
-        frm.setPadre(this);
-        frm.iniciar();
+//        Abm frm = getForm();
+//        frm.setPadre(this);
+//        frm.iniciar();
     }
 
     private void nuevoAcction(ClickEvent<Button> e)  {
-        Abm frm = getForm();
-        frm.setPadre(this);
-        generarNuevo(itemClass);
-        frm.iniciar();
-        frm.openDialog();
+        
+//        Abm frm = getForm();
+//        frm.setPadre(this);
+//
+//        frm.getPresenter().crearNuevo();
+        //generarNuevo(itemClass);
+        
+        
+        
+        //frm.iniciar();
+        //frm.openDialog();
+        
     }
 
     private void generarNuevo( Class<T> cls) {
@@ -230,9 +239,9 @@ public class UnoaMuchoComponent<T extends AbstractEntityId, P extends AbstractEn
     }
 
     private void editarAcction(ClickEvent<Button> e) {
-        Abm frm = getForm();
-        frm.setPadre(this);
-        frm.iniciar();
+//        Abm frm = getForm();
+//        frm.setPadre(this);
+//        frm.iniciar();
     }
 
     private void borrarAcction(ClickEvent<Button> e) {

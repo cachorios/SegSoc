@@ -1,4 +1,4 @@
-package com.gmail.cachorios.ui.forms;
+package com.gmail.cachorios.ui.views.admin;
 
 import com.github.appreciated.app.layout.annotations.Caption;
 import com.github.appreciated.app.layout.annotations.Icon;
@@ -19,12 +19,12 @@ import com.vaadin.flow.templatemodel.TemplateModel;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Route(value = LarConst.PAGE_DOCUMENTOS, layout = MainAppLayout.class)
-@Caption("DocumentoForm")
+@Caption("Documentos")
 @Icon(VaadinIcon.MODAL_LIST)
-public class DocumentoForm extends Abm<Documento, TemplateModel> {
+public class Documentos extends Abm<Documento, TemplateModel> {
 
     @Autowired
-    public DocumentoForm(FilterableAbmService<Documento> service) {
+    public Documentos(FilterableAbmService<Documento> service) {
         super("Documento", service);
 
         setWith("1000px");

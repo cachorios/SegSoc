@@ -1,11 +1,12 @@
-package com.gmail.cachorios.ui.forms;
+package com.gmail.cachorios.ui.views.admin;
 
 import com.github.appreciated.app.layout.annotations.Caption;
 import com.github.appreciated.app.layout.annotations.Icon;
 import com.gmail.cachorios.backend.data.entity.Parametro;
+import com.gmail.cachorios.backend.data.entity.Persona;
 import com.gmail.cachorios.backend.data.entity.Plan;
 import com.gmail.cachorios.backend.servicios.ParametroTipoService;
-import com.gmail.cachorios.core.ui.data.FilterableAbmService;
+import com.gmail.cachorios.backend.servicios.PlanService;
 import com.gmail.cachorios.core.ui.data.enums.ETipoParametro;
 import com.gmail.cachorios.core.ui.data.util.converter.ImporteConverter;
 import com.gmail.cachorios.core.ui.view.abm.Abm;
@@ -17,32 +18,55 @@ import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.BeanValidationBinder;
+import com.vaadin.flow.data.provider.DataProvider;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.templatemodel.TemplateModel;
 import org.springframework.beans.factory.annotation.Autowired;
 
-@Route(value = LarConst.PAGE_PLAN, layout = MainAppLayout.class)
-@Caption("PlanForm")
-@Icon(VaadinIcon.SITEMAP)
-public class PlanForm extends Abm<Plan, TemplateModel> {
 
+
+
+@Route(value = LarConst.PAGE_PLAN, layout = MainAppLayout.class)
+@Caption("Planes")
+@Icon(VaadinIcon.SITEMAP)
+
+public class Planes extends Abm<Plan, TemplateModel> {
+    
     @Autowired
-    public PlanForm(FilterableAbmService<Plan> service) {
+    public Planes(PlanService service) {
         super("Plan", service);
 
-        setWith("500px");
-
+        setWith("400px");
         configureGrid(this.getGrid());
-
         this.iniciar(LarConst.TITULO_PLAN);
     }
-
-    @Override
+	
+	
+	@Override
+	public void configurrListener() {
+		super.configurrListener();
+		addPreUpdateListener(e -> {
+			if(getPadre()!= null) {
+				getPresenter().getEntidad().setPersona((Persona) getPadre());
+			}
+		});
+		addSaveListener(e -> ((Persona)getPadre()).addPlan((Plan)(e.getRegistroActivo())) );
+	}
+	
+	@Override
     protected String getBasePage() {
         return LarConst.PAGE_PLAN;
     }
-
-    private void configureGrid(Grid<Plan> grid) {
+	
+	@Override
+	protected DataProvider getDateProvider() {
+    	if(getPadre()== null) {
+			return super.getDateProvider();
+		}
+		return DataProvider.ofCollection( ((Persona)getPadre()).getPlanes() );
+	}
+	
+	private void configureGrid(Grid<Plan> grid) {
         grid.addColumn(Plan::getNombre).setHeader("Nombre").setWidth("60%");
         grid.addColumn(Plan::getMonto).setHeader("Monto").setKey("monto").setWidth("40%");
     }
@@ -77,4 +101,7 @@ public class PlanForm extends Abm<Plan, TemplateModel> {
                 new FormLayout.ResponsiveStep("24em",5)*/
         );
     }
+    
+    
+    
 }

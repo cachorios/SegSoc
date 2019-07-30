@@ -24,7 +24,7 @@ public class EntityPresenter<T extends EntidadInterface, V extends EntityView<T>
     private Usuario currentUsuario;
     private V view;
 
-    EntityPresenterEstado<T> estado = new EntityPresenterEstado<T>();
+    EntityPresenterStatus<T> status = new EntityPresenterStatus<T>();
 
     public EntityPresenter(AbmService<T> abmService, Usuario currentUsuario) {
         this.abmService = abmService;
@@ -38,12 +38,13 @@ public class EntityPresenter<T extends EntidadInterface, V extends EntityView<T>
     public V getView() {
         return view;
     }
+   
 
     public void delete(AbmOperacionListener<T> onSuccess) {
         Message CONFIRM_DELETE = Message.CONFIRM_DELETE.createMessage();
-        confirmIfNecessaryAndExecute(true, CONFIRM_DELETE, () -> {
-            if (executeOperation(() -> abmService.delete(currentUsuario, estado.getEntidad()))) {
-                onSuccess.execute(estado.getEntidad());
+        confirmarSiNecesitaLuegoEjecutar(true, CONFIRM_DELETE, () -> {
+            if (executeOperation(() -> abmService.delete(currentUsuario, status.getEntidad()))) {
+                onSuccess.execute(status.getEntidad());
             }
         }, () -> {
         });
@@ -51,13 +52,13 @@ public class EntityPresenter<T extends EntidadInterface, V extends EntityView<T>
 
     public void save(AbmOperacionListener<T> onSuccess) {
         if (executeOperation(() -> guardarEntidad())) {
-            onSuccess.execute(estado.getEntidad());
+            onSuccess.execute(status.getEntidad());
         }
     }
 
     public boolean executeUpdate(UnaryOperator<T> updater) {
         return executeOperation(() -> {
-            estado.actualizarEntidad(updater.apply(getEntidad()), esNuevo());
+            status.actualizarEntidad(updater.apply(getEntidad()), esNuevo());
         });
     }
 
@@ -88,13 +89,13 @@ public class EntityPresenter<T extends EntidadInterface, V extends EntityView<T>
     }
 
     private void guardarEntidad() {
-        estado.actualizarEntidad( abmService.save(currentUsuario, estado.getEntidad()), esNuevo());
+        status.actualizarEntidad( abmService.save(currentUsuario, status.getEntidad()), esNuevo());
     }
 
-    //??? donde se usa
+    
     public boolean writeEntity() {
         try {
-            view.write(estado.getEntidad());
+            view.write(status.getEntidad());
             return true;
         } catch (ValidationException e) {
             view.showError(AbmErrorMessage.REQUIRED_FIELDS_MISSING, false);
@@ -105,27 +106,27 @@ public class EntityPresenter<T extends EntidadInterface, V extends EntityView<T>
     }
 
     public void close() {
-        estado.limpiar();
+        status.limpiar();
         view.clear();
     }
 
     public void cancel(Runnable onConfirmed, Runnable onCancelled) {
-        confirmIfNecessaryAndExecute(view.isDirty(), Message.UNSAVED_CHANGES.createMessage(estado.getNombreEntidad()), () -> {
+        confirmarSiNecesitaLuegoEjecutar(view.isDirty(), Message.UNSAVED_CHANGES.createMessage(status.getNombreEntidad()), () -> {
             view.clear();
             onConfirmed.run();
         }, onCancelled);
     }
 
-    private void confirmIfNecessaryAndExecute(boolean needsConfirmation, Message message, Runnable onConfirmed,
-                                              Runnable onCancelled) {
+    private void confirmarSiNecesitaLuegoEjecutar(boolean needsConfirmation, Message message, Runnable onConfirmed,
+                                                  Runnable onCancelled) {
         if (needsConfirmation) {
-            showConfirmationRequest(message, onConfirmed, onCancelled);
+            MostrarPedidoConfirmacion(message, onConfirmed, onCancelled);
         } else {
             onConfirmed.run();
         }
     }
 
-    private void showConfirmationRequest(Message message, Runnable onOk, Runnable onCancel) {
+    private void MostrarPedidoConfirmacion(Message message, Runnable onOk, Runnable onCancel) {
         view.getConfirmDialog().setMessage(message.getMessage());
         view.getConfirmDialog().setCaption(message.getCaption());
         view.getConfirmDialog().setCancelText(message.getCancelText());
@@ -136,27 +137,27 @@ public class EntityPresenter<T extends EntidadInterface, V extends EntityView<T>
                 .addOkClickListener(e -> onOk.run());
         final Registration cancelRegistration = view.getConfirmDialog()
                 .addCancelClickListener(e -> onCancel.run());
-        estado.actualizRegistros(okRegistration, cancelRegistration);
+        status.actualizRegistros(okRegistration, cancelRegistration);
     }
 
     public boolean cargarEntidad(Long id, AbmOperacionListener<T> onSuccess ){
         return executeOperation(() -> {
-            estado.actualizarEntidad(abmService.load(id), false);
-            onSuccess.execute(estado.getEntidad());
+            status.actualizarEntidad(abmService.load(id), false);
+            onSuccess.execute(status.getEntidad());
         });
     }
 
     public T crearNuevo() {
-        estado.actualizarEntidad(abmService.createNew(currentUsuario), true);
-        return estado.getEntidad();
+        status.actualizarEntidad(abmService.createNew(currentUsuario), true);
+        return status.getEntidad();
     }
 
     public T getEntidad(){
-        return estado.getEntidad();
+        return status.getEntidad();
     }
 
     public boolean esNuevo(){
-        return estado.esNuevo();
+        return status.esNuevo();
     }
 
     @FunctionalInterface
@@ -169,12 +170,12 @@ public class EntityPresenter<T extends EntidadInterface, V extends EntityView<T>
 /**
  * Mantiene las variable que cambian.
  */
-class EntityPresenterEstado<T extends EntidadInterface> {
+class EntityPresenterStatus<T extends EntidadInterface> {
     private T entidad;
     private String nombreEntidad;
     private Boolean esNuevo;
-    private Registration okRegistration;
-    private Registration cancelRegistration;
+    private Registration okRegistracion;
+    private Registration cancelarRegistracion;
 
     void actualizarEntidad(T entidad, boolean esNuevo ){
         this.entidad = entidad;
@@ -182,11 +183,11 @@ class EntityPresenterEstado<T extends EntidadInterface> {
         this.esNuevo = esNuevo;
     }
 
-    void actualizRegistros(Registration okRegistration, Registration cancelRegistration){
-        limpiarRegistro(this.okRegistration);
-        limpiarRegistro(this.cancelRegistration);
-        this.okRegistration = okRegistration;
-        this.cancelRegistration = cancelRegistration;
+    void actualizRegistros(Registration okRegistracion, Registration cancelarRegistracion){
+        limpiarRegistro(this.okRegistracion);
+        limpiarRegistro(this.cancelarRegistracion);
+        this.okRegistracion = okRegistracion;
+        this.cancelarRegistracion = cancelarRegistracion;
     }
 
     void limpiar(){
