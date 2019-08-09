@@ -31,8 +31,6 @@ import com.vaadin.flow.templatemodel.TemplateModel;
 
 @Tag("lar-abm")
 @HtmlImport("src/components/lar-abm.html")
-
-
 public abstract class Abm<T extends EntidadInterface, D extends TemplateModel> extends PolymerTemplate<D> implements HasLogger, EntityView<T>, HasUrlParameter<Long> {
 
     public interface IAbmForm<T> {
