@@ -34,11 +34,8 @@ public class Personas extends Abm<Persona, TemplateModel> {
     @Autowired
     public Personas(FilterableAbmService<Persona> service) {
         super("Persona", service);
-
         setWith("1000px");
-
         configureGrid(this.getGrid());
-
         this.iniciar(LarConst.TITULO_PERSONA);
     }
 
@@ -48,9 +45,9 @@ public class Personas extends Abm<Persona, TemplateModel> {
     }
 
     private void configureGrid(Grid<Persona> grid) {
-        grid.addColumn(Persona::getNombre).setHeader("Nombre").setWidth("15%");
-        grid.addColumn(Persona::getDocumento).setHeader("Documento").setKey("documento").setWidth("40%");
-        grid.addColumn(Persona::getSexo).setHeader("Sexo").setKey("sexo").setWidth("40%");
+        grid.addColumn(Persona::getNombre).setHeader("Nombre").setWidth("60%");
+        grid.addColumn(Persona::getDocumento).setHeader("Documento").setKey("documento").setWidth("30%");
+        grid.addColumn(Persona::getSexo).setHeader("Sexo").setKey("sexo").setWidth("10%");
     }
 
     @Override
