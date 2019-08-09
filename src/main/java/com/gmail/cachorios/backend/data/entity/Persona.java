@@ -6,7 +6,6 @@ import com.gmail.cachorios.core.ui.data.enums.EGrupoSanguineo;
 import com.gmail.cachorios.core.ui.data.enums.EParentesco;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
@@ -52,6 +51,10 @@ public class Persona extends AbstractEntityId {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "persona",fetch = FetchType.EAGER)
     private List<Plan> planes;
+
+    public Persona() {
+        this.planes = new ArrayList<>();
+    }
 
     @Override
     public Long getId() {

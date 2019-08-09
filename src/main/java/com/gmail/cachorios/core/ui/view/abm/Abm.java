@@ -74,16 +74,16 @@ public abstract class Abm<T extends EntidadInterface, D extends TemplateModel> e
        binder = new BeanValidationBinder<>(service.getBeanType());
        crearForm(form.getFormLayuot() , binder);
         
-       grid.setDataProvider(getDateProvider());
+       grid.setDataProvider(getDataProvider());
         
        dialog.add((Component) this.form);
        dialog.setWidth("450px");
        dialog.setHeight("100%");
         
-       configurrListener();
+       configurarListener();
     }
     
-    protected DataProvider getDateProvider(){
+    protected DataProvider getDataProvider(){
         return new AbmDataProvider(service);
     }
     
@@ -104,7 +104,7 @@ public abstract class Abm<T extends EntidadInterface, D extends TemplateModel> e
         return form;
     }
 
-    public void configurrListener(){
+    public void configurarListener(){
         
         searchBar.addFilterChangeListener(e->getPresenter().filter(searchBar.getFilter()));
         searchBar.setActionText("Nuevo "+this.nombreEntidad);
@@ -254,7 +254,7 @@ public abstract class Abm<T extends EntidadInterface, D extends TemplateModel> e
         if(padre != null){
             this.padre = padre;
             //service.setPadre(padre);
-            grid.setDataProvider( getDateProvider() );
+            grid.setDataProvider( getDataProvider() );
             
         }
         

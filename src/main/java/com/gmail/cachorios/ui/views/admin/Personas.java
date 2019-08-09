@@ -117,9 +117,8 @@ public class Personas extends Abm<Persona, TemplateModel> {
     
         planes.getElement().setAttribute("colspan", "5");
         planes.setHeigth("150px");
-        
+
         addLoadFormListener(e -> planes.setPadre(e.getRegistroActivo()) );
-        
         Div cPlanes = new Div(planes);
         cPlanes.setWidth("100%");
         
