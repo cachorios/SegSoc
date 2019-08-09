@@ -9,6 +9,7 @@ import com.gmail.cachorios.core.ui.data.FilterableAbmService;
 import com.gmail.cachorios.core.ui.data.enums.EFactorRH;
 import com.gmail.cachorios.core.ui.data.enums.EGrupoSanguineo;
 import com.gmail.cachorios.core.ui.data.enums.EParentesco;
+import com.gmail.cachorios.core.ui.data.enums.ESexo;
 import com.gmail.cachorios.core.ui.data.util.converter.IntegerConverter;
 import com.gmail.cachorios.core.ui.view.abm.Abm;
 import com.gmail.cachorios.core.ui.view.component.selectCompuesto.SelectCompuesto;
@@ -53,7 +54,8 @@ public class Personas extends Abm<Persona, TemplateModel> {
     @Override
     protected void crearForm(FormLayout form, BeanValidationBinder<Persona> binder) {
         
-        TextField nombre, documento, sexo, direccion, descripcionDireccion, numeroPartida;
+        TextField nombre, documento, direccion, descripcionDireccion, numeroPartida;
+        ComboBox<ESexo> cbSexo;
         ComboBox<EParentesco> cbParentesco;
         ComboBox<EGrupoSanguineo> cbGrupoSanguineo;
         Planes planes = Context.getBean(Planes.class);
@@ -77,6 +79,9 @@ public class Personas extends Abm<Persona, TemplateModel> {
         cbParentesco.setItems(EParentesco.values());
         binder.bind(cbParentesco, "parentesco");
 
+        cbParentesco.setEnabled(csPersona.getValue() != null);
+        csPersona.addValueChangeListener(e -> cbParentesco.setEnabled(csPersona.getValue() != null));
+
         cbGrupoSanguineo = new ComboBox<>("Grupo sanguineo");
         cbGrupoSanguineo.getElement().setAttribute("colspan", "2");
         cbGrupoSanguineo.setItems(EGrupoSanguineo.values());
@@ -86,7 +91,6 @@ public class Personas extends Abm<Persona, TemplateModel> {
         cbFactor.getElement().setAttribute("colspan", "2");
         cbFactor.setItems(EFactorRH.values());
         binder.bind(cbFactor, "factor");
-        
 
         nombre = new TextField("Nombre");
         nombre.getElement().setAttribute("colspan", "2");
@@ -96,9 +100,10 @@ public class Personas extends Abm<Persona, TemplateModel> {
         documento.getElement().setAttribute("colspan", "2");
         binder.bind(documento, "documento");
 
-        sexo = new TextField("Sexo");
-        sexo.getElement().setAttribute("colspan", "1");
-        binder.bind(sexo, "sexo");
+        cbSexo = new ComboBox<>("Sexo");
+        cbSexo.getElement().setAttribute("colspan", "1");
+        cbSexo.setItems(ESexo.values());
+        binder.bind(cbSexo, "sexo");
 
         direccion = new TextField("direccion");
         direccion.getElement().setAttribute("colspan", "2");
@@ -120,7 +125,7 @@ public class Personas extends Abm<Persona, TemplateModel> {
         cPlanes.setWidth("100%");
         
         cPlanes.getElement().setAttribute("colspan", "5");
-        form.add(nombre, documento, sexo, csPersona, cbParentesco, cbGrupoSanguineo, cbFactor, direccion, descripcionDireccion, numeroPartida, cPlanes);
+        form.add(nombre, documento, cbSexo, csPersona, cbParentesco, cbGrupoSanguineo, cbFactor, direccion, descripcionDireccion, numeroPartida, cPlanes);
         
         form.setResponsiveSteps(
                 new FormLayout.ResponsiveStep("0",1),
