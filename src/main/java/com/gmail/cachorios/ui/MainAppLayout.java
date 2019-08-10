@@ -16,6 +16,7 @@ import com.github.appreciated.app.layout.router.AppLayoutRouterLayout;
 
 import com.gmail.cachorios.app.ApplicationContextProvider;
 import com.gmail.cachorios.app.seguridad.SecurityUtils;
+import com.gmail.cachorios.backend.data.entity.Parametro;
 import com.gmail.cachorios.backend.data.entity.Usuario;
 import com.gmail.cachorios.backend.servicios.UsuarioService;
 import com.gmail.cachorios.ui.views.admin.*;
@@ -28,9 +29,8 @@ import com.vaadin.flow.component.page.Push;
 import com.vaadin.flow.component.page.Viewport;
 
 import static com.github.appreciated.app.layout.entity.Section.HEADER;
-
 import static com.github.appreciated.app.layout.entity.Section.FOOTER;
-import static com.github.appreciated.app.layout.entity.Section.HEADER;
+
 
 @Push
 @Viewport("width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes")
@@ -42,9 +42,16 @@ public class MainAppLayout extends AppLayoutRouterLayout {
     public MainAppLayout() {
         super();
         notifications.addClickListener(notification -> {/* ... */});
+    
+        UsuarioService usuarioService = ApplicationContextProvider.getApplicationContext().getBean(UsuarioService.class);
+        Usuario usuario = usuarioService.getRepository().findByEmailIgnoreCase(SecurityUtils.getUsername());
+    
+        LeftHeaderItem header = new LeftHeaderItem(usuario.getFullName(), null, usuario.getFotoUrl());
+        header.getContent().setAlignItems(FlexComponent.Alignment.CENTER);
+        
         init(AppLayoutBuilder
                 .get(Behaviour.LEFT_RESPONSIVE)
-                .withTitle("App Layout")
+                .withTitle("Seguimientos Acc. Social")
                 .withAppBar(AppBarBuilder
                         .get()
                         .add(new LeftClickableItem("Salir",
@@ -52,49 +59,46 @@ public class MainAppLayout extends AppLayoutRouterLayout {
                                 clickEvent -> UI.getCurrent().getPage().executeJs("location.assign('logout')") ))
                                 
                         .build())
-                .withAppMenu(LeftAppMenuBuilder
-                        .get()
-                        .addToSection(new LeftHeaderItem("Menu-Header", "Version 3.0.0",
-                                "/frontend/images/logo.png"), HEADER)
-                        .addToSection(new LeftClickableItem("Clickable Entry",
-                                VaadinIcon.COG.create(),
-                                clickEvent -> Notification.show("onClick ...")
-                        ), HEADER)
+                .withAppMenu(
+                    LeftAppMenuBuilder.get()
+                        .addToSection(header, HEADER)
+//                        .addToSection(new LeftClickableItem("Clickable Entry",
+//                                VaadinIcon.COG.create(),
+//                                clickEvent -> Notification.show("onClick ...")
+//                        ), HEADER)
+//                        .add(new LeftNavigationItem(Personas.class))
+//                        .add(LeftSubMenuBuilder
+//                                .get("My Submenu", VaadinIcon.PLUS.create())
+//                                .add(LeftSubMenuBuilder
+//                                        .get("My Submenu", VaadinIcon.PLUS.create())
+//                                        .add(new LeftNavigationItem(Personas.class))
+//                                        .add(new LeftNavigationItem(Personas.class))
+//                                        .add(new LeftNavigationItem(Personas.class))
+//                                        .build())
+//                                .add(new LeftNavigationItem(Personas.class))
+//                                .add(new LeftNavigationItem(Personas.class))
+//                                .build())
                         .add(new LeftNavigationItem(Personas.class))
-                        .add(LeftSubMenuBuilder
-                                .get("My Submenu", VaadinIcon.PLUS.create())
-                                .add(LeftSubMenuBuilder
-                                        .get("My Submenu", VaadinIcon.PLUS.create())
-                                        .add(new LeftNavigationItem(Personas.class))
-                                        .add(new LeftNavigationItem(Personas.class))
-                                        .add(new LeftNavigationItem(Personas.class))
-                                        .build())
-                                .add(new LeftNavigationItem(Personas.class))
-                                .add(new LeftNavigationItem(Personas.class))
-                                .build())
-                        .add(new LeftNavigationItem(Personas.class))
-                        .addToSection(new LeftClickableItem("Clickable Entry",
-                                VaadinIcon.COG.create(),
-                                clickEvent -> Notification.show("onClick ...")
-                        ), FOOTER)
-                        .build())
-                .build());
+                        .add(new LeftNavigationItem(Movimientos.class))
+                        .add(new LeftNavigationItem(Productos.class))
+                        .add(new LeftNavigationItem(Planes.class))
+        
+                        .withStickyFooter()
+//                        .addToSection(
+//                            new LeftClickableItem("Footer Clickable!",
+//                                    VaadinIcon.COG.create(),
+//                                    clickEvent -> Notification.show("Clicked!")),
+//                                FOOTER)
+                        .addToSection(new LeftNavigationItem(Parametros.class),FOOTER)
+                        .addToSection(new LeftNavigationItem(Usuarios.class),FOOTER)
+                        
+                        .build()
+                ).build());
     }
 
    
    /*
-    @Override
-    public AppLayout createAppLayoutInstance() {
-
-        //notifications = new DefaultNotificationHolder(newStatus -> { });
-
-        UsuarioService usuarioService = ApplicationContextProvider.getApplicationContext().getBean(UsuarioService.class);
-        Usuario usuario = usuarioService.getRepository().findByEmailIgnoreCase(SecurityUtils.getUsername());
-
-
 //        String diricono = "/frontend/images/" + "cacho"+ ".png";
-
-        
         MenuHeaderComponent header = new MenuHeaderComponent(usuario.getFullName(), null, usuario.getFotoUrl());
         header.getContent().setAlignItems(FlexComponent.Alignment.CENTER);
 

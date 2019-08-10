@@ -36,7 +36,7 @@ public class Personas extends Abm<Persona, Abm.Model> {
     @Autowired
     public Personas(FilterableAbmService<Persona> service) {
         super("Persona", service);
-        setWith("1000px");
+        setWith("700px");
         configureGrid(this.getGrid());
         this.iniciar(LarConst.TITULO_PERSONA);
     }
@@ -136,11 +136,11 @@ public class Personas extends Abm<Persona, Abm.Model> {
         form.add(nombre, documento, cbSexo, csPersona, cbParentesco, cbGrupoSanguineo, cbFactor, direccion, descripcionDireccion, numeroPartida, cPlanes);
         
         form.setResponsiveSteps(
-                new FormLayout.ResponsiveStep("0",1),
-                new FormLayout.ResponsiveStep("18em",2),
-                new FormLayout.ResponsiveStep("19em",3),
-                new FormLayout.ResponsiveStep("20em",4),
-                new FormLayout.ResponsiveStep("20em",5)
+                new FormLayout.ResponsiveStep("3em",1),
+                new FormLayout.ResponsiveStep("3em",2),
+                new FormLayout.ResponsiveStep("3em",3),
+                new FormLayout.ResponsiveStep("4em",4),
+                new FormLayout.ResponsiveStep("0",5)
         );
     }
 }

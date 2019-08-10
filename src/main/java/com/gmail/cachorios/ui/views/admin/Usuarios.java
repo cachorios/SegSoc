@@ -33,7 +33,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Route(value = LarConst.PAGE_USERS, layout = MainAppLayout.class)
 @Caption("Usuarios")
-@Icon(VaadinIcon.HOME)
+@Icon(VaadinIcon.USERS)
 
 @Secured(Role.ADMIN)
 public class Usuarios extends Abm<Usuario, Abm.Model> {
@@ -47,7 +47,7 @@ public class Usuarios extends Abm<Usuario, Abm.Model> {
         super("Usuario", service);
         this.passwordEncoder = passwordEncoder;
 
-        setWith("1000px");
+        setWith("600px");
 
         configureGrid();
 

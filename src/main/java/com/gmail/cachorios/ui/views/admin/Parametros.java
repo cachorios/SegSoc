@@ -36,7 +36,7 @@ public class Parametros extends Abm<Parametro, Abm.Model> {
     public Parametros(ParametroService service) {
         super("Parametro", service);
 
-        setWith("1000px");
+        setWith("700px");
 
         configureGrid(this.getGrid());
 
@@ -69,6 +69,7 @@ public class Parametros extends Abm<Parametro, Abm.Model> {
         DatePicker valordat;
         ComboBox<ETipoParametro> tipoComboBox;
 
+        
         nombre = new TextField("Nombre");
         nombre.getElement().setAttribute("colspan", "2");
         binder.bind(nombre,"nombre");

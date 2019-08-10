@@ -86,7 +86,7 @@ public abstract class Abm<T extends EntidadInterface, D extends Abm.Model> exten
         grid.setDataProvider(getDataProvider());
         
         dialog.add((Component) this.form);
-        dialog.setWidth("450px");
+//        dialog.setWidth("450px");
         dialog.setHeight("100%");
         accion.setVisible(false);
         configurarListener();
