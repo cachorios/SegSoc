@@ -50,11 +50,13 @@ public class AbmEntityPresenter<T extends EntidadInterface>  extends EntityPrese
     }
 
     private T open(T entidad){
-        getView().fireEvent(new LoadFormEvent(getView(),false, entidad));
+        
         getView().getBinder().readBean(entidad);
         getView().getForm().getButtons().setSaveDisabled(true);
         getView().getForm().getButtons().setDeleteDisabled(esNuevo());
         getView().actualizarTitulo(esNuevo());
+    
+        getView().fireEvent(new LoadFormEvent(getView(),false, entidad));
         getView().openDialog();
 
         return entidad;
