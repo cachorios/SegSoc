@@ -17,7 +17,7 @@ public class Persona extends AbstractEntityId {
     @Id
     private Long id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
     private Persona cabeza;
 
     private EParentesco parentesco;

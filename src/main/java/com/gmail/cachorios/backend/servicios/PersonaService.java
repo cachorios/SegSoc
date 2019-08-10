@@ -14,6 +14,7 @@ import java.util.Optional;
 @Service
 public class PersonaService implements FilterableAbmService<Persona> {
     private final PersonaRepositorio personaRepositorio;
+    private Persona pariente;
 
     @Autowired
     public PersonaService(PersonaRepositorio personaRepositorio) {
@@ -25,6 +26,8 @@ public class PersonaService implements FilterableAbmService<Persona> {
         if(filter.isPresent()){
             String filtro = makeForLike(filter.get());
             return getRepository().findByNombreLikeIgnoreCase(filtro, pageable);
+        } else if (pariente != null && !pariente.isNew()) {
+            return getRepository().findDistinctOf(pariente.getId(), pageable);
         }
         return find(pageable);
     }
@@ -38,6 +41,8 @@ public class PersonaService implements FilterableAbmService<Persona> {
         if(filter.isPresent()){
             String filtro = makeForLike(filter.get());
             return getRepository().countByNombreLikeIgnoreCase(filtro);
+        } else if (pariente != null && !pariente.isNew()) {
+            return getRepository().countDistinctOf(pariente.getId());
         }
         return count();
     }
@@ -55,5 +60,9 @@ public class PersonaService implements FilterableAbmService<Persona> {
     @Override
     public Persona createNew(Usuario currentUsuario) {
         return new Persona();
+    }
+
+    public void setPariente(Persona pariente) {
+        this.pariente = pariente;
     }
 }

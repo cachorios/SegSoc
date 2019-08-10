@@ -2,23 +2,22 @@ package com.gmail.cachorios.ui.views.admin;
 
 import com.github.appreciated.app.layout.annotations.Caption;
 import com.github.appreciated.app.layout.annotations.Icon;
-import com.gmail.cachorios.backend.data.entity.Documento;
+import com.gmail.cachorios.app.Context;
 import com.gmail.cachorios.backend.data.entity.MovimientoDetalle;
 import com.gmail.cachorios.backend.data.entity.Producto;
 import com.gmail.cachorios.backend.servicios.ProductoService;
 import com.gmail.cachorios.core.ui.data.FilterableAbmService;
 import com.gmail.cachorios.core.ui.view.abm.Abm;
-import com.gmail.cachorios.core.ui.view.component.UnoaMuchoComponent;
 import com.gmail.cachorios.core.ui.view.component.selectCompuesto.SelectCompuesto;
 import com.gmail.cachorios.ui.MainAppLayout;
 import com.gmail.cachorios.ui.utils.LarConst;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.BeanValidationBinder;
 import com.vaadin.flow.router.Route;
-import com.vaadin.flow.templatemodel.TemplateModel;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Route(value = LarConst.PAGE_MOVIMIENTODET, layout = MainAppLayout.class)
@@ -67,20 +66,20 @@ public class MovimientoDetalles extends Abm<MovimientoDetalle, Abm.Model> {
         csProducto.getElement().setAttribute("colspan", "2");
         binder.bind(csProducto, "producto");
 
-        UnoaMuchoComponent<Documento, MovimientoDetalle> documentos = new UnoaMuchoComponent("Documentos", this);
-
-        documentos.setHeight("300px");
+        Documentos documentos = Context.getBean(Documentos.class);
         documentos.getElement().setAttribute("colspan", "5");
+        documentos.setHeigth("150px");
 
-        documentos.getGrid().addColumn(Documento::getDescripcion).setHeader("Descripcion").setFlexGrow(0);
+        addLoadFormListener(e -> documentos.setPadre(e.getRegistroActivo()) );
+        documentos.setViewSearchBar(false);
+        documentos.setAccionText("Nuevo Documento");
 
-        documentos.withForm(Documentos.class)
-                .withVer()
-                .withNuevo(Documento.class);
+        Div cDocumentos = new Div(documentos);
+        cDocumentos.setWidth("100%");
 
-        documentos.iniciar();
+        cDocumentos.getElement().setAttribute("colspan", "5");
 
-        form.add(productoDescripcion, documentos, csProducto);
+        form.add(productoDescripcion, cDocumentos, csProducto);
         form.setResponsiveSteps(
                 new FormLayout.ResponsiveStep("0",1),
                 new FormLayout.ResponsiveStep("21em",2),
