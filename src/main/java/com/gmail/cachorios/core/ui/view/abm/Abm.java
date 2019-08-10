@@ -82,7 +82,7 @@ public abstract class Abm<T extends EntidadInterface, D extends Abm.Model> exten
        binder = new BeanValidationBinder<>(service.getBeanType());
        crearForm(form.getFormLayuot() , binder);
         
-        grid.setDataProvider(getDateProvider());
+        grid.setDataProvider(getDataProvider());
         
         dialog.add((Component) this.form);
         dialog.setWidth("450px");
@@ -99,7 +99,7 @@ public abstract class Abm<T extends EntidadInterface, D extends Abm.Model> exten
         getModel().setButtonText(text);
     }
     
-    protected DataProvider getDateProvider(){
+    protected DataProvider getDataProvider(){
         return new AbmDataProvider(service);
     }
     
@@ -270,7 +270,7 @@ public abstract class Abm<T extends EntidadInterface, D extends Abm.Model> exten
         if(padre != null){
             this.padre = padre;
             //service.setPadre(padre);
-            grid.setDataProvider( getDateProvider() );
+            grid.setDataProvider( getDataProvider() );
             
         }
         
