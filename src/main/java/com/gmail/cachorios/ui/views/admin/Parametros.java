@@ -30,7 +30,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 @Route(value = LarConst.PAGE_PARAMETRO, layout = MainAppLayout.class)
 @Caption("Parametros")
 @Icon(VaadinIcon.OPTIONS)
-public class Parametros extends Abm<Parametro, TemplateModel> {
+public class Parametros extends Abm<Parametro, Abm.Model> {
 
     @Autowired
     public Parametros(ParametroService service) {

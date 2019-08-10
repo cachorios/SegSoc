@@ -36,7 +36,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Icon(VaadinIcon.HOME)
 
 @Secured(Role.ADMIN)
-public class Usuarios extends Abm<Usuario, TemplateModel> {
+public class Usuarios extends Abm<Usuario, Abm.Model> {
 
     private UsuarioService usuarioService;
     private final PasswordEncoder passwordEncoder;

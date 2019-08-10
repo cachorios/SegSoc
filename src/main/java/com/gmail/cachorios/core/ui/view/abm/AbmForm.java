@@ -28,7 +28,7 @@ public class AbmForm<T extends EntidadInterface> extends PolymerTemplate<Templat
     private FormButtonsBar botonera;
 
     public AbmForm() {
-        titulo.setText("Edicion de Usuario");
+        titulo.setText("Edicion de ");
     }
 
 

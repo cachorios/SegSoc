@@ -19,7 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 @Route(value = LarConst.PAGE_PRODUCTO, layout = MainAppLayout.class)
 @Caption("Productos")
 @Icon(VaadinIcon.BARCODE)
-public class Productos extends Abm<Producto, TemplateModel> {
+public class Productos extends Abm<Producto, Abm.Model> {
 
     @Autowired
     public Productos(FilterableAbmService<Producto> service) {

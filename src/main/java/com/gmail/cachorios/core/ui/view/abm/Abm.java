@@ -10,6 +10,7 @@ import com.gmail.cachorios.core.ui.view.abm.interfaces.EntityView;
 import com.gmail.cachorios.core.ui.view.component.FormButtonsBar;
 import com.gmail.cachorios.core.ui.view.component.SearchBar;
 import com.vaadin.flow.component.*;
+import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.HtmlImport;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.formlayout.FormLayout;
@@ -31,13 +32,19 @@ import com.vaadin.flow.templatemodel.TemplateModel;
 
 @Tag("lar-abm")
 @HtmlImport("src/components/lar-abm.html")
-public abstract class Abm<T extends EntidadInterface, D extends TemplateModel> extends PolymerTemplate<D> implements HasLogger, EntityView<T>, HasUrlParameter<Long> {
+public abstract class Abm<T extends EntidadInterface, D extends Abm.Model> extends PolymerTemplate<D> implements HasLogger, EntityView<T>, HasUrlParameter<Long> {
 
     public interface IAbmForm<T> {
         FormButtonsBar getButtons();
         HasText getTitle();
         FormLayout getFormLayuot();
         void setBinder(BeanValidationBinder<T> binder);
+       
+    }
+    
+    public interface Model extends TemplateModel {
+        void setSeachBar(Boolean viewSeachBar);
+        void setButtonText(String nuevoText);
     }
 	
     
@@ -47,6 +54,9 @@ public abstract class Abm<T extends EntidadInterface, D extends TemplateModel> e
     private H4 titulo;
     @Id("searchbar")
     private SearchBar searchBar;
+    
+    @Id("accion")
+    private Button accion;
 
     private final Dialog dialog = new Dialog();
     private ConfirmDialog confirmation = new ConfirmDialog();
@@ -72,13 +82,21 @@ public abstract class Abm<T extends EntidadInterface, D extends TemplateModel> e
        binder = new BeanValidationBinder<>(service.getBeanType());
        crearForm(form.getFormLayuot() , binder);
         
-       grid.setDataProvider(getDateProvider());
+        grid.setDataProvider(getDateProvider());
         
-       dialog.add((Component) this.form);
-       dialog.setWidth("450px");
-       dialog.setHeight("100%");
-        
-       configurrListener();
+        dialog.add((Component) this.form);
+        dialog.setWidth("450px");
+        dialog.setHeight("100%");
+        accion.setVisible(false);
+        configurrListener();
+    }
+    
+    public void setViewSearchBar(boolean viewSearchBar){
+        searchBar.setVisible(viewSearchBar);
+        accion.setVisible(!viewSearchBar);
+    }
+    public void setAccionText(String text){
+        getModel().setButtonText(text);
     }
     
     protected DataProvider getDateProvider(){
@@ -107,7 +125,7 @@ public abstract class Abm<T extends EntidadInterface, D extends TemplateModel> e
         searchBar.addFilterChangeListener(e->getPresenter().filter(searchBar.getFilter()));
         searchBar.setActionText("Nuevo "+this.nombreEntidad);
         searchBar.addActionClickListener(e->  getPresenter().crearNuevo() );
-
+        
         getGrid().addSelectionListener(e -> {
             e.getFirstSelectedItem().ifPresent(entity -> {
                 fireEvent(new RowFocusChangedEvent(this, false, entity ));

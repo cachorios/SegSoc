@@ -21,7 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 @Route(value = LarConst.PAGE_DOCUMENTOS, layout = MainAppLayout.class)
 @Caption("Documentos")
 @Icon(VaadinIcon.MODAL_LIST)
-public class Documentos extends Abm<Documento, TemplateModel> {
+public class Documentos extends Abm<Documento, Abm.Model> {
 
     @Autowired
     public Documentos(FilterableAbmService<Documento> service) {

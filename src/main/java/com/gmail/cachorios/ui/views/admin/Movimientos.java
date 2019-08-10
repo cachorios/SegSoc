@@ -25,7 +25,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 @Route(value = LarConst.PAGE_MOVIMIENTO, layout = MainAppLayout.class)
 @Caption("Movimientos")
 @Icon(VaadinIcon.ARROW_RIGHT)
-public class Movimientos extends Abm<Movimiento, TemplateModel> {
+public class Movimientos extends Abm<Movimiento, Abm.Model> {
 
     @Autowired
     public Movimientos(FilterableAbmService<Movimiento> service) {

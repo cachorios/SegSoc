@@ -16,7 +16,7 @@
             display: flex;
             flex-direction: column;
 
-            padding: 0 0.5rem;
+            /*padding: 0 0.5rem;*/
             min-height: 200px;
         }
 
@@ -40,7 +40,7 @@
             height:  var(--titulo-height);
             margin-block-start: 0.8rem;
             margin-block-end: 0;
-            width: 85%;
+            width: auto;
         }
 
 
@@ -48,10 +48,10 @@
     </style>
         <div class="titulo_compuesto">
         <h4 id="titulo" part="titulo" theme="abm" ></h4>
-        <vaadin-button id="action" class="withpadre-action-btn" theme="primary">
-            <iron-icon icon$="[[buttonIcon]]" slot="prefix"></iron-icon>
-            [[buttonText]]
-          </vaadin-button>
+            <vaadin-button id="accion" class="withpadre-action-btn" theme="primary">
+                    <iron-icon icon$="[[buttonIcon]]" slot="prefix"></iron-icon>
+                    [[buttonText]]
+              </vaadin-button>
         </div>
 
         <div part="abm-content" theme="abm">
@@ -73,6 +73,10 @@
                                     type: String,
                                     value: "Nuevo Registro"
                                   },
+                        buttonIcon: {
+                                  type: String,
+                                  value: 'vaadin:plus'
+                            },
                          search_view:{
                              type: Boolean,
                              value: true
@@ -80,19 +84,34 @@
                     };
 
             }
+            static get observers() {
+                    return [
+                      '_setView(search_view)'
+                    ];
+                  }
 
-              ready() {
-                            super.ready();
-                            console.log("--Ready");
-                            if(Abm.properties.search_view.value){
-                                console.clear();
-                                console.log("--Display");
-                                document.getElementById("searchbar").style.display = "none";
-                                console.log(this.$("#searchbar"));
-                            }
-                            console.log("--end Ready");
-
-                        }
+              // ready() {
+              //
+              //               super.ready();
+              //               console.log("--Ready");
+              //               if(Abm.properties.search_view.value){
+              //                   this.$.action.style.display = "none";
+              //               }else{
+              //                   this.$.searchbar.style.display = "none";
+              //
+              //               }
+              //               console.log("--end Ready");
+              //
+              //           }
+                _setView(search_view){
+                    // alert(search_view);
+                    //  if(Abm.properties.search_view.value){
+                    //     this.$.action.style.display = "none";
+                    // }else{
+                    //     this.$.searchbar.style.display = "none";
+                    //
+                    // }
+               }
         }
        window.customElements.define(Abm.is, Abm);
     </script>

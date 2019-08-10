@@ -29,7 +29,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 @Route(value = LarConst.PAGE_PERSONA, layout = MainAppLayout.class)
 @Caption("Personas")
 @Icon(VaadinIcon.USER)
-public class Personas extends Abm<Persona, TemplateModel> {
+public class Personas extends Abm<Persona, Abm.Model> {
 
     @Autowired
     public Personas(FilterableAbmService<Persona> service) {
@@ -116,6 +116,8 @@ public class Personas extends Abm<Persona, TemplateModel> {
         planes.setHeigth("150px");
         
         addLoadFormListener(e -> planes.setPadre(e.getRegistroActivo()) );
+        planes.setViewSearchBar(false);
+        planes.setAccionText("Nuevo Plan");
         
         Div cPlanes = new Div(planes);
         cPlanes.setWidth("100%");

@@ -30,7 +30,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 @Caption("Planes")
 @Icon(VaadinIcon.SITEMAP)
 
-public class Planes extends Abm<Plan, TemplateModel> {
+public class Planes extends Abm<Plan, Abm.Model> {
     
     @Autowired
     public Planes(PlanService service) {
