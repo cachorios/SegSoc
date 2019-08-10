@@ -4,6 +4,7 @@ import com.gmail.cachorios.core.ui.data.AbstractEntityId;
 import com.gmail.cachorios.core.ui.data.enums.EFactorRH;
 import com.gmail.cachorios.core.ui.data.enums.EGrupoSanguineo;
 import com.gmail.cachorios.core.ui.data.enums.EParentesco;
+import com.gmail.cachorios.core.ui.data.enums.ESexo;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -28,8 +29,7 @@ public class Persona extends AbstractEntityId {
     private String documento;
 
 //    @NotNull
-    @Size(max = 1)
-    private String sexo;
+    private ESexo sexo;
 
 //    @NotNull
     private EGrupoSanguineo grupoSanguineo;
@@ -91,11 +91,11 @@ public class Persona extends AbstractEntityId {
         this.documento = documento;
     }
 
-    public String getSexo() {
+    public ESexo getSexo() {
         return sexo;
     }
 
-    public void setSexo(String sexo) {
+    public void setSexo(ESexo sexo) {
         this.sexo = sexo;
     }
 

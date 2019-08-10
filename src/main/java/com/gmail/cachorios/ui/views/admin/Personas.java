@@ -46,9 +46,9 @@ public class Personas extends Abm<Persona, Abm.Model> {
     }
 
     private void configureGrid(Grid<Persona> grid) {
-        grid.addColumn(Persona::getNombre).setHeader("Nombre").setWidth("60%");
+        grid.addColumn(Persona::getNombre).setHeader("Nombre").setWidth("50%");
         grid.addColumn(Persona::getDocumento).setHeader("Documento").setKey("documento").setWidth("30%");
-        grid.addColumn(Persona::getSexo).setHeader("Sexo").setKey("sexo").setWidth("10%");
+        grid.addColumn(Persona::getSexo).setHeader("Sexo").setKey("sexo").setWidth("20%");
     }
 
     @Override
