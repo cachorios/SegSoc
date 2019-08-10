@@ -2,6 +2,7 @@ package com.gmail.cachorios.backend.servicios;
 
 
 import com.gmail.cachorios.app.ApplicationContextProvider;
+import com.gmail.cachorios.app.Context;
 import com.gmail.cachorios.app.seguridad.SecurityUtils;
 import com.gmail.cachorios.backend.data.entity.Usuario;
 import com.vaadin.flow.component.UI;
@@ -11,7 +12,7 @@ public  class SegSocServices {
     public static Usuario getUsuarioActivo() {
         if(SecurityUtils.isUserLoggedIn()) {
             if (usuario == null) {
-                UsuarioService usuarioService = ApplicationContextProvider.getApplicationContext().getBean(UsuarioService.class);
+                UsuarioService usuarioService = Context.getBean(UsuarioService.class);
                 usuario = usuarioService.getRepository().findByEmailIgnoreCase(SecurityUtils.getUsername());
             }
             return usuario;

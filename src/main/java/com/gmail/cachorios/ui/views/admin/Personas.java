@@ -2,8 +2,10 @@ package com.gmail.cachorios.ui.views.admin;
 
 import com.github.appreciated.app.layout.annotations.Caption;
 import com.github.appreciated.app.layout.annotations.Icon;
+import com.gmail.cachorios.app.ApplicationContextProvider;
 import com.gmail.cachorios.app.Context;
 import com.gmail.cachorios.backend.data.entity.Persona;
+import com.gmail.cachorios.backend.repositorios.PersonaRepositorio;
 import com.gmail.cachorios.backend.servicios.PersonaService;
 import com.gmail.cachorios.core.ui.data.FilterableAbmService;
 import com.gmail.cachorios.core.ui.data.enums.EFactorRH;
@@ -23,7 +25,6 @@ import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.BeanValidationBinder;
 import com.vaadin.flow.router.Route;
-import com.vaadin.flow.templatemodel.TemplateModel;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
@@ -61,8 +62,12 @@ public class Personas extends Abm<Persona, Abm.Model> {
         Planes planes = Context.getBean(Planes.class);
         
         ComboBox<EFactorRH> cbFactor;
-        
-        SelectCompuesto<Persona> csPersona = new SelectCompuesto<>("Familiar de...", PersonaService.class );
+
+        PersonaRepositorio pr = Context.getBean(PersonaRepositorio.class);
+        PersonaService ps = new PersonaService(pr);
+        SelectCompuesto<Persona> csPersona = new SelectCompuesto<>("Familiar de...", ps );
+        addLoadFormListener(e -> ((PersonaService) csPersona.getService()).setPariente(getPresenter().getEntidad()) ) ;
+
         csPersona.setColSpan(3L)
                 .setWidthInput("150px")
                 .withFind("Lista de Persona")

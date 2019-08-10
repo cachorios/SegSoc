@@ -2,6 +2,7 @@ package com.gmail.cachorios.core.ui.view.component.selectCompuesto;
 
 
 import com.gmail.cachorios.app.ApplicationContextProvider;
+import com.gmail.cachorios.app.Context;
 import com.gmail.cachorios.core.ui.data.EntidadInterface;
 import com.gmail.cachorios.core.ui.data.FilterableAbmService;
 import com.vaadin.flow.component.*;
@@ -13,6 +14,7 @@ import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.polymertemplate.EventHandler;
 import com.vaadin.flow.component.polymertemplate.Id;
 import com.vaadin.flow.component.polymertemplate.PolymerTemplate;
+import com.vaadin.flow.component.polymertemplate.TemplateParser;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.function.ValueProvider;
 import com.vaadin.flow.shared.Registration;
@@ -56,18 +58,26 @@ public class SelectCompuesto<T extends EntidadInterface> extends PolymerTemplate
     private Dialog dialog;
     private  Grid<T> grilla;
 
-    public SelectCompuesto(Class serviceClass) {
-
-
+    public SelectCompuesto() {
         this.fieldSupport = new AbstractFieldSupport<>(this, null, Objects::deepEquals, c->{});
-        this.service = (FilterableAbmService<T>) ApplicationContextProvider.getApplicationContext().getBean(serviceClass);
 
         obtenerVarlor = entidad -> String.valueOf(entidad.getId());
         obtenerLeyenda = entidad -> String.valueOf(entidad.toString());
         consultarCodigo = (service, string) -> service.findById( Long.valueOf(string));
 
         input.addValueChangeListener(e->changeInput(e.getValue()));
+    }
 
+    public SelectCompuesto(Class serviceClass) {
+        this();
+        this.service = (FilterableAbmService<T>) Context.getBean(serviceClass);
+    }
+
+    public SelectCompuesto(String label, FilterableAbmService service) {
+        this();
+
+        this.service = service;
+        this.setLabel(label);
     }
 
     public SelectCompuesto(String label,Class serviceClass){
