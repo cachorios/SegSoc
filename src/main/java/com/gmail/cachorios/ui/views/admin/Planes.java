@@ -23,9 +23,6 @@ import com.vaadin.flow.router.Route;
 import com.vaadin.flow.templatemodel.TemplateModel;
 import org.springframework.beans.factory.annotation.Autowired;
 
-
-
-
 @Route(value = LarConst.PAGE_PLAN, layout = MainAppLayout.class)
 @Caption("Planes")
 @Icon(VaadinIcon.SITEMAP)
@@ -43,8 +40,8 @@ public class Planes extends Abm<Plan, Abm.Model> {
 	
 	
 	@Override
-	public void configurrListener() {
-		super.configurrListener();
+	public void configurarListener() {
+		super.configurarListener();
 		addPreUpdateListener(e -> {
 			if(getPadre()!= null) {
 				getPresenter().getEntidad().setPersona((Persona) getPadre());
@@ -59,9 +56,9 @@ public class Planes extends Abm<Plan, Abm.Model> {
     }
 	
 	@Override
-	protected DataProvider getDateProvider() {
+	protected DataProvider getDataProvider() {
     	if(getPadre()== null) {
-			return super.getDateProvider();
+			return super.getDataProvider();
 		}
 		return DataProvider.ofCollection( ((Persona)getPadre()).getPlanes() );
 	}
