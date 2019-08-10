@@ -88,7 +88,7 @@ public abstract class Abm<T extends EntidadInterface, D extends Abm.Model> exten
         dialog.setWidth("450px");
         dialog.setHeight("100%");
         accion.setVisible(false);
-        configurrListener();
+        configurarListener();
     }
     
     public void setViewSearchBar(boolean viewSearchBar){
@@ -120,7 +120,7 @@ public abstract class Abm<T extends EntidadInterface, D extends Abm.Model> exten
         return form;
     }
 
-    public void configurrListener(){
+    public void configurarListener(){
         
         searchBar.addFilterChangeListener(e->getPresenter().filter(searchBar.getFilter()));
         searchBar.setActionText("Nuevo "+this.nombreEntidad);
