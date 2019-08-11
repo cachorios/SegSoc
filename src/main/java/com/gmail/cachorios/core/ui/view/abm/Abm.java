@@ -248,7 +248,7 @@ public abstract class Abm<T extends EntidadInterface, D extends Abm.Model> exten
         grid.getElement().setAttribute("slot", "grid");
         grid.setClassName("grid");
 
-        dialog.getElement().addAttachListener(event -> UI.getCurrent().getPage().executeJavaScript(
+        dialog.getElement().addAttachListener(event -> UI.getCurrent().getPage().executeJs(
                 "$0.$.overlay.setAttribute('theme', 'right-form');", dialog.getElement()));
 
     }

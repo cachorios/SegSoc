@@ -10,22 +10,23 @@
         padding: var(--lumo-space-xs);
       }
 
-      [part="overlay"] {
+      [part="overlay"] { /*Es el que contiene a "Content"*/
         display: flex;
         animation: none !important;
-        min-width: 300px;
+        min-width: 350px;
         outline: none;
         align-items: stretch;
+        padding: 0.1em;
+        border: var(--lumo-contrast-10pct) thin solid;
       }
 
-      [part="content"] {
-        width: 100%;
+      [part="content"] { /*Es elcontenido del dialogo */
+        width: 30% !important;
         box-sizing: border-box;
         flex: 1 1 auto;
         display: flex;
         flex-direction: column;
-        padding: 20px !important;
-
+        padding: 1rem !important;
         height: 100%;
 
       }
@@ -45,20 +46,21 @@
       }
 
       :host([theme]) [part="overlay"] {
-            max-width: 65em;
+            max-width: 70%;
+            /*min-width: 30em;*/
       }
 
       :host([theme="left"]) [part="overlay"],
       :host([theme="right"]) [part="overlay"] {
-        max-width: 45em;
+        max-width: 50em;
       }
 
       :host([theme="left-form"]) [part="overlay"],
       :host([theme="right-form"]) [part="overlay"] {
-            max-width: 80vw;
+            /*max-width: 80vw;*/
             height: 100vh;
             animation: none !important;
-            min-width: 300px;
+            min-width: 30em;
             outline: none;
       }
 
@@ -77,9 +79,10 @@
         }
 
         :host([theme]) [part="overlay"] {
-          flex: 1;
+          /*flex: 1;*/
           width: 100%;
           border-radius: 0 !important;
+          overflow: auto;
         }
       }
 
@@ -166,12 +169,12 @@
       :host([theme~="orders"]) [part~="body-cell"] {
         background: transparent;
       }
-
       @media (max-width: 600px) {
         :host([theme~="orders"]) [part~="cell"] ::slotted(vaadin-grid-cell-content) {
           padding: 0 !important;
         }
       }
+
 
       :host([theme~="dashboard"]) [part~="cell"] ::slotted(vaadin-grid-cell-content) {
         padding: 0;
@@ -225,6 +228,7 @@
               order: 1;
             }
           }
+
 
           .flex {
             display: flex;

@@ -11,14 +11,18 @@
                    flex-direction: column;
                    flex: auto;
                    height: 100%;
+                   /*background-color: #ef6c00;*/
                    /*width: 400px;*/
 
               }
+              [part="content"] ::slotted(flow-component-renderer) {
+                             height: 100%;
+                        }
 
               vaadin-form-layout {
                 overflow: auto;
                 flex: auto;
-
+                min-width: 30em;
 
               }
         </style>

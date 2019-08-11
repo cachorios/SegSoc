@@ -36,7 +36,7 @@ public class Personas extends Abm<Persona, Abm.Model> {
     @Autowired
     public Personas(FilterableAbmService<Persona> service) {
         super("Persona", service);
-        setWith("700px");
+        setWith("650px");
         configureGrid(this.getGrid());
         this.iniciar(LarConst.TITULO_PERSONA);
     }
@@ -118,7 +118,7 @@ public class Personas extends Abm<Persona, Abm.Model> {
         descripcionDireccion.getElement().setAttribute("colspan", "2");
         binder.bind(descripcionDireccion, "descripcionDireccion");
 
-        numeroPartida = new TextField("Numero de partida");
+        numeroPartida = new TextField("Nro. de partida");
         numeroPartida.getElement().setAttribute("colspan", "1");
         binder.forField(numeroPartida).withConverter(new IntegerConverter()).bind("numeroPartida");
     
@@ -131,16 +131,16 @@ public class Personas extends Abm<Persona, Abm.Model> {
 
         Div cPlanes = new Div(planes);
         cPlanes.setWidth("100%");
-        
+        cPlanes.getElement().getStyle().set("padding-top", "2em");
         cPlanes.getElement().setAttribute("colspan", "5");
         form.add(nombre, documento, cbSexo, csPersona, cbParentesco, cbGrupoSanguineo, cbFactor, direccion, descripcionDireccion, numeroPartida, cPlanes);
         
         form.setResponsiveSteps(
-                new FormLayout.ResponsiveStep("3em",1),
-                new FormLayout.ResponsiveStep("3em",2),
-                new FormLayout.ResponsiveStep("3em",3),
-                new FormLayout.ResponsiveStep("4em",4),
-                new FormLayout.ResponsiveStep("0",5)
+                new FormLayout.ResponsiveStep("1em",1),
+                new FormLayout.ResponsiveStep("1em",2),
+                new FormLayout.ResponsiveStep("1em",3),
+                new FormLayout.ResponsiveStep("1em",4),
+                new FormLayout.ResponsiveStep("1em",5)
         );
     }
 }
