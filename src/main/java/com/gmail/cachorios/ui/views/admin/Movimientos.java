@@ -12,6 +12,7 @@ import com.gmail.cachorios.core.ui.view.abm.Abm;
 import com.gmail.cachorios.core.ui.view.component.selectCompuesto.SelectCompuesto;
 import com.gmail.cachorios.ui.MainAppLayout;
 import com.gmail.cachorios.ui.utils.LarConst;
+import com.gmail.cachorios.ui.utils.renderers.DateRenderer;
 import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.grid.Grid;
@@ -31,7 +32,7 @@ public class Movimientos extends Abm<Movimiento, Abm.Model> {
     public Movimientos(FilterableAbmService<Movimiento> service) {
         super("Movimiento", service);
 
-        setWith("1000px");
+        setWith("900px");
 
         configureGrid(this.getGrid());
 
@@ -44,7 +45,7 @@ public class Movimientos extends Abm<Movimiento, Abm.Model> {
     }
 
     private void configureGrid(Grid<Movimiento> grid) {
-        grid.addColumn(Movimiento::getFecha).setHeader("Fecha").setWidth("15%");
+        grid.addColumn(new DateRenderer<>(Movimiento::getFecha, "dd/MM/yyyy")).setHeader("Fecha").setWidth("15%");
         grid.addColumn(Movimiento::getPersona).setHeader("Persona").setKey("persona").setWidth("40%");
     }
 

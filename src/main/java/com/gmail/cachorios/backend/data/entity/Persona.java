@@ -7,7 +7,6 @@ import com.gmail.cachorios.core.ui.data.enums.EParentesco;
 import com.gmail.cachorios.core.ui.data.enums.ESexo;
 
 import javax.persistence.*;
-import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -72,8 +71,6 @@ public class Persona extends AbstractEntityId {
     public void setCabeza(Persona cabeza) {
         this.cabeza = cabeza;
     }
-
-    
 
     public String getNombre() {
         return nombre;
