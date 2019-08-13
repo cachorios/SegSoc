@@ -57,8 +57,6 @@ public class Persona extends AbstractEntityId {
         this.cabeza = cabeza;
     }
 
-    
-
     public String getNombre() {
         return nombre;
     }
