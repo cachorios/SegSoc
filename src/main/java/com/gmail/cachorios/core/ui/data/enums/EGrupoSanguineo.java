@@ -9,7 +9,6 @@ package com.gmail.cachorios.core.ui.data.enums;
  * @version 20161011
  */
 public enum EGrupoSanguineo {
-    NINGUNO,    //0
     A,          //1
     B,          //2
     AB,         //3

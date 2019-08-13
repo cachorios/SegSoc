@@ -10,9 +10,6 @@ import javax.validation.constraints.NotNull;
 @Entity
 public class Plan extends AbstractEntityId {
 
-    @Id
-    private Long id;
-
     @ManyToOne
     private Parametro nombre;
 
@@ -21,15 +18,6 @@ public class Plan extends AbstractEntityId {
 
     @ManyToOne
     private Persona persona;
-
-    @Override
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public Parametro getNombre() {
         return nombre;

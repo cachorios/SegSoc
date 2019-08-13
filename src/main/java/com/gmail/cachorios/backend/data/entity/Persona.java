@@ -7,44 +7,37 @@ import com.gmail.cachorios.core.ui.data.enums.EParentesco;
 import com.gmail.cachorios.core.ui.data.enums.ESexo;
 
 import javax.persistence.*;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 public class Persona extends AbstractEntityId {
 
-    @Id
-    private Long id;
-
+    @NotBlank
+    private String nombre;
+    @NotEmpty
+    private String documento;
+    @NotNull
+    private ESexo sexo;
+    @NotNull
+    private EGrupoSanguineo grupoSanguineo;
+    @NotNull
+    private EFactorRH factor;
+    @NotEmpty
+    private String direccion;
+    
+    @NotEmpty
+    private String descripcionDireccion;
+    
+    @NotNull
+    private Integer numeroPartida;
+    
     @ManyToOne(cascade = CascadeType.MERGE)
     private Persona cabeza;
-
     private EParentesco parentesco;
-
-//    @NotNull
-    private String nombre;
-
-//    @NotNull
-    private String documento;
-
-//    @NotNull
-    private ESexo sexo;
-
-//    @NotNull
-    private EGrupoSanguineo grupoSanguineo;
-
-//    @NotNull
-    private EFactorRH factor;
-
-//    @NotNull
-    private String direccion;
-
-//    @NotNull
-    private String descripcionDireccion;
-
-//    @NotNull
-    private Integer numeroPartida;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "persona", fetch = FetchType.LAZY)
     private List<Documento> fotosDocumento;
@@ -54,15 +47,6 @@ public class Persona extends AbstractEntityId {
 
     public Persona() {
         this.planes = new ArrayList<>();
-    }
-
-    @Override
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public Persona getCabeza() {

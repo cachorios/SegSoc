@@ -11,9 +11,6 @@ import java.util.Date;
 @Entity
 public class Parametro extends AbstractEntityId {
 
-    @Id
-    private Long id;
-
     @Enumerated
     @Column(name = "tipo", columnDefinition = "smallint default 0")
     private ETipoParametro tipo;
@@ -58,11 +55,7 @@ public class Parametro extends AbstractEntityId {
         orden = 0;
     }
 
-    @Override
-    public Long getId() {
-        return id;
-    }
-
+   
     public Parametro(ETipoParametro tipo, String clase, Integer orden, String nombre, Long valorint, Double valordob,
                      String valorstr, Boolean valorbol, Date valordat, String valorchr) {
         this();

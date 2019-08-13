@@ -6,7 +6,6 @@ import com.gmail.cachorios.backend.data.Role;
 import com.gmail.cachorios.backend.data.entity.Usuario;
 
 import com.gmail.cachorios.core.ui.data.FilterableAbmService;
-import com.gmail.cachorios.backend.servicios.UsuarioService;
 import com.gmail.cachorios.core.ui.view.abm.*;
 
 
@@ -30,15 +29,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-
 @Route(value = LarConst.PAGE_USERS, layout = MainAppLayout.class)
 @Caption("Usuarios")
 @Icon(VaadinIcon.USERS)
-
 @Secured(Role.ADMIN)
 public class Usuarios extends Abm<Usuario, Abm.Model> {
 
-    private UsuarioService usuarioService;
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
@@ -48,9 +44,7 @@ public class Usuarios extends Abm<Usuario, Abm.Model> {
         this.passwordEncoder = passwordEncoder;
 
         setWith("600px");
-
         configureGrid();
-
         this.iniciar(LarConst.TITULO_USUARIOS);
     }
 

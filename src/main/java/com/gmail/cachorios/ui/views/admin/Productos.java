@@ -2,6 +2,7 @@ package com.gmail.cachorios.ui.views.admin;
 
 import com.github.appreciated.app.layout.annotations.Caption;
 import com.github.appreciated.app.layout.annotations.Icon;
+import com.gmail.cachorios.backend.data.Role;
 import com.gmail.cachorios.backend.data.entity.Producto;
 import com.gmail.cachorios.core.ui.data.FilterableAbmService;
 import com.gmail.cachorios.core.ui.view.abm.Abm;
@@ -15,10 +16,12 @@ import com.vaadin.flow.data.binder.BeanValidationBinder;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.templatemodel.TemplateModel;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 
 @Route(value = LarConst.PAGE_PRODUCTO, layout = MainAppLayout.class)
 @Caption("Productos")
 @Icon(VaadinIcon.BARCODE)
+@Secured(Role.ADMIN)
 public class Productos extends Abm<Producto, Abm.Model> {
 
     @Autowired
@@ -26,9 +29,7 @@ public class Productos extends Abm<Producto, Abm.Model> {
         super("Producto", service);
 
         setWith("500px");
-
         configureGrid(this.getGrid());
-
         this.iniciar(LarConst.TITULO_PRODUCTO);
     }
 

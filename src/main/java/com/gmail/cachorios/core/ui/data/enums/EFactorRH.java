@@ -9,7 +9,6 @@ package com.gmail.cachorios.core.ui.data.enums;
  * @version 20161011
  */
 public enum EFactorRH {
-    NINGUNO,          //0
-    POSITIVO,         //1
-    NEGATIVO          //2
+    POSITIVO,         //0
+    NEGATIVO          //1
 }
