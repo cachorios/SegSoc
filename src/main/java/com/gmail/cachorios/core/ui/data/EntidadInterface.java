@@ -4,7 +4,11 @@ import java.io.Serializable;
 
 public interface EntidadInterface extends Serializable {
 
-    public Long getId();
+    Long getId();
 
-    public int getVersion();
+    int getVersion();
+    
+    boolean isNew();
+    
+    
 }

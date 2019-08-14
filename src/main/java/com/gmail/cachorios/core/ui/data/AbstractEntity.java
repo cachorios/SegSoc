@@ -40,5 +40,10 @@ public abstract class AbstractEntity implements EntidadInterface {
 		}
 		return getId().equals(((AbstractEntity) other).getId());
 	}
+	
+	@Override
+	public boolean isNew() {
+		return (getId() == null);
+	}
 
 }

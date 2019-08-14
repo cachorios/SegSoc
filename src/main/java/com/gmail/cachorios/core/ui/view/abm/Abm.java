@@ -127,13 +127,14 @@ public abstract class Abm<T extends EntidadInterface, D extends Abm.Model> exten
         searchBar.setActionText("Nuevo "+this.nombreEntidad);
         searchBar.addActionClickListener(e->  getPresenter().crearNuevo() );
         
+        
         getGrid().addSelectionListener(e -> {
             e.getFirstSelectedItem().ifPresent(entity -> {
                 fireEvent(new RowFocusChangedEvent(this, false, entity ));
                 if(padre==null) {
                     navigateToEntity(entity.getId().toString());
                 }else{
-                    getPresenter().cargarEntidad(entity.getId());
+                    getPresenter().cargarEntidad(entity);
                 }
                 getGrid().deselectAll();
             });
@@ -270,13 +271,14 @@ public abstract class Abm<T extends EntidadInterface, D extends Abm.Model> exten
     public void setPadre(EntidadInterface padre) {
         if(padre != null){
             this.padre = padre;
-            //service.setPadre(padre);
+            service.setPadre(padre);
             grid.setDataProvider( getDataProvider() );
-            
+            accion.addClickListener(e->  getPresenter().crearNuevo() );
         }
-        
-        
-        
+    }
+    
+    public void refreshWithPadre(){
+        grid.setDataProvider( getDataProvider() );
     }
     
     /***

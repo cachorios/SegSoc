@@ -146,6 +146,13 @@ public class EntityPresenter<T extends EntidadInterface, V extends EntityView<T>
             onSuccess.execute(status.getEntidad());
         });
     }
+    
+    public boolean cargarEntidad(T entidad, AbmOperacionListener<T> onSuccess ){
+        return executeOperation(() -> {
+            status.actualizarEntidad(entidad, false);
+            onSuccess.execute(status.getEntidad());
+        });
+    }
 
     public T crearNuevo() {
         status.actualizarEntidad(abmService.createNew(currentUsuario), true);

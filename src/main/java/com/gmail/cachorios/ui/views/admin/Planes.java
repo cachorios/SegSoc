@@ -18,9 +18,7 @@ import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.BeanValidationBinder;
-import com.vaadin.flow.data.provider.DataProvider;
 import com.vaadin.flow.router.Route;
-import com.vaadin.flow.templatemodel.TemplateModel;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Route(value = LarConst.PAGE_PLAN, layout = MainAppLayout.class)
@@ -38,7 +36,6 @@ public class Planes extends Abm<Plan, Abm.Model> {
         this.iniciar(LarConst.TITULO_PLAN);
     }
 	
-	
 	@Override
 	public void configurarListener() {
 		super.configurarListener();
@@ -47,7 +44,7 @@ public class Planes extends Abm<Plan, Abm.Model> {
 				getPresenter().getEntidad().setPersona((Persona) getPadre());
 			}
 		});
-		addSaveListener(e -> ((Persona)getPadre()).addPlan((Plan)(e.getRegistroActivo())) );
+//		addSaveListener(e -> ((Persona)getPadre()).addPlan((Plan)(e.getRegistroActivo())) );
 	}
 	
 	@Override
@@ -55,13 +52,13 @@ public class Planes extends Abm<Plan, Abm.Model> {
         return LarConst.PAGE_PLAN;
     }
 	
-	@Override
-	protected DataProvider getDataProvider() {
-    	if(getPadre()== null) {
-			return super.getDataProvider();
-		}
-		return DataProvider.ofCollection( ((Persona)getPadre()).getPlanes() );
-	}
+//	@Override
+//	protected DataProvider getDataProvider() {
+//    	if(getPadre()== null) {
+//			return super.getDataProvider();
+//		}
+//		return DataProvider.ofCollection( ((Persona)getPadre()).getPlanes() );
+//	}
 	
 	private void configureGrid(Grid<Plan> grid) {
         grid.addColumn(Plan::getNombre).setHeader("Nombre").setWidth("60%");

@@ -26,6 +26,7 @@ import javax.persistence.Version;
 			return version;
 		}
 
+		@Override
 		public boolean isNew() {
 		return (getId() == null);
 	}

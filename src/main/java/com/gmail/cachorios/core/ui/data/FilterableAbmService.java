@@ -1,5 +1,6 @@
 package com.gmail.cachorios.core.ui.data;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -29,11 +30,7 @@ public interface FilterableAbmService<T extends EntidadInterface> extends AbmSer
 		return SegSocServices.getUsuarioActivo();
 	}
 	
-	default void setPadre(EntidadInterface padre){}
 	
-	default EntidadInterface getPadre(){
-		return null;
-		
-	}
+	
 	
 }

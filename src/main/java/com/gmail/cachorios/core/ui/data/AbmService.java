@@ -5,6 +5,7 @@ import javax.persistence.EntityNotFoundException;
 import com.gmail.cachorios.backend.data.entity.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
 
 
 public interface AbmService<T extends EntidadInterface> {
@@ -13,14 +14,23 @@ public interface AbmService<T extends EntidadInterface> {
 
 
 	default T save(Usuario currentUsuario, T entity) {
-		return getRepository().saveAndFlush(entity);
+		if(getPadre() == null) {
+			return getRepository().saveAndFlush(entity);
+		}
+		if(entity.isNew()) {
+			getList().add(entity);
+		}
+		return entity;
 	}
 
 	default void delete(Usuario currentUsuario, T entity) {
 		if (entity == null) {
 			throw new EntityNotFoundException();
 		}
-		getRepository().delete(entity);
+		if(getPadre() == null) {
+			getRepository().delete(entity);
+		}
+		getList().remove(entity);
 	}
 
 	default void delete(Usuario currentUsuario, long id) {
@@ -28,7 +38,10 @@ public interface AbmService<T extends EntidadInterface> {
 	}
 
 	default long count() {
-		return getRepository().count();
+		if(getPadre() == null) {
+			return getRepository().count();
+		}
+		return getList().size();
 	}
 
 	default T load(long id) {
@@ -40,4 +53,12 @@ public interface AbmService<T extends EntidadInterface> {
 	}
 
 	T createNew(Usuario currentUsuario);
+	
+	default void setPadre(EntidadInterface padre){}
+	
+	default EntidadInterface getPadre(){
+		return null;
+	}
+	
+	default <T extends EntidadInterface> List<T> getList(){return null; }
 }

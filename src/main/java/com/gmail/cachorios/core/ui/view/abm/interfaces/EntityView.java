@@ -1,5 +1,6 @@
 package com.gmail.cachorios.core.ui.view.abm.interfaces;
 
+import com.gmail.cachorios.core.ui.data.EntidadInterface;
 import com.vaadin.flow.data.binder.ValidationException;
 
 /**
@@ -36,5 +37,7 @@ public interface EntityView<T> extends HasNotifications, HasConfirmation {
     default void showDeletedNotification() {
         showNotification(getEntityName() + " fue eliminado!");
     }
-
+    
+    
+    EntidadInterface getPadre();
 }

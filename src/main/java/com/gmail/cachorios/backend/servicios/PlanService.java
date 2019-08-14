@@ -73,6 +73,10 @@ public class PlanService implements FilterableAbmService<Plan> {
     public EntidadInterface getPadre() {
         return persona;
     }
-   
-   
+    
+    
+    @Override
+    public  List<Plan> getList() {
+        return persona.getPlanes();
+    }
 }

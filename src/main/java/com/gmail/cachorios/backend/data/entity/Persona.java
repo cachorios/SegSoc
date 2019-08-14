@@ -42,7 +42,7 @@ public class Persona extends AbstractEntityId {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "persona", fetch = FetchType.LAZY)
     private List<Documento> fotosDocumento;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "persona",fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.MERGE, mappedBy = "persona",fetch = FetchType.EAGER)
     private List<Plan> planes;
 
     public Persona() {
