@@ -6,6 +6,7 @@ import com.gmail.cachorios.backend.data.entity.Documento;
 import com.gmail.cachorios.core.ui.data.FilterableAbmService;
 import com.gmail.cachorios.core.ui.data.enums.ETipoDocumento;
 import com.gmail.cachorios.core.ui.view.abm.Abm;
+import com.gmail.cachorios.core.ui.view.component.DocumentoACU;
 import com.gmail.cachorios.ui.MainAppLayout;
 import com.gmail.cachorios.ui.utils.LarConst;
 import com.vaadin.flow.component.combobox.ComboBox;
@@ -27,7 +28,7 @@ public class Documentos extends Abm<Documento, Abm.Model> {
     public Documentos(FilterableAbmService<Documento> service) {
         super("Documento", service);
 
-        setWith("1000px");
+        setWith("900px");
 
         configureGrid(this.getGrid());
 
@@ -54,13 +55,16 @@ public class Documentos extends Abm<Documento, Abm.Model> {
         binder.bind(descripcion,"descripcion");
 
         cbDocs = new ComboBox<>("Tipo");
-        cbDocs.getElement().setAttribute("colspan", "2");
+        cbDocs.getElement().setAttribute("colspan", "1");
         cbDocs.setItems(ETipoDocumento.values());
 
-        form.add(descripcion, cbDocs);
+        DocumentoACU documentoACU = new DocumentoACU("Documento", true);
+
+        form.add(descripcion, cbDocs, documentoACU);
         form.setResponsiveSteps(
                 new FormLayout.ResponsiveStep("0",1),
-                new FormLayout.ResponsiveStep("21em",2)
+                new FormLayout.ResponsiveStep("21em",2),
+                new FormLayout.ResponsiveStep("22em",3)
         );
     }
 }
