@@ -1,0 +1,100 @@
+<dom-module id="custom-select">
+    <template>
+        <style>
+            /*:host {*/
+                /*--lumo-text-field-size: var(--lumo-size-m);*/
+                /*color: var(--lumo-body-text-color);*/
+                /*font-size: var(--lumo-font-size-m);*/
+                /*font-family: var(--lumo-font-family);*/
+                /*-webkit-font-smoothing: antialiased;*/
+                /*-moz-osx-font-smoothing: grayscale;*/
+                /*-webkit-tap-highlight-color: transparent;*/
+                /*padding: var(--lumo-space-xs) 0;*/
+            /*}*/
+            /*:host::before {*/
+                /*height: var(--lumo-text-field-size);*/
+                /*box-sizing: border-box;*/
+                /*display: inline-flex;*/
+                /*align-items: center;*/
+            /*}*/
+            /*:host([focused]:not([readonly])) [part="label"] {*/
+                /*color: var(--lumo-primary-text-color);*/
+            /*}*/
+
+            .custom_select{
+                display: flex;
+                flex-direction: column;
+
+                --lumo-text-field-size: var(--lumo-size-m);
+                color: var(--lumo-body-text-color);
+                font-size: var(--lumo-font-size-m);
+                font-family: var(--lumo-font-family);
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+                -webkit-tap-highlight-color: transparent;
+                padding: var(--lumo-space-xs) 0;
+
+                background-color: #2d9f19;
+            }
+
+            .small{
+                background-color: #ef6c00 !important;
+            }
+            .custom_select_width{
+
+            }
+            .lbl-caption{
+                align-self: flex-start;
+                color: var(--lumo-secondary-text-color);
+                font-weight: 500;
+                font-size: var(--lumo-font-size-s);
+                        /*var(--lumo-font-size-s);*/
+                margin-left: calc(var(--lumo-border-radius) / 4);
+                transition: color 0.2s;
+                line-height: 1;
+                padding-top: 1rem;
+                padding-bottom: 0.5rem;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                position: relative;
+                max-width: 100%;
+                box-sizing: border-box;
+            }
+
+            .codigo{
+                padding-top: 0.5rem;
+                height: 1.8rem;
+                width: 6rem;
+            }
+        </style>
+    </template>
+</dom-module>
+
+<script>
+    class CustomSelect extends Polymer.Element {
+        static get is() { return 'custom-select'; }
+    }
+
+    customElements.define(CustomSelect.is, CustomSelect);
+</script>
+
+<custom-style>
+    <style include="custom-select">
+        .custom_select{
+            display: flex;
+            flex-direction: column;
+
+            --lumo-text-field-size: var(--lumo-size-m);
+            color: var(--lumo-body-text-color);
+            font-size: var(--lumo-font-size-m);
+            font-family: var(--lumo-font-family);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            -webkit-tap-highlight-color: transparent;
+            padding: var(--lumo-space-xs) 0;
+
+            background-color: #2d9f19;
+        }
+    </style>
+</custom-style>

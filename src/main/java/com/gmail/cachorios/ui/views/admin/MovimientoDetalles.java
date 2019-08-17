@@ -29,7 +29,7 @@ public class MovimientoDetalles extends Abm<MovimientoDetalle, Abm.Model> {
     public MovimientoDetalles(FilterableAbmService<MovimientoDetalle> service) {
         super("MovimientoDetalle", service);
 
-        setWith("1000px");
+        setWith("900px");
 
         configureGrid(this.getGrid());
 
