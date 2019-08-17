@@ -1,6 +1,5 @@
 package com.gmail.cachorios.core.ui.data;
 
-import java.util.List;
 import java.util.Optional;
 
 

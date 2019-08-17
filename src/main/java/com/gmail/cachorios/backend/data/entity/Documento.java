@@ -11,9 +11,6 @@ import javax.validation.constraints.NotNull;
 @Entity
 public class Documento extends AbstractEntityId {
 
-    @Id
-    private Long id;
-
     @NotNull
     private String descripcion;
 
@@ -25,15 +22,6 @@ public class Documento extends AbstractEntityId {
 
     @ManyToOne
     private MovimientoDetalle movimientoDetalle;
-
-    @Override
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getDescripcion() {
         return descripcion;

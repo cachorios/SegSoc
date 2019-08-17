@@ -5,12 +5,14 @@ import com.gmail.cachorios.backend.data.entity.MovimientoDetalle;
 import com.gmail.cachorios.backend.data.entity.Persona;
 import com.gmail.cachorios.backend.data.entity.Usuario;
 import com.gmail.cachorios.backend.repositorios.DocumentoRepositorio;
+import com.gmail.cachorios.core.ui.data.EntidadInterface;
 import com.gmail.cachorios.core.ui.data.FilterableAbmService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -74,7 +76,18 @@ public class DocumentoService implements FilterableAbmService<Documento> {
         this.movimientoDet = movimientoDetalle;
     }
 
-    public void setPersona(Persona persona) {
-        this.persona = persona;
+    @Override
+    public void setPadre(EntidadInterface padre) {
+        this.movimientoDet = (MovimientoDetalle) padre;
+    }
+
+    @Override
+    public EntidadInterface getPadre() {
+        return movimientoDet;
+    }
+
+    @Override
+    public List<Documento> getList() {
+        return movimientoDet.getDocumentos();
     }
 }

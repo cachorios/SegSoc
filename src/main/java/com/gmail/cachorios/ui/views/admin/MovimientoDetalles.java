@@ -3,8 +3,10 @@ package com.gmail.cachorios.ui.views.admin;
 import com.github.appreciated.app.layout.annotations.Caption;
 import com.github.appreciated.app.layout.annotations.Icon;
 import com.gmail.cachorios.app.Context;
+import com.gmail.cachorios.backend.data.entity.Movimiento;
 import com.gmail.cachorios.backend.data.entity.MovimientoDetalle;
 import com.gmail.cachorios.backend.data.entity.Producto;
+import com.gmail.cachorios.backend.servicios.MovimientoDetalleService;
 import com.gmail.cachorios.backend.servicios.ProductoService;
 import com.gmail.cachorios.core.ui.data.FilterableAbmService;
 import com.gmail.cachorios.core.ui.view.abm.Abm;
@@ -26,7 +28,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class MovimientoDetalles extends Abm<MovimientoDetalle, Abm.Model> {
 
     @Autowired
-    public MovimientoDetalles(FilterableAbmService<MovimientoDetalle> service) {
+    public MovimientoDetalles(MovimientoDetalleService service) {
         super("MovimientoDetalle", service);
 
         setWith("900px");
@@ -34,6 +36,17 @@ public class MovimientoDetalles extends Abm<MovimientoDetalle, Abm.Model> {
         configureGrid(this.getGrid());
 
         this.iniciar(LarConst.TITULO_MOVIMIENTODET);
+    }
+
+    @Override
+    public void configurarListener() {
+        super.configurarListener();
+        addPreUpdateListener(e -> {
+            if(getPadre()!= null) {
+                getPresenter().getEntidad().setMovimiento((Movimiento) getPadre());
+            }
+        });
+//		addSaveListener(e -> ((Persona)getPadre()).addPlan((Plan)(e.getRegistroActivo())) );
     }
 
     @Override

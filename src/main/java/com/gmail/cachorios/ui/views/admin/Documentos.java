@@ -57,6 +57,7 @@ public class Documentos extends Abm<Documento, Abm.Model> {
         cbDocs = new ComboBox<>("Tipo");
         cbDocs.getElement().setAttribute("colspan", "1");
         cbDocs.setItems(ETipoDocumento.values());
+        binder.bind(cbDocs, "tipo");
 
         DocumentoACU documentoACU = new DocumentoACU("Documento", true);
 
