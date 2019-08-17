@@ -6,6 +6,9 @@ import java.util.stream.Stream;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.gmail.cachorios.ui.views.errors.AccessDeniedView;
+import com.gmail.cachorios.ui.views.errors.CustomRouteNotFoundError;
+import com.gmail.cachorios.ui.views.login.LoginView;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -37,8 +40,13 @@ public final class SecurityUtils {
 	 */
 	public static String getUsername() {
 		SecurityContext context = SecurityContextHolder.getContext();
-		UserDetails userDetails = (UserDetails) context.getAuthentication().getPrincipal();
-		return userDetails.getUsername();
+		Object principal = context.getAuthentication().getPrincipal();
+		if(principal instanceof UserDetails) {
+			UserDetails userDetails = (UserDetails) context.getAuthentication().getPrincipal();
+			return userDetails.getUsername();
+		}
+		//Anonimo o no autenticado
+		return null;
 	}
 
 	/**
@@ -49,15 +57,28 @@ public final class SecurityUtils {
 	 * @return true if access is granted, false otherwise.
 	 */
 	public static boolean isAccessGranted(Class<?> securedClass) {
+		final boolean publicView = LoginView.class.equals(securedClass)
+				|| AccessDeniedView.class.equals(securedClass)
+				|| CustomRouteNotFoundError.class.equals(securedClass);
+		
+		// Always allow access to public views
+		if (publicView) {
+			return true;
+		}
+		
+		Authentication userAuthentication = SecurityContextHolder.getContext().getAuthentication();
+		
+		// All other views require authentication
+		if (!isUserLoggedIn(userAuthentication)) {
+			return false;
+		}
+		
 		Secured secured = AnnotationUtils.findAnnotation(securedClass, Secured.class);
 		if (secured == null) {
 			return true;
 		}
 
-		Authentication userAuthentication = SecurityContextHolder.getContext().getAuthentication();
-		if (userAuthentication == null) {
-			return false;
-		}
+		
 		List<String> allowedRoles = Arrays.asList(secured.value());
 		return userAuthentication.getAuthorities().stream().map(GrantedAuthority::getAuthority)
 				.anyMatch(allowedRoles::contains);
@@ -69,9 +90,11 @@ public final class SecurityUtils {
 	 * @return true if the user is logged in. False otherwise.
 	 */
 	public static boolean isUserLoggedIn() {
-		SecurityContext context = SecurityContextHolder.getContext();
-		return context.getAuthentication() != null
-				&& !(context.getAuthentication() instanceof AnonymousAuthenticationToken);
+		return isUserLoggedIn(SecurityContextHolder.getContext().getAuthentication());
+	}
+	private static boolean isUserLoggedIn(Authentication authentication) {
+		return authentication != null
+				&& !(authentication instanceof AnonymousAuthenticationToken);
 	}
 
 	/**

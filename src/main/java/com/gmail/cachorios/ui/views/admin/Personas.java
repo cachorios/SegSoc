@@ -2,7 +2,6 @@ package com.gmail.cachorios.ui.views.admin;
 
 import com.github.appreciated.app.layout.annotations.Caption;
 import com.github.appreciated.app.layout.annotations.Icon;
-import com.gmail.cachorios.app.ApplicationContextProvider;
 import com.gmail.cachorios.app.Context;
 import com.gmail.cachorios.backend.data.entity.Persona;
 import com.gmail.cachorios.backend.repositorios.PersonaRepositorio;
@@ -14,8 +13,8 @@ import com.gmail.cachorios.core.ui.data.enums.EParentesco;
 import com.gmail.cachorios.core.ui.data.enums.ESexo;
 import com.gmail.cachorios.core.ui.data.util.converter.IntegerConverter;
 import com.gmail.cachorios.core.ui.view.abm.Abm;
-import com.gmail.cachorios.core.ui.view.component.selectCompuesto.SelectCompuesto;
-import com.gmail.cachorios.ui.MainAppLayout;
+import com.gmail.cachorios.core.ui.component.selectCompuesto.SelectCompuesto;
+import com.gmail.cachorios.ui.MainView;
 import com.gmail.cachorios.ui.utils.LarConst;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.formlayout.FormLayout;
@@ -28,7 +27,7 @@ import com.vaadin.flow.router.Route;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
-@Route(value = LarConst.PAGE_PERSONA, layout = MainAppLayout.class)
+@Route(value = LarConst.PAGE_PERSONA, layout = MainView.class)
 @Caption("Personas")
 @Icon(VaadinIcon.USER)
 public class Personas extends Abm<Persona, Abm.Model> {

@@ -5,8 +5,6 @@ import com.gmail.cachorios.core.ui.data.enums.EFactorRH;
 import com.gmail.cachorios.core.ui.data.enums.EGrupoSanguineo;
 import com.gmail.cachorios.core.ui.data.enums.EParentesco;
 import com.gmail.cachorios.core.ui.data.enums.ESexo;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -41,12 +39,10 @@ public class Persona extends AbstractEntityId {
     private Persona cabeza;
     private EParentesco parentesco;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "persona", fetch = FetchType.EAGER)
-    @Fetch(value = FetchMode.SUBSELECT)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "persona", fetch = FetchType.LAZY)
     private List<Documento> fotosDocumento;
 
     @OneToMany(cascade = CascadeType.MERGE, mappedBy = "persona",fetch = FetchType.EAGER)
-    @Fetch(value = FetchMode.SUBSELECT)
     private List<Plan> planes;
 
     public Persona() {

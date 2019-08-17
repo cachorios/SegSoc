@@ -9,8 +9,8 @@ import com.gmail.cachorios.backend.servicios.PersonaService;
 import com.gmail.cachorios.backend.servicios.SegSocServices;
 import com.gmail.cachorios.core.ui.data.FilterableAbmService;
 import com.gmail.cachorios.core.ui.view.abm.Abm;
-import com.gmail.cachorios.core.ui.view.component.selectCompuesto.SelectCompuesto;
-import com.gmail.cachorios.ui.MainAppLayout;
+import com.gmail.cachorios.core.ui.component.selectCompuesto.SelectCompuesto;
+import com.gmail.cachorios.ui.MainView;
 import com.gmail.cachorios.ui.utils.LarConst;
 import com.gmail.cachorios.ui.utils.renderers.DateRenderer;
 import com.vaadin.flow.component.datepicker.DatePicker;
@@ -23,7 +23,7 @@ import com.vaadin.flow.data.converter.LocalDateToDateConverter;
 import com.vaadin.flow.router.Route;
 import org.springframework.beans.factory.annotation.Autowired;
 
-@Route(value = LarConst.PAGE_MOVIMIENTO, layout = MainAppLayout.class)
+@Route(value = LarConst.PAGE_MOVIMIENTO, layout = MainView.class)
 @Caption("Movimientos")
 @Icon(VaadinIcon.ARROW_RIGHT)
 public class Movimientos extends Abm<Movimiento, Abm.Model> {

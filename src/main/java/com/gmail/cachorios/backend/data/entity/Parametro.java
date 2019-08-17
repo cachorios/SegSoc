@@ -16,7 +16,6 @@ public class Parametro extends AbstractEntityId {
     private ETipoParametro tipo;
 
     @Column(name = "clase")
-    @NotNull(message = "Campo vacio: Clase")
     @Size(min = 4, max = 32, message = "El campo debe tener entre 4 y 32 caracteres")
     private String clase;
 

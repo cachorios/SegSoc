@@ -55,8 +55,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Bean
 	@Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-	public Usuario currentUser(UsuarioRepositorio userRepository) {
-		return userRepository.findByEmailIgnoreCase(SecurityUtils.getUsername());
+	public CurrentUser currentUser(UsuarioRepositorio userRepository) {
+		final String username = SecurityUtils.getUsername();
+		Usuario user = username != null ?userRepository.findByEmailIgnoreCase(SecurityUtils.getUsername()): null;
+		return () -> user;
 	}
 
 	/**
@@ -75,28 +77,28 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		// Not using Spring CSRF here to be able to use plain HTML for the login page
 		http.csrf().disable()
-
+				
 				// Register our CustomRequestCache, that saves unauthorized access attempts, so
 				// the user is redirected after login.
 				.requestCache().requestCache(new CustomRequestCache())
-
+				
 				// Restrict access to our application.
 				.and().authorizeRequests()
-
+				
 				// Allow all flow internal requests.
 				.requestMatchers(SecurityUtils::isFrameworkInternalRequest).permitAll()
-
+				
 				// Allow all requests by logged in users.
 				.anyRequest().hasAnyAuthority(Role.getAllRoles())
-
+				
 				// Configure the login page.
 				.and().formLogin().loginPage(LOGIN_URL).permitAll().loginProcessingUrl(LOGIN_PROCESSING_URL)
 				.failureUrl(LOGIN_FAILURE_URL)
-
+				
 				// Register the success handler that redirects users to the page they last tried
 				// to access
 				.successHandler(new SavedRequestAwareAuthenticationSuccessHandler())
-
+				
 				// Configure logout
 				.and().logout().logoutSuccessUrl(LOGOUT_SUCCESS_URL);
 	}
@@ -109,28 +111,31 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		web.ignoring().antMatchers(
 				// Vaadin Flow static resources
 				"/VAADIN/**",
-
+				
 				// the standard favicon URI
 				"/favicon.ico",
-
+				
+				// the robots exclusion standard
+				"/robots.txt",
+				
 				// web application manifest
-				"/manifest.json",
+				"/manifest.webmanifest",
 				"/sw.js",
 				"/offline-page.html",
-
+				
 				// icons and images
 				"/icons/**",
 				"/images/**",
-
+				
 				// (development mode) static resources
 				"/frontend/**",
-
+				
 				// (development mode) webjars
 				"/webjars/**",
-
+				
 				// (development mode) H2 debugging console
 				"/h2-console/**",
-
+				
 				// (production mode) static resources
 				"/frontend-es5/**", "/frontend-es6/**");
 	}

@@ -12,7 +12,7 @@ import com.gmail.cachorios.core.ui.data.util.converter.ImporteConverter;
 import com.gmail.cachorios.core.ui.data.util.converter.IntegerConverter;
 import com.gmail.cachorios.core.ui.data.util.converter.LongConverter;
 import com.gmail.cachorios.core.ui.view.abm.Abm;
-import com.gmail.cachorios.ui.MainAppLayout;
+import com.gmail.cachorios.ui.MainView;
 import com.gmail.cachorios.ui.utils.LarConst;
 import com.vaadin.flow.component.AbstractField;
 import com.vaadin.flow.component.combobox.ComboBox;
@@ -24,10 +24,9 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.BeanValidationBinder;
 import com.vaadin.flow.data.converter.LocalDateToDateConverter;
 import com.vaadin.flow.router.Route;
-import com.vaadin.flow.templatemodel.TemplateModel;
 import org.springframework.beans.factory.annotation.Autowired;
 
-@Route(value = LarConst.PAGE_PARAMETRO, layout = MainAppLayout.class)
+@Route(value = LarConst.PAGE_PARAMETRO, layout = MainView.class)
 @Caption("Parametros")
 @Icon(VaadinIcon.OPTIONS)
 public class Parametros extends Abm<Parametro, Abm.Model> {

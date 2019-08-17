@@ -9,7 +9,7 @@ import com.gmail.cachorios.core.ui.data.FilterableAbmService;
 import com.gmail.cachorios.core.ui.view.abm.*;
 
 
-import com.gmail.cachorios.ui.MainAppLayout;
+import com.gmail.cachorios.ui.MainView;
 import com.gmail.cachorios.ui.utils.LarConst;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.formlayout.FormLayout;
@@ -23,13 +23,12 @@ import com.vaadin.flow.data.provider.ListDataProvider;
 import com.vaadin.flow.data.renderer.TemplateRenderer;
 import com.vaadin.flow.router.Route;
 
-import com.vaadin.flow.templatemodel.TemplateModel;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-@Route(value = LarConst.PAGE_USERS, layout = MainAppLayout.class)
+@Route(value = LarConst.PAGE_USERS, layout = MainView.class)
 @Caption("Usuarios")
 @Icon(VaadinIcon.USERS)
 @Secured(Role.ADMIN)

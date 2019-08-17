@@ -6,7 +6,7 @@ import com.gmail.cachorios.backend.data.Role;
 import com.gmail.cachorios.backend.data.entity.Producto;
 import com.gmail.cachorios.core.ui.data.FilterableAbmService;
 import com.gmail.cachorios.core.ui.view.abm.Abm;
-import com.gmail.cachorios.ui.MainAppLayout;
+import com.gmail.cachorios.ui.MainView;
 import com.gmail.cachorios.ui.utils.LarConst;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.grid.Grid;
@@ -14,11 +14,10 @@ import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.BeanValidationBinder;
 import com.vaadin.flow.router.Route;
-import com.vaadin.flow.templatemodel.TemplateModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 
-@Route(value = LarConst.PAGE_PRODUCTO, layout = MainAppLayout.class)
+@Route(value = LarConst.PAGE_PRODUCTO, layout = MainView.class)
 @Caption("Productos")
 @Icon(VaadinIcon.BARCODE)
 @Secured(Role.ADMIN)

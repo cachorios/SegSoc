@@ -1,16 +1,16 @@
 package com.gmail.cachorios.backend.data.entity;
 
 import com.gmail.cachorios.core.ui.data.AbstractEntityId;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 public class MovimientoDetalle extends AbstractEntityId {
+
+    @Id
+    private Long id;
 
     private String productoDescripcion;
 
@@ -21,9 +21,18 @@ public class MovimientoDetalle extends AbstractEntityId {
     @NotNull
     private Movimiento movimiento;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "movimientoDetalle", fetch = FetchType.EAGER)
-    @Fetch(value = FetchMode.SUBSELECT)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "movimientoDetalle", fetch = FetchType.LAZY)
+    @NotNull
     private List<Documento> documentos;
+
+    @Override
+    public Long getId(){
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getProductoDescripcion() {
         return productoDescripcion;
@@ -55,10 +64,6 @@ public class MovimientoDetalle extends AbstractEntityId {
 
     public void setDocumentos(List<Documento> documentos) {
         this.documentos = documentos;
-    }
-
-    public MovimientoDetalle() {
-        this.documentos = new ArrayList<>();
     }
 
     @Override

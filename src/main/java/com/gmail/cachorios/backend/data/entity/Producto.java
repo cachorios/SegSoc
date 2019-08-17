@@ -11,6 +11,8 @@ import javax.validation.constraints.Size;
 @Entity
 public class Producto extends AbstractEntityId {
 
+  
+
     @NotEmpty
     @Size(max = 255, min = 4, message = "La descripcion debe tener entre 4 y 255 caracteres.")
     private String descripcion;
@@ -23,8 +25,6 @@ public class Producto extends AbstractEntityId {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-
-
 
     
     @Override
