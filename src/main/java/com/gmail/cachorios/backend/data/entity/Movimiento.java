@@ -24,7 +24,7 @@ public class Movimiento extends AbstractEntityId {
     @ManyToOne
     private Persona persona;
 
-    @OneToMany(cascade = CascadeType.MERGE, mappedBy = "movimiento",fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "movimiento",fetch = FetchType.EAGER)
     @Fetch(value = FetchMode.SUBSELECT)
     private List<MovimientoDetalle> detalles;
 

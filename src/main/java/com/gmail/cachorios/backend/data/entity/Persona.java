@@ -45,7 +45,7 @@ public class Persona extends AbstractEntityId {
     @Fetch(value = FetchMode.SUBSELECT)
     private List<Documento> fotosDocumento;
 
-    @OneToMany(cascade = CascadeType.MERGE, mappedBy = "persona",fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "persona",fetch = FetchType.EAGER)
     @Fetch(value = FetchMode.SUBSELECT)
     private List<Plan> planes;
 

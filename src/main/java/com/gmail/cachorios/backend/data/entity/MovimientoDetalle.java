@@ -63,6 +63,6 @@ public class MovimientoDetalle extends AbstractEntityId {
 
     @Override
     public String toString() {
-        return (isNew() ? "Nuevo detalle" : producto.getDescripcion() + " (" + productoDescripcion + ") ");
+        return (isNew() ? "Nuevo detalle" : ((producto != null) ? producto.getDescripcion() : productoDescripcion));
     }
 }
