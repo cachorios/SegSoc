@@ -3,6 +3,7 @@ package com.gmail.cachorios.ui.views.admin;
 import com.github.appreciated.app.layout.annotations.Caption;
 import com.github.appreciated.app.layout.annotations.Icon;
 import com.gmail.cachorios.backend.data.entity.Documento;
+import com.gmail.cachorios.backend.data.entity.MovimientoDetalle;
 import com.gmail.cachorios.core.ui.data.FilterableAbmService;
 import com.gmail.cachorios.core.ui.data.enums.ETipoDocumento;
 import com.gmail.cachorios.core.ui.view.abm.Abm;
@@ -33,6 +34,17 @@ public class Documentos extends Abm<Documento, Abm.Model> {
         configureGrid(this.getGrid());
 
         this.iniciar(LarConst.TITULO_DOCUMENTO);
+    }
+
+    @Override
+    public void configurarListener() {
+        super.configurarListener();
+        addPreUpdateListener(e -> {
+            if(getPadre()!= null) {
+                getPresenter().getEntidad().setMovimientoDetalle((MovimientoDetalle) getPadre());
+            }
+        });
+//		addSaveListener(e -> ((Persona)getPadre()).addPlan((Plan)(e.getRegistroActivo())) );
     }
 
     @Override

@@ -7,6 +7,7 @@ import com.vaadin.flow.component.dependency.HtmlImport;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.icon.VaadinIcon;
+import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.upload.SucceededEvent;
 
 @Tag("custom-select")
@@ -33,7 +34,6 @@ public abstract class AbstractCustomUpload<T> extends AbstractCompositeField<Div
     }
 
     private void alSeleccionar(SucceededEvent evento) {
-        String a = "Holamundo!";
         setPresentationValue(generarObjeto(filename));
     }
 
@@ -63,7 +63,7 @@ public abstract class AbstractCustomUpload<T> extends AbstractCompositeField<Div
         return upload;
     }
 
-    /*protected Button generarVer() {
+    protected Button generarVer() {
         Button ver = new Button();
 
         ver.getElement().setProperty("title", "Ver");
@@ -81,13 +81,13 @@ public abstract class AbstractCustomUpload<T> extends AbstractCompositeField<Div
         });
 
         return ver;
-    }*/
+    }
 
     protected String getDescripcion(T valor) { return valor.toString(); }
 
-//    protected void verElemento() {
-//        new WinUploadView(getDescripcion(getValue())).open();
-//    }
+    protected void verElemento() {
+        new WinUploadView(getDescripcion(getValue())).open();
+    }
 
     protected void limpiarElemento() {
         clear();
@@ -116,6 +116,8 @@ public abstract class AbstractCustomUpload<T> extends AbstractCompositeField<Div
         if (conSelect) {
             content.add((select = generarSelect()));
         }
+
+        content.add((ver = generarVer()));
 
         content.getStyle().set("padding", "var(--lumo-space-xs) 0");
         content.getElement().getClassList().add("panel-block");
