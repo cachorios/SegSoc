@@ -4,15 +4,19 @@ import com.gmail.cachorios.core.ui.data.AbstractEntityId;
 import com.gmail.cachorios.core.ui.data.enums.ETipoDocumento;
 
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Documento extends AbstractEntityId {
 
     @NotNull
+    @Size(min = 3, message = "La descripcion debe contener mas de 2 caracteres.")
     private String descripcion;
+
+    @NotNull
+    private String nombreArchivo;
 
     @NotNull
     private ETipoDocumento tipo;
@@ -29,6 +33,14 @@ public class Documento extends AbstractEntityId {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public String getNombreArchivo() {
+        return nombreArchivo;
+    }
+
+    public void setNombreArchivo(String nombreArchivo) {
+        this.nombreArchivo = nombreArchivo;
     }
 
     public Persona getPersona() {

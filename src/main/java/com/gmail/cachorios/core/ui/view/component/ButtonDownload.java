@@ -29,7 +29,7 @@ public class ButtonDownload extends VerticalLayout {
     }
 
     public void setFile(String directorio, String nombreArchivo){
-        File file = new File(directorio);
+        File file = new File(directorio + nombreArchivo);
 
         try {
             ts = new FileInputStream(file);

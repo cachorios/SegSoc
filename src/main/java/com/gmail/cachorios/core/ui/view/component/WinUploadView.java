@@ -10,22 +10,22 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 public class WinUploadView extends Dialog {
     private Button cancelar;
 
-    public WinUploadView(String filename) {
+    public WinUploadView(String filedir) {
         super();
-        armarVentana(filename);
+        armarVentana(filedir);
     }
 
-    private void armarVentana(String filename) {
-        setWidth("600px");
-        setHeight("480px");
+    private void armarVentana(String filedir) {
+        setWidth("100%");
+        setHeight("100%");
         setCloseOnEsc(true);
 
         final Image imagen = new Image();
-        imagen.setSrc(filename);
+        imagen.setSrc(filedir);
         //setSource(new FileResource(new File(Sistema.getSistema().getImagePath().concat(filename))));
         //imagen.setWidth("95%");
         //imagen.setHeight("90%");
-        imagen.setAlt(filename);
+        imagen.setAlt(filedir);
         imagen.setSizeFull();
         //imagen.setSizeUndefined();
 

@@ -59,19 +59,26 @@ public class Documentos extends Abm<Documento, Abm.Model> {
 
     @Override
     protected void crearForm(FormLayout form, BeanValidationBinder<Documento> binder) {
-        TextField descripcion;
+        TextField descripcion, nombreArchivo;
         ComboBox<ETipoDocumento> cbDocs;
 
         descripcion = new TextField("Descripcion");
         descripcion.getElement().setAttribute("colspan", "2");
         binder.bind(descripcion,"descripcion");
 
+        nombreArchivo = new TextField("");
+        nombreArchivo.getElement().setAttribute("colspan", "2");
+        binder.bind(nombreArchivo,"nombreArchivo");
+
         cbDocs = new ComboBox<>("Tipo");
         cbDocs.getElement().setAttribute("colspan", "1");
         cbDocs.setItems(ETipoDocumento.values());
         binder.bind(cbDocs, "tipo");
 
-        DocumentoACU documentoACU = new DocumentoACU("Documento", true);
+        DocumentoACU documentoACU = new DocumentoACU("Documento", this, true);
+        documentoACU.addValueChangeListener(e -> setNombreArchivo(documentoACU, nombreArchivo));
+
+        addLoadFormListener(e -> setFile(documentoACU));
 
         form.add(descripcion, cbDocs, documentoACU);
         form.setResponsiveSteps(
@@ -79,5 +86,17 @@ public class Documentos extends Abm<Documento, Abm.Model> {
                 new FormLayout.ResponsiveStep("21em",2),
                 new FormLayout.ResponsiveStep("22em",3)
         );
+    }
+
+    private void setNombreArchivo(DocumentoACU doc, TextField nombreArchivo) {
+        if(!doc.getDescripcion().isEmpty()) {
+            nombreArchivo.setValue(doc.getDescripcion());
+        }
+    }
+
+    private void setFile(DocumentoACU documentoACU) {
+        if(!getPresenter().getEntidad().isNew()) {
+            documentoACU.setFile(getPresenter().getEntidad().getNombreArchivo());
+        }
     }
 }

@@ -93,6 +93,7 @@ public class AbmEntityPresenter<T extends EntidadInterface>  extends EntityPrese
                 addIfNotFound(getEntidad());
                 getView().refreshWithPadre();
                 getView().showUpdatedNotification();
+                onValueChange(true);
                 
                 getView().fireEvent(new SaveEvent(getView(), false, getEntidad()));
                 closeSilently();

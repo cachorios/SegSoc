@@ -1,5 +1,7 @@
 package com.gmail.cachorios.core.ui.view.component;
 
+import com.gmail.cachorios.core.ui.util.C;
+import com.gmail.cachorios.core.ui.view.abm.Abm;
 import com.vaadin.flow.component.AbstractCompositeField;
 import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.component.button.Button;
@@ -8,25 +10,27 @@ import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.upload.SucceededEvent;
 
 @Tag("custom-select")
 @HtmlImport("frontend://styles/custom-select.html")
 public abstract class AbstractCustomUpload<T> extends AbstractCompositeField<Div, AbstractCustomUpload<T>, T> {
-//    private IVisualizable padre;
+    private Abm padre;
     private String titulo, filename;
+    private ButtonDownload descarga;
     private Button ver;
     private boolean conSelect;
     private CustomUpload select;
     private String DIR_TO_UPLOAD;
 
-    public AbstractCustomUpload(String titulo/*, IVisualizable padre*/, T nullValue, boolean conSelect) {
+    public AbstractCustomUpload(String titulo, Abm padre, T nullValue, boolean conSelect) {
         super(nullValue);
 
         this.conSelect = conSelect;
-//        this.padre = padre;
+        this.padre = padre;
         this.titulo = titulo;
-        this.DIR_TO_UPLOAD = "";
+        this.DIR_TO_UPLOAD = C.UPLOAD_DIR;
     }
 
     private String adaptarNombre(String fuente) {
@@ -63,30 +67,16 @@ public abstract class AbstractCustomUpload<T> extends AbstractCompositeField<Div
         return upload;
     }
 
-    protected Button generarVer() {
-        Button ver = new Button();
+    public void setFile(String nombreArchivo) {
+        if(filename == null) {
+            filename = nombreArchivo;
+        }
 
-        ver.getElement().setProperty("title", "Ver");
-        ver.setIcon(VaadinIcon.EYE.create());
-        ver.addClickListener(e -> {
-            try {
-                if (!isEmpty()) {
-                    verElemento();
-                } else {
-                    Notification.show("Esta vacio");
-                }
-            } catch (Exception ex) {
-                Notification.show("ERROR X2");
-            }
-        });
-
-        return ver;
+        descarga.setFile(DIR_TO_UPLOAD, nombreArchivo);
     }
 
-    protected String getDescripcion(T valor) { return valor.toString(); }
-
-    protected void verElemento() {
-        new WinUploadView(getDescripcion(getValue())).open();
+    public String getDescripcion() {
+        return filename;
     }
 
     protected void limpiarElemento() {
@@ -94,9 +84,9 @@ public abstract class AbstractCustomUpload<T> extends AbstractCompositeField<Div
         setFocus();
     }
 
-    /*public IVisualizable getPadre() {
+    public Abm getPadre() {
         return padre;
-    }*/
+    }
 
     public void setFocus() {
         if (ver != null) {
@@ -113,16 +103,45 @@ public abstract class AbstractCustomUpload<T> extends AbstractCompositeField<Div
 
         content.add(generateCaption());
 
+        HorizontalLayout hl = new HorizontalLayout();
+
         if (conSelect) {
-            content.add((select = generarSelect()));
+            hl.add((select = generarSelect()));
         }
 
-        content.add((ver = generarVer()));
+        hl.add((ver = generarVer()));
 
+        hl.add((descarga = new ButtonDownload()));
+
+        content.add(hl);
         content.getStyle().set("padding", "var(--lumo-space-xs) 0");
         content.getElement().getClassList().add("panel-block");
 
         return content;
+    }
+
+    protected Button generarVer() {
+        Button ver = new Button();
+
+        ver.getElement().setProperty("title", "Ver");
+        ver.setIcon(VaadinIcon.EYE.create());
+        ver.addClickListener(e -> {
+            try {
+                if (!filename.isEmpty()) {
+                    verElemento();
+                } else {
+                    Notification.show("Nombre de archivo vacio.");
+                }
+            } catch (Exception ex) {
+                Notification.show("Se produjo una excepcion en el nombre del archivo - " + ex.getMessage());
+            }
+        });
+
+        return ver;
+    }
+
+    protected void verElemento() {
+        new WinUploadView(C.PREVIEW_DIR + getDescripcion()).open();
     }
 
     @Override
@@ -131,17 +150,24 @@ public abstract class AbstractCustomUpload<T> extends AbstractCompositeField<Div
 
         if (value != null && !value.equals(getEmptyValue())) {
             select.getElement().setProperty("title", "Cambiar");
-            if (ver != null) { ver.setEnabled(true); ver.focus(); }
+            if (ver != null) {
+                ver.setEnabled(true);
+//                ver.focus();
+            }
         } else {
             select.getElement().setProperty("title", "Elegir");
             if (ver != null) { ver.setEnabled(false); }
         }
 
-//        avisarAlPadre();
+        avisarAlPadre();
         setModelValue(value, false);
     }
 
-    @Override
+    protected void avisarAlPadre() {
+        getPadre().getPresenter().onValueChange(true);
+    }
+
+    /*@Override
     public void setRequiredIndicatorVisible(boolean required) {
         //CustomUpload.setRequiredIndicatorVisible(required);
     }
@@ -149,7 +175,7 @@ public abstract class AbstractCustomUpload<T> extends AbstractCompositeField<Div
     @Override
     public boolean isRequiredIndicatorVisible() {
         return false;//descripcion.isRequiredIndicatorVisible();
-    }
+    }*/
 
     @Override
     public void setReadOnly(boolean readOnly) {

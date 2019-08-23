@@ -9,7 +9,7 @@ drop table if exists usuario cascade;
 drop sequence hibernate_sequence;
 
 create sequence hibernate_sequence start 1 increment 1;
-create table documento (id int8 not null, version int4 not null, descripcion varchar(255) not null, tipo int4 not null, movimiento_detalle_id int8, persona_id int8, primary key (id));
+create table documento (id int8 not null, version int4 not null, descripcion varchar(255) not null, nombre_archivo varchar(255) not null, tipo int4 not null, movimiento_detalle_id int8, persona_id int8, primary key (id))
 create table movimiento (id int8 not null, version int4 not null, fecha timestamp not null, persona_id int8 not null, usuario_id int8 not null, primary key (id));
 create table movimiento_detalle (id int8 not null, version int4 not null, producto_descripcion varchar(255), movimiento_id int8 not null, producto_id int8, primary key (id));
 create table parametro (id int8 not null, version int4 not null, clase varchar(32) not null, nombre varchar(32) not null, orden int4 not null, tipo smallint default 0, valorbol boolean default false not null, valorchr char, valordat timestamp, valordob float8, valorint int8, valorstr varchar(255), primary key (id));

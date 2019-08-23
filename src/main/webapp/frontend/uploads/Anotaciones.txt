@@ -1,0 +1,14 @@
+DEJOSPHP Usuario:
+- Salt: a9d8b339868ba9aa23ace84d4fd3bb07
+- Pass: QW4/34DDqvyP58pgBiz1wcVWGmOrG8+1YOm8I1duoqAY/34vU1tNkeBhJyrgNjnHEFwRnNyK8RqgKr3L60/dAQ==
+
+
+El recibo es padre
+tipo-letra-prefijo-numero
+
+Cliente:
+72 ELBA
+EDICION: 978844713186000053 (4016)
+
+SEGSOC:
+MovimientoCabezera (Solo se guarda un ID como comprobante)
