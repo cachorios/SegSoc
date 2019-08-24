@@ -1,4 +1,4 @@
-package com.gmail.cachorios.core.ui.data.util.converter;
+package com.gmail.cachorios.core.data.util.converter;
 
 import com.vaadin.flow.templatemodel.ModelEncoder;
 

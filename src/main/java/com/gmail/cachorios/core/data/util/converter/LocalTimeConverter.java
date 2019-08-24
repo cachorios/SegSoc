@@ -1,4 +1,4 @@
-package com.gmail.cachorios.core.ui.data.util.converter;
+package com.gmail.cachorios.core.data.util.converter;
 
 import com.vaadin.flow.data.binder.Result;
 import com.vaadin.flow.data.binder.ValueContext;
@@ -8,8 +8,8 @@ import com.vaadin.flow.templatemodel.ModelEncoder;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 
-import static com.gmail.cachorios.core.ui.data.util.DataProviderUtil.convertIfNotNull;
-import static com.gmail.cachorios.core.ui.data.util.FormattingUtils.HOUR_FORMATTER;
+import static com.gmail.cachorios.core.data.util.DataProviderUtil.convertIfNotNull;
+import static com.gmail.cachorios.core.data.util.FormattingUtils.HOUR_FORMATTER;
 
 
 public class LocalTimeConverter implements ModelEncoder<LocalTime, String>, Converter<String, LocalTime> {

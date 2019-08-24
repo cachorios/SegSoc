@@ -2,6 +2,7 @@ package com.gmail.cachorios.ui;
 
 import com.gmail.cachorios.app.seguridad.SecurityUtils;
 
+import com.gmail.cachorios.core.ui.component.OfflineBanner;
 import com.gmail.cachorios.ui.views.admin.Personas;
 import com.gmail.cachorios.ui.views.admin.Planes;
 import com.vaadin.flow.component.Component;
@@ -37,8 +38,8 @@ public class MainView extends AppLayout {
     private final Tabs menu;
     public MainView() {
     
-//        new OfflineBanner();
-//
+        new OfflineBanner();
+
         this.setDrawerOpened(false);
         Span appName = new Span("SegSoc");
         appName.addClassName("hide-on-mobile");
@@ -58,9 +59,6 @@ public class MainView extends AppLayout {
     
         
         //this.setDrawerOpened(false);
-//
-////        Span appName = new Span("Inicio");
-////        appName.addClassName("hide-on-mobile");
 //
 //        UsuarioService usuarioService = ApplicationContextProvider.getApplicationContext().getBean(UsuarioService.class);
 //        Usuario usuario = usuarioService.getRepository().findByEmailIgnoreCase(SecurityUtils.getUsername());
@@ -106,7 +104,7 @@ public class MainView extends AppLayout {
     
     private static Tab[] getAvailableTabs() {
         final List<Tab> tabs = new ArrayList<>(4);
-        tabs.add(createTab(VaadinIcon.EDIT, TITULO_PERSONA, View1.class));
+        tabs.add(createTab(VaadinIcon.EDIT, TITULO_PERSONA, Personas.class));
         tabs.add(createTab(VaadinIcon.EDIT, TITULO_MOVIMIENTO, View2.class));
         tabs.add(createTab(VaadinIcon.EDIT, TITULO_PLAN, Planes.class));
         

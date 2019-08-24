@@ -1,4 +1,4 @@
-package com.gmail.cachorios.core.ui.data.enums;
+package com.gmail.cachorios.core.data.enums;
 
 /**
  * ETipoParametro es una enumeracion que contiene los distintas tipos de parametros que pueden existir

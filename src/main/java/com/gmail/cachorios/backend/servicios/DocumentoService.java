@@ -5,7 +5,7 @@ import com.gmail.cachorios.backend.data.entity.MovimientoDetalle;
 import com.gmail.cachorios.backend.data.entity.Persona;
 import com.gmail.cachorios.backend.data.entity.Usuario;
 import com.gmail.cachorios.backend.repositorios.DocumentoRepositorio;
-import com.gmail.cachorios.core.ui.data.FilterableAbmService;
+import com.gmail.cachorios.core.data.FilterableAbmService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

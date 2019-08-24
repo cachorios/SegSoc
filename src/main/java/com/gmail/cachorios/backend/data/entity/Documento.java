@@ -1,7 +1,7 @@
 package com.gmail.cachorios.backend.data.entity;
 
-import com.gmail.cachorios.core.ui.data.AbstractEntityId;
-import com.gmail.cachorios.core.ui.data.enums.ETipoDocumento;
+import com.gmail.cachorios.core.data.AbstractEntityId;
+import com.gmail.cachorios.core.data.enums.ETipoDocumento;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

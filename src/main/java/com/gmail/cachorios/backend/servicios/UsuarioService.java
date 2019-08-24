@@ -1,8 +1,8 @@
 package com.gmail.cachorios.backend.servicios;
 
 import com.gmail.cachorios.backend.data.entity.Usuario;
-import com.gmail.cachorios.core.ui.data.FilterableAbmService;
-import com.gmail.cachorios.core.ui.data.UserFriendlyDataException;
+import com.gmail.cachorios.core.data.FilterableAbmService;
+import com.gmail.cachorios.core.data.UserFriendlyDataException;
 import com.gmail.cachorios.backend.repositorios.UsuarioRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

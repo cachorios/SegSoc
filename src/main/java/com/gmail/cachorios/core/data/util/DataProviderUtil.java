@@ -1,4 +1,4 @@
-package com.gmail.cachorios.core.ui.data.util;
+package com.gmail.cachorios.core.data.util;
 
 import java.util.function.Function;
 import java.util.function.Supplier;

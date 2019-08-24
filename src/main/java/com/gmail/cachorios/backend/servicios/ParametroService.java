@@ -3,7 +3,7 @@ package com.gmail.cachorios.backend.servicios;
 import com.gmail.cachorios.backend.data.entity.Parametro;
 import com.gmail.cachorios.backend.data.entity.Usuario;
 import com.gmail.cachorios.backend.repositorios.ParametroRepositorio;
-import com.gmail.cachorios.core.ui.data.FilterableAbmService;
+import com.gmail.cachorios.core.data.FilterableAbmService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

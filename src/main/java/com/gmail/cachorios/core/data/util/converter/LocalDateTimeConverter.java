@@ -1,10 +1,10 @@
-package com.gmail.cachorios.core.ui.data.util.converter;
+package com.gmail.cachorios.core.data.util.converter;
 
 import com.vaadin.flow.templatemodel.ModelEncoder;
 import java.time.LocalDateTime;
 
-import static com.gmail.cachorios.core.ui.data.util.DataProviderUtil.convertIfNotNull;
-import static com.gmail.cachorios.core.ui.data.util.FormattingUtils.FULL_DATE_FORMATTER;
+import static com.gmail.cachorios.core.data.util.DataProviderUtil.convertIfNotNull;
+import static com.gmail.cachorios.core.data.util.FormattingUtils.FULL_DATE_FORMATTER;
 
 public class LocalDateTimeConverter implements ModelEncoder<LocalDateTime, String> {
 

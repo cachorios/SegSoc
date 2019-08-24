@@ -1,4 +1,4 @@
-package com.gmail.cachorios.core.ui.data;
+package com.gmail.cachorios.core.data;
 
 import java.io.Serializable;
 

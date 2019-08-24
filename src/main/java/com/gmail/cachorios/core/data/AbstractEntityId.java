@@ -1,4 +1,4 @@
-package com.gmail.cachorios.core.ui.data;
+package com.gmail.cachorios.core.data;
 
 import java.io.Serializable;
 
@@ -50,7 +50,7 @@ import javax.persistence.Version;
 			if (this == other) {
 				return true;
 			}
-			if (!(other instanceof com.gmail.cachorios.core.ui.data.AbstractEntityId)) {
+			if (!(other instanceof AbstractEntityId)) {
 				return false;
 			}
 			return id.equals(((AbstractEntityId) other).id);

@@ -1,10 +1,10 @@
 package com.gmail.cachorios.backend.data.entity;
 
-import com.gmail.cachorios.core.ui.data.AbstractEntityId;
-import com.gmail.cachorios.core.ui.data.enums.EFactorRH;
-import com.gmail.cachorios.core.ui.data.enums.EGrupoSanguineo;
-import com.gmail.cachorios.core.ui.data.enums.EParentesco;
-import com.gmail.cachorios.core.ui.data.enums.ESexo;
+import com.gmail.cachorios.core.data.AbstractEntityId;
+import com.gmail.cachorios.core.data.enums.EFactorRH;
+import com.gmail.cachorios.core.data.enums.EGrupoSanguineo;
+import com.gmail.cachorios.core.data.enums.EParentesco;
+import com.gmail.cachorios.core.data.enums.ESexo;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;

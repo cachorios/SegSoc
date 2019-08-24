@@ -1,12 +1,12 @@
-package com.gmail.cachorios.core.ui.data.util.converter;
+package com.gmail.cachorios.core.data.util.converter;
 
-import static com.gmail.cachorios.core.ui.data.util.DataProviderUtil.convertIfNotNull;
+import static com.gmail.cachorios.core.data.util.DataProviderUtil.convertIfNotNull;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 
-import com.gmail.cachorios.core.ui.data.util.FormattingUtils;
+import com.gmail.cachorios.core.data.util.FormattingUtils;
 import com.vaadin.flow.data.binder.Result;
 import com.vaadin.flow.data.binder.ValueContext;
 import com.vaadin.flow.data.converter.Converter;

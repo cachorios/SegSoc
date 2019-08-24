@@ -1,4 +1,4 @@
-package com.gmail.cachorios.core.ui.data.util;
+package com.gmail.cachorios.core.data.util;
 
 import com.gmail.cachorios.ui.utils.LarConst;
 

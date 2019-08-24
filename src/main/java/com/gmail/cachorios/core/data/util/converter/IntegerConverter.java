@@ -1,10 +1,10 @@
-package com.gmail.cachorios.core.ui.data.util.converter;
+package com.gmail.cachorios.core.data.util.converter;
 
-        import com.vaadin.flow.data.binder.Result;
-        import com.vaadin.flow.data.binder.ValueContext;
-        import com.vaadin.flow.data.converter.Converter;
+import com.vaadin.flow.data.binder.Result;
+import com.vaadin.flow.data.binder.ValueContext;
+import com.vaadin.flow.data.converter.Converter;
 
-        import static com.gmail.cachorios.core.ui.data.util.DataProviderUtil.convertIfNotNull;
+import static com.gmail.cachorios.core.data.util.DataProviderUtil.convertIfNotNull;
 
 public class IntegerConverter implements Converter<String, Integer> {
     @Override

@@ -1,4 +1,4 @@
-package com.gmail.cachorios.core.ui.data.enums;
+package com.gmail.cachorios.core.data.enums;
 
 public enum ETipoDocumento {
     FOTO_DOCUMENTO,

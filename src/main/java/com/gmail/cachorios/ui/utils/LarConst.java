@@ -1,5 +1,7 @@
 package com.gmail.cachorios.ui.utils;
 
+import org.springframework.data.domain.Sort;
+
 import java.util.Locale;
 
 public class LarConst {
@@ -14,10 +16,8 @@ public class LarConst {
     public static final String PAGE_MOVIMIENTODET = "detmovimiento";
     public static final String PAGE_DOCUMENTOS = "documentos";
     public static final String PAGE_USERS = "usuarios";
-
-    public static final String TITLE_ACCESS_DENIED = "Acceso denegado";
-    public static final String TITLE_NOT_FOUND = "No existe esta página";
-
+    
+    public static final String APP_TITLE = "Seguimientos Acción Social";
     public static final String TITULO_USUARIOS = "Administració de Usuarios";
     public static final String TITULO_PERSONA = "Administración de Personas";
     public static final String TITULO_PRODUCTO = "Administración de Productos";
@@ -26,11 +26,14 @@ public class LarConst {
     public static final String TITULO_MOVIMIENTO = "Movimientos";
     public static final String TITULO_MOVIMIENTODET = "Detalles de movimientos";
     public static final String TITULO_DOCUMENTO = "Administración de Documentos";
+    
+    public static final String TITLE_LOGOUT = "Salir";
+    public static final String TITLE_ACCESS_DENIED = "Acceso denegado";
+    public static final String TITLE_NOT_FOUND = "No existe esta página";
 
-
-    public static final String VIEWPORT = "width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes";
-    public static final String APP_TITLE = "SegSocWeb";
+    public static final String VIEWPORT = "width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes, viewport-fit=cover";
+    
+    public static final Sort.Direction DEFAULT_SORT_DIRECTION = Sort.Direction.ASC;
+    
     public static final int NOTIFICATION_DURATION = 4000;
-    public static final String TITULO_REGIMEN = "Regimenes";
-    public static final String TITULO_PORCENTAJE = "Porcentajes";
 }

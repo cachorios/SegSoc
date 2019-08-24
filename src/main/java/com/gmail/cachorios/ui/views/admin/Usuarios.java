@@ -5,8 +5,8 @@ import com.github.appreciated.app.layout.annotations.Icon;
 import com.gmail.cachorios.backend.data.Role;
 import com.gmail.cachorios.backend.data.entity.Usuario;
 
-import com.gmail.cachorios.core.ui.data.FilterableAbmService;
-import com.gmail.cachorios.core.ui.view.abm.*;
+import com.gmail.cachorios.core.data.FilterableAbmService;
+import com.gmail.cachorios.core.ui.abm.*;
 
 
 import com.gmail.cachorios.ui.MainView;
