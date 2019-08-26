@@ -1,5 +1,6 @@
 package com.gmail.cachorios.core.ui.view.component;
 
+import com.gmail.cachorios.backend.data.entity.Documento;
 import com.gmail.cachorios.core.ui.util.C;
 import com.gmail.cachorios.core.ui.view.abm.Abm;
 import com.vaadin.flow.component.AbstractCompositeField;
@@ -22,6 +23,7 @@ public abstract class AbstractCustomUpload<T> extends AbstractCompositeField<Div
     private Button ver;
     private boolean conSelect;
     private CustomUpload select;
+    private String mimeType;
     private String DIR_TO_UPLOAD;
 
     public AbstractCustomUpload(String titulo, Abm padre, T nullValue, boolean conSelect) {
@@ -67,12 +69,17 @@ public abstract class AbstractCustomUpload<T> extends AbstractCompositeField<Div
         return upload;
     }
 
-    public void setFile(String nombreArchivo) {
+    public void setFile(Documento doc) {
         if(filename == null) {
-            filename = nombreArchivo;
+            filename = doc.getNombreArchivo();
         }
 
-        descarga.setFile(DIR_TO_UPLOAD, nombreArchivo);
+        descarga.setFile(DIR_TO_UPLOAD, doc.getNombreArchivo());
+        mimeType = doc.getMimeType();
+    }
+
+    public String getMimeType() {
+        return mimeType;
     }
 
     public String getDescripcion() {
@@ -103,17 +110,14 @@ public abstract class AbstractCustomUpload<T> extends AbstractCompositeField<Div
 
         content.add(generateCaption());
 
-        HorizontalLayout hl = new HorizontalLayout();
-
         if (conSelect) {
-            hl.add((select = generarSelect()));
+            content.add((select = generarSelect()));
         }
 
-        hl.add((ver = generarVer()));
+        content.add((ver = generarVer()));
 
-        hl.add((descarga = new ButtonDownload()));
+        content.add((descarga = new ButtonDownload()));
 
-        content.add(hl);
         content.getStyle().set("padding", "var(--lumo-space-xs) 0");
         content.getElement().getClassList().add("panel-block");
 

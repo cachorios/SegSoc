@@ -19,6 +19,9 @@ public class Documento extends AbstractEntityId {
     private String nombreArchivo;
 
     @NotNull
+    private String mimeType;
+
+    @NotNull
     private ETipoDocumento tipo;
 
     @ManyToOne
@@ -41,6 +44,14 @@ public class Documento extends AbstractEntityId {
 
     public void setNombreArchivo(String nombreArchivo) {
         this.nombreArchivo = nombreArchivo;
+    }
+
+    public String getMimeType() {
+        return mimeType;
+    }
+
+    public void setMimeType(String mimeType) {
+        this.mimeType = mimeType;
     }
 
     public Persona getPersona() {

@@ -59,7 +59,7 @@ public class Documentos extends Abm<Documento, Abm.Model> {
 
     @Override
     protected void crearForm(FormLayout form, BeanValidationBinder<Documento> binder) {
-        TextField descripcion, nombreArchivo;
+        TextField descripcion, nombreArchivo, mimeType;
         ComboBox<ETipoDocumento> cbDocs;
 
         descripcion = new TextField("Descripcion");
@@ -67,8 +67,10 @@ public class Documentos extends Abm<Documento, Abm.Model> {
         binder.bind(descripcion,"descripcion");
 
         nombreArchivo = new TextField("");
-        nombreArchivo.getElement().setAttribute("colspan", "2");
         binder.bind(nombreArchivo,"nombreArchivo");
+
+        mimeType = new TextField("");
+        binder.bind(nombreArchivo,"mimeType");
 
         cbDocs = new ComboBox<>("Tipo");
         cbDocs.getElement().setAttribute("colspan", "1");
@@ -76,7 +78,7 @@ public class Documentos extends Abm<Documento, Abm.Model> {
         binder.bind(cbDocs, "tipo");
 
         DocumentoACU documentoACU = new DocumentoACU("Documento", this, true);
-        documentoACU.addValueChangeListener(e -> setNombreArchivo(documentoACU, nombreArchivo));
+        documentoACU.addValueChangeListener(e -> setNombreArchivo(documentoACU, nombreArchivo, mimeType));
 
         addLoadFormListener(e -> setFile(documentoACU));
 
@@ -88,15 +90,16 @@ public class Documentos extends Abm<Documento, Abm.Model> {
         );
     }
 
-    private void setNombreArchivo(DocumentoACU doc, TextField nombreArchivo) {
+    private void setNombreArchivo(DocumentoACU doc, TextField nombreArchivo, TextField mimeType) {
         if(!doc.getDescripcion().isEmpty()) {
             nombreArchivo.setValue(doc.getDescripcion());
+            mimeType.setValue(doc.getMimeType());
         }
     }
 
     private void setFile(DocumentoACU documentoACU) {
         if(!getPresenter().getEntidad().isNew()) {
-            documentoACU.setFile(getPresenter().getEntidad().getNombreArchivo());
+            documentoACU.setFile(getPresenter().getEntidad());
         }
     }
 }

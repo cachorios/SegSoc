@@ -22,6 +22,7 @@ import java.util.function.Function;
 public class CustomUpload extends Upload implements Receiver {
     private Consumer<SucceededEvent> onOK;
     private Function<String, String> adapter;
+    private String mimeType;
 
     public CustomUpload(@NotNull Consumer<SucceededEvent> onOK, @NotNull Function<String, String> adapter, Button boton,
                         String... aceptables) {
@@ -60,6 +61,7 @@ public class CustomUpload extends Upload implements Receiver {
         }
 
         String nombre = adapter.apply(filename);
+        this.mimeType = mimeType;
 
         try {
             File file = new File(nombre);
@@ -69,6 +71,10 @@ public class CustomUpload extends Upload implements Receiver {
         }
 
         return null;
+    }
+
+    public String getMimeType() {
+        return mimeType;
     }
 
     public Consumer<SucceededEvent> getOnOK() {
