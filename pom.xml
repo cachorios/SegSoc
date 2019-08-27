@@ -112,6 +112,11 @@
             <artifactId>app-layout-addon</artifactId>
             <version>LATEST</version>
         </dependency>
+        <dependency>
+            <groupId>org.vaadin.alejandro</groupId>
+            <artifactId>pdf_browser</artifactId>
+            <version>1.0.0-alpha1</version>
+        </dependency>
         <!-- End of Vaadin -->
 
         <!-- spring -->

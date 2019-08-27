@@ -13,6 +13,12 @@ import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.upload.SucceededEvent;
+import com.vaadin.flow.server.StreamResource;
+import org.vaadin.alejandro.PdfBrowserViewer;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 
 @Tag("custom-select")
 @HtmlImport("frontend://styles/custom-select.html")
@@ -25,6 +31,8 @@ public abstract class AbstractCustomUpload<T> extends AbstractCompositeField<Div
     private CustomUpload select;
     private String mimeType;
     private String DIR_TO_UPLOAD;
+
+    private InputStream ts;
 
     public AbstractCustomUpload(String titulo, Abm padre, T nullValue, boolean conSelect) {
         super(nullValue);
@@ -41,6 +49,9 @@ public abstract class AbstractCustomUpload<T> extends AbstractCompositeField<Div
 
     private void alSeleccionar(SucceededEvent evento) {
         setPresentationValue(generarObjeto(filename));
+
+        this.mimeType = getMimeType();
+        descarga.setFile(C.UPLOAD_DIR, filename);
     }
 
     private void alRemover() {
@@ -145,7 +156,31 @@ public abstract class AbstractCustomUpload<T> extends AbstractCompositeField<Div
     }
 
     protected void verElemento() {
-        new WinUploadView(C.PREVIEW_DIR + getDescripcion()).open();
+        if(mimeType.contains("pdf")) {
+            mostrarPDF();
+        } else if (mimeType.contains("image")){
+            new WinUploadView(C.UPLOAD_DIR + filename).open();
+        } else {
+            Notification.show("EL ARCHIVO NO POSEE PREVISUALIZACION, DESCARGUELO", 2000, Notification.Position.MIDDLE);
+        }
+    }
+
+    private void mostrarPDF() {
+        DefaultPDFViewDialog view = new DefaultPDFViewDialog();
+
+        File file = new File(C.UPLOAD_DIR + filename);
+
+        try {
+            ts = new FileInputStream(file);
+        }
+        catch (Exception ex){}
+
+        StreamResource streamResource = new StreamResource(filename, () -> ts);
+
+        PdfBrowserViewer viewer = new PdfBrowserViewer(streamResource);
+        viewer.setHeight("100%");
+        view.getDialog().add(viewer);
+        view.open();
     }
 
     @Override
