@@ -1,9 +1,9 @@
 
 import { PolymerElement } from '@polymer/polymer/polymer-element.js';
 import '@vaadin/vaadin-grid/src/vaadin-grid.js';
-import './search-bar.js';
+// import './search-bar.js';
 import './utils-mixin.js';
-import './../../styles/shared-styles.js';
+import '../../styles/shared-styles.js';
 import { html } from '@polymer/polymer/lib/utils/html-tag.js';
 
 class Abm extends PolymerElement{
@@ -55,7 +55,7 @@ class Abm extends PolymerElement{
     </div>
 
     <div part="abm-content" theme="abm">
-        <search-bar id="searchbar" part="searchbar" theme="abm"  visible="[[search_view]]" ></search-bar>
+<!--        <search-bar id="searchbar" part="searchbar" theme="abm"  visible="[[search_view]]" ></search-bar>-->
         <vaadin-grid id="grid" theme="lar" slot="grid"></vaadin-grid>
     </div>
 

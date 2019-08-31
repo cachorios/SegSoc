@@ -1,7 +1,6 @@
 package com.gmail.cachorios.ui.views.errors;
 
-
-import com.gmail.cachorios.ui.MainAppLayout;
+import com.gmail.cachorios.ui.MainView;
 import com.gmail.cachorios.ui.exceptions.AccessDeniedException;
 import com.gmail.cachorios.ui.utils.LarConst;
 import com.vaadin.flow.component.Tag;
@@ -14,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @Tag("access-denied-view")
 @HtmlImport("src/views/errors/access-denied-view.html")
-@ParentLayout(MainAppLayout.class)
+@ParentLayout(MainView.class)
 @PageTitle(LarConst.TITLE_ACCESS_DENIED)
 public class AccessDeniedView extends PolymerTemplate<TemplateModel> implements HasErrorParameter<AccessDeniedException> {
 

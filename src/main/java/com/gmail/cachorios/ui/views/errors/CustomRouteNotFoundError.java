@@ -1,7 +1,7 @@
 package com.gmail.cachorios.ui.views.errors;
 
 
-import com.gmail.cachorios.ui.MainAppLayout;
+import com.gmail.cachorios.ui.MainView;
 import com.gmail.cachorios.ui.utils.LarConst;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.Text;
@@ -10,7 +10,7 @@ import com.vaadin.flow.router.*;
 
 import javax.servlet.http.HttpServletResponse;
 
-@ParentLayout(MainAppLayout.class)
+@ParentLayout(MainView.class)
 @PageTitle(LarConst.TITLE_NOT_FOUND)
 public class CustomRouteNotFoundError extends RouteNotFoundError {
 

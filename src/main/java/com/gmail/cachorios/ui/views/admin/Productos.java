@@ -1,7 +1,5 @@
 package com.gmail.cachorios.ui.views.admin;
 
-import com.github.appreciated.app.layout.annotations.Caption;
-import com.github.appreciated.app.layout.annotations.Icon;
 import com.gmail.cachorios.backend.data.Role;
 import com.gmail.cachorios.backend.data.entity.Producto;
 import com.gmail.cachorios.core.data.FilterableAbmService;
@@ -18,8 +16,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 
 @Route(value = LarConst.PAGE_PRODUCTO, layout = MainView.class)
-@Caption("Productos")
-@Icon(VaadinIcon.BARCODE)
+//@Caption("Productos")
+//@Icon(VaadinIcon.BARCODE)
 @Secured(Role.ADMIN)
 public class Productos extends Abm<Producto, Abm.Model> {
 

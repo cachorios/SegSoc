@@ -22,7 +22,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <failOnMissingWebXml>false</failOnMissingWebXml>
         <!-- Dependencies -->
-        <vaadin.version>14.0.0</vaadin.version>
+        <vaadin.version>14.0.2</vaadin.version>
 
         <!-- Overrides the old version specified by the Spring Boot parent -->
         <selenium.version>3.141.59</selenium.version>
@@ -225,11 +225,11 @@
         <!-- End Spring -->
 
 
-        <dependency>
-            <groupId>com.github.appreciated</groupId>
-            <artifactId>app-layout-addon</artifactId>
-            <version>LATEST</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.github.appreciated</groupId>-->
+<!--            <artifactId>app-layout-addon</artifactId>-->
+<!--            <version>LATEST</version>-->
+<!--        </dependency>-->
         <!-- End of Vaadin -->
         <dependency>
             <groupId>org.postgresql</groupId>

@@ -2,9 +2,10 @@ package com.gmail.cachorios.ui;
 
 import com.gmail.cachorios.app.seguridad.SecurityUtils;
 
+import com.gmail.cachorios.core.ui.abm.ConfirmDialog;
+import com.gmail.cachorios.core.ui.abm.interfaces.HasConfirmation;
 import com.gmail.cachorios.core.ui.component.OfflineBanner;
-import com.gmail.cachorios.ui.views.admin.Personas;
-import com.gmail.cachorios.ui.views.admin.Planes;
+import com.gmail.cachorios.ui.views.admin.*;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasComponents;
 import com.vaadin.flow.component.applayout.AppLayout;
@@ -12,16 +13,19 @@ import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.icon.VaadinIcon;
 
+import com.vaadin.flow.component.page.Push;
 import com.vaadin.flow.component.page.Viewport;
 import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.component.tabs.TabVariant;
 import com.vaadin.flow.component.tabs.Tabs;
+import com.vaadin.flow.router.RouteConfiguration;
 import com.vaadin.flow.router.RouterLink;
 import com.vaadin.flow.server.PWA;
 import com.vaadin.flow.server.VaadinServlet;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static com.gmail.cachorios.ui.utils.LarConst.*;
 
@@ -35,19 +39,25 @@ import static com.gmail.cachorios.ui.utils.LarConst.*;
         offlineResources = {"images/offline-login-banner.jpg"})
 
 public class MainView extends AppLayout {
+    private final com.gmail.cachorios.core.ui.abm.ConfirmDialog confirmDialog = new ConfirmDialog();
     private final Tabs menu;
     public MainView() {
     
         new OfflineBanner();
-
+    
+//        confirmDialog.setCancelable(true);
+//        confirmDialog.setConfirmButtonTheme("raised tertiary error");
+//        confirmDialog.setCancelButtonTheme("raised tertiary");
+        
         this.setDrawerOpened(false);
-        Span appName = new Span("SegSoc");
+        Span appName = new Span("Seguridad Social");
         appName.addClassName("hide-on-mobile");
     
         menu = createMenuTabs();
+        
         this.addToNavbar(appName);
         this.addToNavbar(true, menu);
-       // this.getElement().appendChild(confirmDialog.getElement());
+        this.getElement().appendChild(confirmDialog.getElement());
     
         getElement().addEventListener("search-focus", e -> {
             getElement().getClassList().add("hide-navbar");
@@ -56,43 +66,22 @@ public class MainView extends AppLayout {
         getElement().addEventListener("search-blur", e -> {
             getElement().getClassList().remove("hide-navbar");
         });
+    }
     
+    @Override
+    protected void afterNavigation() {
+        super.afterNavigation();
+        confirmDialog.setOpened(false);
+        if (getContent() instanceof HasConfirmation) {
+           // ((HasConfirmation) getContent()).setConfirmDialog(confirmDialog);
+        }
         
-        //this.setDrawerOpened(false);
-//
-//        UsuarioService usuarioService = ApplicationContextProvider.getApplicationContext().getBean(UsuarioService.class);
-//        Usuario usuario = usuarioService.getRepository().findByEmailIgnoreCase(SecurityUtils.getUsername());
-//
-//
-//        LeftHeaderItem header = new LeftHeaderItem(usuario.getFullName(), null, usuario.getFotoUrl());
-//        header.getContent().setAlignItems(FlexComponent.Alignment.CENTER);
-//
-//        init(AppLayoutBuilder
-//                .get(Behaviour.LEFT_RESPONSIVE)
-//                .withTitle("Seguimientos Acc. Social")
-//                .withAppBar(AppBarBuilder
-//                        .get()
-//                        .add(new LeftClickableItem("Salir",
-//                                VaadinIcon.SIGN_OUT.create(),
-//                                clickEvent -> UI.getCurrent().getPage().executeJs("location.assign('logout')") ))
-//
-//                        .build())
-//                .withAppMenu(
-//                    LeftAppMenuBuilder.get()
-//                        .addToSection(header, HEADER)
-//                        .add(new LeftNavigationItem(Personas.class))
-//                        .add(new LeftNavigationItem(Movimientos.class))
-//                        .add(new LeftNavigationItem(Productos.class))
-//                        .add(new LeftNavigationItem(Planes.class))
-//
-//                        .withStickyFooter()
-//                        .addToSection(new LeftNavigationItem(Parametros.class),FOOTER)
-//                        .addToSection(new LeftNavigationItem(Usuarios.class),FOOTER)
-//
-//                        .build()
-//                ).build());
-//
-    
+        String target = RouteConfiguration.forSessionScope().getUrl(this.getContent().getClass());
+        Optional<Component> tabToSelect = menu.getChildren().filter(tab -> {
+            Component child = tab.getChildren().findFirst().get();
+            return child instanceof RouterLink && ((RouterLink) child).getHref().equals(target);
+        }).findFirst();
+        tabToSelect.ifPresent(tab -> menu.setSelectedTab((Tab)tab));
     }
     
     private static Tabs createMenuTabs() {
@@ -105,15 +94,15 @@ public class MainView extends AppLayout {
     private static Tab[] getAvailableTabs() {
         final List<Tab> tabs = new ArrayList<>(4);
         tabs.add(createTab(VaadinIcon.EDIT, TITULO_PERSONA, Personas.class));
-        tabs.add(createTab(VaadinIcon.EDIT, TITULO_MOVIMIENTO, View2.class));
+        tabs.add(createTab(VaadinIcon.EDIT, TITULO_MOVIMIENTO, Movimientos.class));
         tabs.add(createTab(VaadinIcon.EDIT, TITULO_PLAN, Planes.class));
         
-        if (SecurityUtils.isAccessGranted(View3.class)) {
-            tabs.add(createTab(VaadinIcon.USER,TITULO_USUARIOS,View3.class));
+        if (SecurityUtils.isAccessGranted(Usuarios.class)) {
+            tabs.add(createTab(VaadinIcon.USER,TITULO_USUARIOS, Usuarios.class));
         }
         
-        if (SecurityUtils.isAccessGranted(View5.class)) {
-            tabs.add(createTab(VaadinIcon.CALENDAR, TITULO_PARAMETRO,View5.class));
+        if (SecurityUtils.isAccessGranted(Parametros.class)) {
+            tabs.add(createTab(VaadinIcon.CALENDAR, TITULO_PARAMETRO, Parametros.class));
         }
         final String contextPath = VaadinServlet.getCurrent().getServletContext().getContextPath();
         final Tab logoutTab = createTab(createLogoutLink(contextPath));

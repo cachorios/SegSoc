@@ -9,3 +9,4 @@ src/main/webapp/WEB-INF/resources.xml
 src/main/resources/application.properties
 create.sql
 node_modules/
+!/package-lock.json

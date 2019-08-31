@@ -1,7 +1,5 @@
 package com.gmail.cachorios.ui.views.admin;
 
-import com.github.appreciated.app.layout.annotations.Caption;
-import com.github.appreciated.app.layout.annotations.Icon;
 import com.gmail.cachorios.backend.data.entity.Documento;
 import com.gmail.cachorios.core.data.FilterableAbmService;
 import com.gmail.cachorios.core.data.enums.ETipoDocumento;
@@ -18,8 +16,8 @@ import com.vaadin.flow.router.Route;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Route(value = LarConst.PAGE_DOCUMENTOS, layout = MainView.class)
-@Caption("Documentos")
-@Icon(VaadinIcon.MODAL_LIST)
+//@Caption("Documentos")
+//@Icon(VaadinIcon.MODAL_LIST)
 public class Documentos extends Abm<Documento, Abm.Model> {
 
     @Autowired

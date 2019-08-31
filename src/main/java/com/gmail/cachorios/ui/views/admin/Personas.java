@@ -1,7 +1,5 @@
 package com.gmail.cachorios.ui.views.admin;
 
-import com.github.appreciated.app.layout.annotations.Caption;
-import com.github.appreciated.app.layout.annotations.Icon;
 import com.gmail.cachorios.app.Context;
 import com.gmail.cachorios.backend.data.entity.Persona;
 import com.gmail.cachorios.backend.repositorios.PersonaRepositorio;
@@ -24,12 +22,14 @@ import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.BeanValidationBinder;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.router.RouteAlias;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
 @Route(value = LarConst.PAGE_PERSONA, layout = MainView.class)
-@Caption("Personas")
-@Icon(VaadinIcon.USER)
+@RouteAlias(value = LarConst.PAGE_ROOT, layout = MainView.class)
+//@Caption("Personas")
+//@Icon(VaadinIcon.USER)
 public class Personas extends Abm<Persona, Abm.Model> {
 
     @Autowired

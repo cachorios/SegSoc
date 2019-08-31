@@ -1,7 +1,5 @@
 package com.gmail.cachorios.ui.views.admin;
 
-import com.github.appreciated.app.layout.annotations.Caption;
-import com.github.appreciated.app.layout.annotations.Icon;
 import com.gmail.cachorios.backend.data.Role;
 import com.gmail.cachorios.backend.data.entity.Usuario;
 
@@ -29,8 +27,8 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Route(value = LarConst.PAGE_USERS, layout = MainView.class)
-@Caption("Usuarios")
-@Icon(VaadinIcon.USERS)
+//@Caption("Usuarios")
+//@Icon(VaadinIcon.USERS)
 @Secured(Role.ADMIN)
 public class Usuarios extends Abm<Usuario, Abm.Model> {
 

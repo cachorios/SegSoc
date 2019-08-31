@@ -1,7 +1,5 @@
 package com.gmail.cachorios.ui.views.admin;
 
-import com.github.appreciated.app.layout.annotations.Caption;
-import com.github.appreciated.app.layout.annotations.Icon;
 import com.gmail.cachorios.app.Context;
 import com.gmail.cachorios.backend.data.entity.MovimientoDetalle;
 import com.gmail.cachorios.backend.data.entity.Producto;
@@ -21,8 +19,8 @@ import com.vaadin.flow.router.Route;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Route(value = LarConst.PAGE_MOVIMIENTODET, layout = MainView.class)
-@Caption("MovimientoDetalles")
-@Icon(VaadinIcon.MODAL_LIST)
+//@Caption("MovimientoDetalles")
+//@Icon(VaadinIcon.MODAL_LIST)
 public class MovimientoDetalles extends Abm<MovimientoDetalle, Abm.Model> {
 
     @Autowired

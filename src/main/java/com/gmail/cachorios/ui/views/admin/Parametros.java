@@ -1,7 +1,5 @@
 package com.gmail.cachorios.ui.views.admin;
 
-import com.github.appreciated.app.layout.annotations.Caption;
-import com.github.appreciated.app.layout.annotations.Icon;
 import com.gmail.cachorios.app.ApplicationContextProvider;
 import com.gmail.cachorios.backend.data.entity.Parametro;
 import com.gmail.cachorios.backend.repositorios.ParametroRepositorio;
@@ -27,8 +25,8 @@ import com.vaadin.flow.router.Route;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Route(value = LarConst.PAGE_PARAMETRO, layout = MainView.class)
-@Caption("Parametros")
-@Icon(VaadinIcon.OPTIONS)
+//@Caption("Parametros")
+//@Icon(VaadinIcon.OPTIONS)
 public class Parametros extends Abm<Parametro, Abm.Model> {
 
     @Autowired

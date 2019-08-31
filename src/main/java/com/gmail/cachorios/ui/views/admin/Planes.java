@@ -1,7 +1,5 @@
 package com.gmail.cachorios.ui.views.admin;
 
-import com.github.appreciated.app.layout.annotations.Caption;
-import com.github.appreciated.app.layout.annotations.Icon;
 import com.gmail.cachorios.backend.data.entity.Parametro;
 import com.gmail.cachorios.backend.data.entity.Persona;
 import com.gmail.cachorios.backend.data.entity.Plan;
@@ -22,8 +20,8 @@ import com.vaadin.flow.router.Route;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Route(value = LarConst.PAGE_PLAN, layout = MainView.class)
-@Caption("Planes")
-@Icon(VaadinIcon.SITEMAP)
+//@Caption("Planes")
+//@Icon(VaadinIcon.SITEMAP)
 
 public class Planes extends Abm<Plan, Abm.Model> {
     

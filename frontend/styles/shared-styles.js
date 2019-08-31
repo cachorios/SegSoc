@@ -1,7 +1,7 @@
 import '@polymer/polymer/lib/elements/custom-style.js';
 const $_documentContainer = document.createElement('template');
 
-$_documentContainer.innerHTML = `<dom-module id="lar-dialog-overlay-theme" theme-for="vaadin-app-layout">
+$_documentContainer.innerHTML = `<dom-module id="bakery-app-layout-theme" theme-for="vaadin-app-layout">
   <template>
     <style>
       :host {
@@ -427,3 +427,4 @@ $_documentContainer.innerHTML = `<dom-module id="lar-dialog-overlay-theme" theme
 </custom-style>`;
 
 document.head.appendChild($_documentContainer.content);
+

@@ -1,6 +1,6 @@
 package com.gmail.cachorios.core.ui.component;
 
-import com.vaadin.flow.component.*;
+
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.HtmlImport;
 import com.vaadin.flow.component.dependency.JsModule;
@@ -25,13 +25,13 @@ public class SearchBar extends PolymerTemplate<SearchBar.Model> {
 		void setButtonText(String actionText);
 	}
 
-	@Id("field")
+	//@Id("field")
 	private TextField textField;
 
-	@Id("clear")
+	//@Id("clear")
 	private Button clearButton;
 
-	@Id("action")
+	//@Id("action")
 	private Button actionButton;
 
 	public SearchBar() {

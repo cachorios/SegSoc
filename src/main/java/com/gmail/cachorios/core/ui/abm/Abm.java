@@ -54,8 +54,8 @@ public abstract class Abm<T extends EntidadInterface, D extends Abm.Model> exten
     private Grid<T> grid;
     @Id("titulo")
     private H4 titulo;
-    @Id("searchbar")
-    private SearchBar searchBar;
+    //@Id("searchbar")
+    private SearchBar searchBar = new SearchBar();
     
     @Id("accion")
     private Button accion;
